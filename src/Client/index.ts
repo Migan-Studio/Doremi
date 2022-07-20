@@ -7,16 +7,18 @@ import {
   GatewayIntentBits,
   InteractionType,
   PermissionResolvable,
-  CacheType,
 } from 'discord.js'
 import { readdirSync } from 'fs'
 import path from 'path'
 import { config } from 'dotenv'
+import Modal from './Interactions/Modals'
+import SelectMenus from './Interactions/SelectMenus'
 
 declare module 'discord.js' {
   interface Client {
     _commands: Collection<string, Command>
     _commandDirectory: string
+    SendDMWithDeveloperForEmbed(embed: any): void
   }
 }
 
@@ -39,10 +41,21 @@ export abstract class Command {
 export class mbprClient extends Client {
   constructor() {
     super({
-      intents: [GatewayIntentBits.Guilds],
+      intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildPresences,
+      ],
     })
     this._commands = new Collection()
     this._commandDirectory = path.join(__dirname, '..', 'Commands')
+  }
+
+  SendDMWithDeveloperForEmbed(embed: any) {
+    this.users!.cache!.get(process.env.OWNER_ID!)!.send({
+      embeds: [embed],
+    })
   }
 
   private _loadCommands() {
@@ -69,21 +82,39 @@ export class mbprClient extends Client {
   }
 
   start() {
+    let supportText: string
+
     config()
     this.login(process.env.TOKEN)
     this.once('ready', () => {
       console.log(`[MbprClient] ${this.user!.username}`)
       console.log('-------------------------')
-      console.warn('[Warning] You using preview version.')
     })
     this._loadCommands()
     this.on('interactionCreate', interaction => {
       if (interaction.type === InteractionType.ApplicationCommand) {
+        if (!interaction.isChatInputCommand()) return
         const Command = this._commands.get(interaction.commandName)
 
         if (!Command) return
 
-        Command.execute(interaction as ChatInputCommandInteraction<CacheType>)
+        Command.execute(interaction)
+      }
+    })
+    this.on('interactionCreate', async interaction => {
+      if (interaction.type === InteractionType.ModalSubmit) {
+        supportText = interaction.fields.getTextInputValue(
+          'Doremi-support$text'
+        )
+        // @ts-ignore
+        Modal[interaction.customId].default.execute(interaction)
+      } else if (interaction.type === InteractionType.MessageComponent) {
+        if (!interaction.isSelectMenu()) return
+        // @ts-ignore
+        SelectMenus[interaction.customId].default.execute(
+          interaction,
+          supportText
+        )
       }
     })
   }
