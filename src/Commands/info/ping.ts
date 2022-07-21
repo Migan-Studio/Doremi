@@ -6,8 +6,8 @@ import {
 } from 'discord.js'
 
 export = class extends Command {
-  name = 'ping'
-  description = "mbpr project's Ping"
+  name = '지연시간'
+  description = 'Doremi의 지연시간'
   execute(interaction: ChatInputCommandInteraction) {
     interaction.reply({
       embeds: [
@@ -16,7 +16,7 @@ export = class extends Command {
             name: interaction.user.tag,
             iconURL: interaction.user.displayAvatarURL(),
           })
-          .setTitle(`${interaction.client.user!.username}'s Latency`)
+          .setTitle(`${interaction.client.user!.username}의 지연시간`)
           .setDescription(
             Formatters.codeBlock('md', `${interaction.client.ws.ping}ms`)
           ),

@@ -10,27 +10,27 @@ import {
 } from 'discord.js'
 
 module.exports = class extends Command {
-  name = 'kick'
-  description = "mbpr project's Kick"
+  name = '추방'
+  description = '[멤버 추방하기 권한 필요] Doremi의 추방'
   options: ApplicationCommandOptionData[] = [
     {
       type: ApplicationCommandOptionType.User,
-      name: 'member',
-      description: 'member',
+      name: '멤버',
+      description: '추방할 멤버',
       required: true,
     },
     {
       type: ApplicationCommandOptionType.String,
-      name: 'reason',
-      description: 'kick reason',
+      name: '사유',
+      description: '차단 사유',
       required: false,
     },
   ]
   execute(interaction: ChatInputCommandInteraction) {
-    let member = interaction.options.getMember('member') as GuildMember
+    let member = interaction.options.getMember('멤버') as GuildMember
     if (interaction.channel!.type === ChannelType.DM)
       return interaction.reply({
-        content: "Can't Using the DM.",
+        content: '❌ 개인 메세지에선 해당 명령어를 사용 할 수 없어요. :(',
         ephemeral: true,
       })
     if (
@@ -39,7 +39,7 @@ module.exports = class extends Command {
         .permissions.has(PermissionsBitField.Flags.KickMembers)
     )
       return interaction.reply({
-        content: 'You not have permissions has `Kick Members`.',
+        content: '❌ `멤버 추방하기` 권한이 필요해요 :(',
         ephemeral: true,
       })
     if (
@@ -48,17 +48,17 @@ module.exports = class extends Command {
       )
     )
       return interaction.reply({
-        content: "i'm not have permissions has `Kick Members`.",
+        content: '❌ 이 봇에 `멤버 추방하기` 권한이 필요해요 :(',
         ephemeral: true,
       })
 
     try {
-      member.kick(interaction.options.getString('reason') || 'None')
+      member.kick(interaction.options.getString('사유') || '없음')
       interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setTitle('Kick')
-            .setDescription(`Member ${member.user.tag} has been kicked.`)
+            .setTitle('추방')
+            .setDescription(`멤버 ${member.user.tag}을/를 추방했어요.`)
             .setTimestamp(),
         ],
         ephemeral: true,

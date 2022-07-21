@@ -9,13 +9,13 @@ import {
 import { Command } from '../../Client'
 
 export = class extends Command {
-  name = 'clean'
-  description = 'Clean the chat room.'
+  name = '채팅청소'
+  description = '[메세지 관리하기 권한 필요] Doremi의 채팅청소'
   options: ApplicationCommandOptionData[] = [
     {
       type: ApplicationCommandOptionType.Number,
-      name: 'limit',
-      description: 'limit',
+      name: '청소제한',
+      description: '청소할 채팅의 갯수',
       required: true,
       minValue: 1,
       maxValue: 100,
@@ -25,7 +25,7 @@ export = class extends Command {
   async execute(interaction: ChatInputCommandInteraction) {
     if (interaction.channel!.type === ChannelType.DM)
       return interaction.reply({
-        content: "Can't Using the DM.",
+        content: '❌ 개인 메세지에선 해당 명령어를 사용 할 수 없어요. :(',
         ephemeral: true,
       })
     if (
@@ -37,7 +37,7 @@ export = class extends Command {
         )
     )
       return interaction.reply({
-        content: 'You not have permissions has `Manage Messages`.',
+        content: '❌ `메세지 관리하기` 권한이 필요해요 :(',
         ephemeral: true,
       })
     if (
@@ -47,12 +47,12 @@ export = class extends Command {
       )
     )
       return interaction.reply({
-        content: "i'm not have permissions gas `Manage Messages`.",
+        content: '❌ 이 봇에 `메세지 관리하기` 권한이 필요해요 :(',
         ephemeral: true,
       })
     await interaction.channel?.messages
       .fetch({
-        limit: interaction.options.getNumber('limit') as number,
+        limit: interaction.options.getNumber('청소제한') as number,
       })
       .then(messages => {
         interaction.guild?.channels.fetch(interaction.channelId).then(a => {
@@ -64,8 +64,8 @@ export = class extends Command {
                 .setTitle('clean')
                 .setDescription(
                   `${interaction.options.getNumber(
-                    'limit'
-                  )} chat(s) have been deleted.`
+                    '청소제한'
+                  )}개의 채팅을 청소 했어요.`
                 ),
             ],
             ephemeral: true,

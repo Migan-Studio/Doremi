@@ -7,6 +7,7 @@ import {
   GatewayIntentBits,
   InteractionType,
   PermissionResolvable,
+  ActivityType,
 } from 'discord.js'
 import { readdirSync } from 'fs'
 import path from 'path'
@@ -89,6 +90,7 @@ export class mbprClient extends Client {
     this.once('ready', () => {
       console.log(`[MbprClient] ${this.user!.username}`)
       console.log('-------------------------')
+      this.user!.setActivity({ type: ActivityType.Watching, name: '/도움말' })
     })
     this._loadCommands()
     this.on('interactionCreate', interaction => {

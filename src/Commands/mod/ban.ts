@@ -10,27 +10,28 @@ import {
 } from 'discord.js'
 
 export = class extends Command {
-  name = 'ban'
-  description = "mbpr project's ban"
+  name = '차단'
+  description = '[멤버 차단하기 권한 필요] Doremi의 차단'
   options: ApplicationCommandOptionData[] = [
     {
       type: ApplicationCommandOptionType.User,
-      name: 'member',
-      description: 'member',
+      name: '멤버',
+      description: '차단할 멤버',
       required: true,
     },
     {
       type: ApplicationCommandOptionType.String,
-      name: 'reason',
-      description: 'ban reason',
+      name: '사유',
+      description: '차단 사유',
       required: false,
     },
   ]
+
   execute(interaction: ChatInputCommandInteraction) {
-    let member = interaction.options.getMember('member') as GuildMember
+    let member = interaction.options.getMember('멤버') as GuildMember
     if (interaction.channel!.type === ChannelType.DM)
       return interaction.reply({
-        content: "Can't Using the DM.",
+        content: '❌ 개인 메세지에선 해당 명령어를 사용 할 수 없어요. :(',
         ephemeral: true,
       })
     if (
@@ -39,7 +40,7 @@ export = class extends Command {
         .permissions.has(PermissionsBitField.Flags.BanMembers)
     )
       return interaction.reply({
-        content: 'You not have permissions has `Ban Members`.',
+        content: '❌ `멤버 차단하기` 권한이 필요해요 :(',
         ephemeral: true,
       })
     if (
@@ -48,19 +49,19 @@ export = class extends Command {
       )
     )
       return interaction.reply({
-        content: "i'm not have permissions has `Ban Members`.",
+        content: '❌ 이 봇에 `멤버 차단하기` 권한이 필요해요 :(',
         ephemeral: true,
       })
 
     try {
       member.ban({
-        reason: interaction.options.getString('reason') || 'None',
+        reason: interaction.options.getString('reason') || '없음',
       })
       interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setTitle('Ban')
-            .setDescription(`Member ${member.user.tag} has been baned.`)
+            .setTitle('차단')
+            .setDescription(`멤버 ${member.user.tag}을/를 차단했어요.`)
             .setTimestamp(),
         ],
         ephemeral: true,
