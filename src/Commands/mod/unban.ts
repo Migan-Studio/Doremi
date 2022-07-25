@@ -9,12 +9,12 @@ import {
 import { Command } from '../../Client'
 
 module.exports = class extends Command {
-  name = '차단해'
+  name = '차단해제'
   description = '[멤버 차단하기 권한 필요] Doremi의 차단해제'
   options: ApplicationCommandOptionData[] = [
     {
       type: ApplicationCommandOptionType.String,
-      name: 'ID',
+      name: '아이디',
       description: '차단해제할 멤버의 ID',
       required: true,
     },

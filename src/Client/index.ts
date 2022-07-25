@@ -83,6 +83,7 @@ export class mbprClient extends Client {
   }
 
   start() {
+    process.on('uncaughtException', console.error)
     let supportText: string
 
     config()
@@ -112,11 +113,19 @@ export class mbprClient extends Client {
         Modal[interaction.customId].default.execute(interaction)
       } else if (interaction.type === InteractionType.MessageComponent) {
         if (!interaction.isSelectMenu()) return
-        // @ts-ignore
-        SelectMenus[interaction.customId].default.execute(
-          interaction,
-          supportText
-        )
+        if (interaction.customId.startsWith('Doremi-select$support')) {
+          // @ts-ignore
+          SelectMenus[interaction.customId].default.execute(
+            interaction,
+            supportText
+          )
+        } else {
+          // @ts-ignore
+          SelectMenus[interaction.customId].default.execute(
+            interaction,
+            interaction.user.id
+          )
+        }
       }
     })
   }
