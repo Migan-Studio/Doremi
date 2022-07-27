@@ -25,5 +25,12 @@ export = class extends Command {
     // @ts-ignore
     modal.addComponents([firstActionRow])
     interaction.showModal(modal)
+
+    interaction.client.once('interactionCreate', i => {
+      if (i.type !== InteractionType.ModalSubmit) return
+      interaction.client.supportText = i.fields.getTextInputValue(
+        'Doremi-support$text'
+      )
+    })
   }
 }

@@ -36,8 +36,8 @@ export = class extends Command {
 - ${interaction.client.users!.cache!.get(process.env.OWNER_ID!)!.tag}
 
 # Node.js 버전
-
 - ${process.version}
+
 # PID
 - ${process.pid}
 
@@ -45,7 +45,10 @@ export = class extends Command {
 - ${interaction.client.guilds.cache.size}
 
 # 유저수
-- ${interaction.client.users.cache.size}`
+- ${interaction.client.users.cache.size}
+
+# 지연시간
+- ${interaction.client.ws.ping}`
             )
           ),
       ],

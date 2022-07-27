@@ -20,6 +20,7 @@ declare module 'discord.js' {
     _commands: Collection<string, Command>
     _commandDirectory: string
     SendDMWithDeveloperForEmbed(embed: any): void
+    supportText: string
   }
 }
 
@@ -53,11 +54,13 @@ export class mbprClient extends Client {
     this._commandDirectory = path.join(__dirname, '..', 'Commands')
   }
 
-  SendDMWithDeveloperForEmbed(embed: any) {
+  public SendDMWithDeveloperForEmbed(embed: any) {
     this.users!.cache!.get(process.env.OWNER_ID!)!.send({
       embeds: [embed],
     })
   }
+
+  public supportText = ''
 
   private _loadCommands() {
     const Directory = readdirSync(path.join(this._commandDirectory))
@@ -84,7 +87,6 @@ export class mbprClient extends Client {
 
   start() {
     process.on('uncaughtException', console.error)
-    let supportText: string
 
     config()
     this.login(process.env.TOKEN)
@@ -106,9 +108,6 @@ export class mbprClient extends Client {
     })
     this.on('interactionCreate', async interaction => {
       if (interaction.type === InteractionType.ModalSubmit) {
-        supportText = interaction.fields.getTextInputValue(
-          'Doremi-support$text'
-        )
         // @ts-ignore
         Modal[interaction.customId].default.execute(interaction)
       } else if (interaction.type === InteractionType.MessageComponent) {
@@ -117,7 +116,7 @@ export class mbprClient extends Client {
           // @ts-ignore
           SelectMenus[interaction.customId].default.execute(
             interaction,
-            supportText
+            this.supportText
           )
         } else {
           // @ts-ignore

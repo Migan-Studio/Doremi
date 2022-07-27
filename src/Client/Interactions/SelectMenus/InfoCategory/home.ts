@@ -30,7 +30,10 @@ export = {
 - ${interaction.client.guilds.cache.size}
 
 # 유저수
-- ${interaction.client.users.cache.size}`
+- ${interaction.client.users.cache.size}
+
+# 지연시간
+- ${interaction.client.ws.ping}`
             )
           ),
       ],
