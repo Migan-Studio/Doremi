@@ -93,7 +93,12 @@ export class mbprClient extends Client {
     this.once('ready', () => {
       console.log(`[MbprClient] ${this.user!.username}`)
       console.log('-------------------------')
-      this.user!.setActivity({ type: ActivityType.Watching, name: '/도움말' })
+      const changeStatus = () =>
+        this.user!.setActivity({
+          name: '/도움말',
+          type: ActivityType.Listening,
+        })
+      setInterval(changeStatus, 10000)
     })
     this._loadCommands()
     this.on('interactionCreate', interaction => {
