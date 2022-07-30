@@ -22,8 +22,7 @@ export = class extends Command {
 # 정보
 - 도움말
 - 정보
-- 핑
-- 서버정보
+- 지원
 
 # 관리
 - 추방
