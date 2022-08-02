@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.0.2",
+    "discord.js": "^14.1.2",
     "dotenv": "^16.0.0",
     "koreanbots": "^3.2.1"
   },
