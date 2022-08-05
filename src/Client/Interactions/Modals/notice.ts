@@ -14,6 +14,7 @@ export default {
                 name: `공지 발송자: ${interaction.user.tag}`,
                 iconURL: interaction.user.displayAvatarURL(),
               })
+              .setTitle(`${interaction.client.user!.username} 공지`)
               .setFields([
                 {
                   name: interaction.fields.getTextInputValue(

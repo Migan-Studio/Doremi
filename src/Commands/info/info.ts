@@ -3,9 +3,9 @@ import {
   ActionRowBuilder,
   ChatInputCommandInteraction,
   EmbedBuilder,
-  Formatters,
   SelectMenuBuilder,
   ChannelType,
+  codeBlock,
 } from 'discord.js'
 import os from 'os'
 
@@ -27,7 +27,7 @@ export = class extends Command {
           })
           .setTitle(`${interaction.client.user!.username} 정보`)
           .setDescription(
-            Formatters.codeBlock(
+            codeBlock(
               'md',
               `# OS 정보
 - ${os.platform} ${os.arch}

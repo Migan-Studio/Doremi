@@ -1,4 +1,4 @@
-import { EmbedBuilder, Formatters, SelectMenuInteraction } from 'discord.js'
+import { EmbedBuilder, codeBlock, SelectMenuInteraction } from 'discord.js'
 import os from 'os'
 
 export = {
@@ -12,7 +12,7 @@ export = {
           })
           .setTitle(`${interaction.client.user!.username} 정보`)
           .setDescription(
-            Formatters.codeBlock(
+            codeBlock(
               'md',
               `# OS 정보
 - ${os.platform} ${os.arch}

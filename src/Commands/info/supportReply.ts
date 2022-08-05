@@ -2,7 +2,6 @@ import { Command } from '../../Client'
 import {
   ActionRowBuilder,
   ChatInputCommandInteraction,
-  DiscordAPIError,
   ModalBuilder,
   TextInputBuilder,
   TextInputStyle,

@@ -1,7 +1,8 @@
 import {
   SelectMenuInteraction,
   EmbedBuilder,
-  Formatters,
+  codeBlock,
+  time,
   GuildVerificationLevel,
 } from 'discord.js'
 
@@ -32,7 +33,7 @@ export = {
           .setTitle(`${interaction.guild!.name}의 서버 정보`)
           .setThumbnail(interaction.guild!.iconURL())
           .setDescription(
-            Formatters.codeBlock(
+            codeBlock(
               'md',
               `# 서버의 이름
 ${interaction.guild!.name}
@@ -61,9 +62,9 @@ ${interaction.guild!.stickers.cache.size}`
           .addFields([
             {
               name: '서버의 생성일',
-              value: `${Formatters.time(
+              value: `${time(
                 Math.floor(interaction.guild!.createdTimestamp / 1000)
-              )} (${Formatters.time(
+              )} (${time(
                 Math.floor(interaction.guild!.createdTimestamp / 1000),
                 'R'
               )})`,

@@ -1,8 +1,8 @@
 import { Command } from '../../Client'
 import {
-  Formatters,
   ChatInputCommandInteraction,
   EmbedBuilder,
+  codeBlock,
 } from 'discord.js'
 
 export = class extends Command {
@@ -16,7 +16,7 @@ export = class extends Command {
           `${interaction.client.user!.username}의 도움말`
         ).setDescription(`
             **참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**
-            ${Formatters.codeBlock(
+            ${codeBlock(
               'md',
               `
 # 정보
@@ -27,7 +27,7 @@ export = class extends Command {
 # 관리
 - 추방
 - 차단
-- 청소
+- 채팅청소
 - 차단해제`
             )}
           `),
