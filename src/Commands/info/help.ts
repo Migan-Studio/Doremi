@@ -12,9 +12,10 @@ export = class extends Command {
   execute(interaction: ChatInputCommandInteraction) {
     interaction.reply({
       embeds: [
-        new EmbedBuilder().setTitle(
-          `${interaction.client.user!.username}의 도움말`
-        ).setDescription(`
+        new EmbedBuilder()
+          .setTitle(`${interaction.client.user!.username}의 도움말`)
+          .setThumbnail(interaction.client.user!.displayAvatarURL())
+          .setDescription(`
             **참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**
             ${codeBlock(
               'md',
