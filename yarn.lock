@@ -479,7 +479,7 @@ is-number@^7.0.0:
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
   integrity sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
 
-koreanbots@^3.2.1:
+koreanbots@^3.2.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/koreanbots/-/koreanbots-3.2.1.tgz#9b7cddfec5a7f51e6d30dab03a9032f16c107c9a"
   integrity sha512-BmHNrhiUv/DO66K3fRtY0tmbVaqfi86bt8p7Sa+nde0jxxUjDYYGpOQ44G17r5+s0ZP6S7M8KzutNDKmG78liw==
