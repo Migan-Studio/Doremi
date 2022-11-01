@@ -14,7 +14,6 @@ import path from 'path'
 import { config } from 'dotenv'
 import Modal from './Interactions/Modals'
 import SelectMenus from './Interactions/SelectMenus'
-import { Koreanbots } from 'koreanbots'
 
 declare module 'discord.js' {
   interface Client {
@@ -92,30 +91,6 @@ export class mbprClient extends Client {
     config()
     this.login(process.env.TOKEN)
     this.once('ready', () => {
-      if (!process.env.KRBOTS_TOKEN) {
-        return console.info(
-          '[MbprClient<KoreanBots>] KoreanBots Token is undefined. Not define of koreanbots variable.'
-        )
-      } else {
-        const koreanbots = new Koreanbots({
-          api: {
-            token: process.env.KRBOTS_TOKEN,
-          },
-          clientID: this.user!.id,
-        })
-        const update = () =>
-          koreanbots.mybot
-            .update({
-              servers: this.guilds.cache.size,
-            })
-            .then(res =>
-              console.info(
-                `[MbprClient<KoreanBots>] Response: ${JSON.stringify(res)}`
-              )
-            )
-        update()
-        setInterval(update, 600000)
-      }
       console.log(`[MbprClient] ${this.user!.username}`)
       console.log('-------------------------')
       const changeStatus = () =>
