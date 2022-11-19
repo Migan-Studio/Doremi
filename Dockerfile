@@ -5,4 +5,6 @@ COPY . .
 RUN yarn
 RUN yarn build
 
+ENV SHELL=/bin/bash
+
 CMD yarn start

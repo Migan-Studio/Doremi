@@ -15,6 +15,7 @@ import { config } from 'dotenv'
 import Modal from './Interactions/Modals'
 import SelectMenus from './Interactions/SelectMenus'
 import { Koreanbots } from 'koreanbots'
+import Dokdo from 'dokdo'
 
 declare module 'discord.js' {
   interface Client {
@@ -22,6 +23,7 @@ declare module 'discord.js' {
     _commandDirectory: string
     SendDMWithDeveloperForEmbed(embed: any): void
     supportText: string
+    dokdo: Dokdo
   }
 }
 
@@ -49,6 +51,7 @@ export class mbprClient extends Client {
         GatewayIntentBits.DirectMessages,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildMessages,
       ],
     })
     this._commands = new Collection()
@@ -60,6 +63,14 @@ export class mbprClient extends Client {
       embeds: [embed],
     })
   }
+
+  public dokdo: Dokdo = new Dokdo(this, {
+    prefix: '<@704999866094452816>',
+    aliases: ['dok', 'dokdo', 'eval'],
+    noPerm: msg => {
+      msg.reply({ content: '❌ 해당 명령어는 개발자 전용이에요.' })
+    },
+  })
 
   public supportText = ''
 
@@ -94,7 +105,7 @@ export class mbprClient extends Client {
     this.once('ready', () => {
       if (!process.env.KRBOTS_TOKEN) {
         return console.info(
-          '[MbprClient<KoreanBots>] KoreanBots Token is undefined. Not define of koreanbots variable.'
+          '[MbprClient>KoreanBots] KoreanBots Token is undefined. Not define of koreanbots variable.'
         )
       } else {
         const koreanbots = new Koreanbots({
@@ -136,26 +147,29 @@ export class mbprClient extends Client {
         Command.execute(interaction)
       }
     })
-    this.on('interactionCreate', async interaction => {
-      if (interaction.type === InteractionType.ModalSubmit) {
-        // @ts-ignore
-        Modal[interaction.customId].default.execute(interaction)
-      } else if (interaction.type === InteractionType.MessageComponent) {
-        if (!interaction.isSelectMenu()) return
-        if (interaction.customId.startsWith('Doremi-select$support')) {
+      .on('interactionCreate', async interaction => {
+        if (interaction.type === InteractionType.ModalSubmit) {
           // @ts-ignore
-          SelectMenus[interaction.customId].default.execute(
-            interaction,
-            this.supportText
-          )
-        } else {
-          // @ts-ignore
-          SelectMenus[interaction.customId].default.execute(
-            interaction,
-            interaction.user.id
-          )
+          Modal[interaction.customId].default.execute(interaction)
+        } else if (interaction.type === InteractionType.MessageComponent) {
+          if (!interaction.isSelectMenu()) return
+          if (interaction.customId.startsWith('Doremi-select$support')) {
+            // @ts-ignore
+            SelectMenus[interaction.customId].default.execute(
+              interaction,
+              this.supportText
+            )
+          } else {
+            // @ts-ignore
+            SelectMenus[interaction.customId].default.execute(
+              interaction,
+              interaction.user.id
+            )
+          }
         }
-      }
-    })
+      })
+      .on('messageCreate', msg => {
+        this.dokdo.run(msg)
+      })
   }
 }
