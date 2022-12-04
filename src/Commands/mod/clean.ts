@@ -6,7 +6,7 @@ import {
   EmbedBuilder,
   PermissionsBitField,
 } from 'discord.js'
-import { Command } from '../../Client'
+import { Command } from 'mbpr-rodule'
 
 export = class extends Command {
   name = '채팅청소'

@@ -6,7 +6,7 @@ import {
   EmbedBuilder,
   PermissionsBitField,
 } from 'discord.js'
-import { Command } from '../../Client'
+import { Command } from 'mbpr-rodule'
 
 module.exports = class extends Command {
   name = '차단해제'

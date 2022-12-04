@@ -1,4 +1,4 @@
-import { Command } from '../../Client'
+import { Command } from 'mbpr-rodule'
 import {
   EmbedBuilder,
   ChatInputCommandInteraction,
