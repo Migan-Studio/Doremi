@@ -103,6 +103,9 @@
     "paths": {
       "@interactions/*": [
         "Interactions/*"
+      ],
+      "@localizations": [
+        "localization/index"
       ]
     }
   },

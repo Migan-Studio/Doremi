@@ -30,11 +30,12 @@ export = class extends Command {
       .setLabel('답장 할 내용을 적어주세요.')
       .setStyle(TextInputStyle.Paragraph)
 
-    const ActionRow = new ActionRowBuilder().addComponents([replyByUserID])
-
-    // @ts-ignore
-    const actionRow = new ActionRowBuilder().addComponents([replyText])
-    // @ts-ignore
+    const ActionRow = new ActionRowBuilder<TextInputBuilder>().addComponents([
+      replyByUserID,
+    ])
+    const actionRow = new ActionRowBuilder<TextInputBuilder>().addComponents([
+      replyText,
+    ])
     modal.addComponents([ActionRow, actionRow])
     interaction
       .showModal(modal)

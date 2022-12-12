@@ -1,9 +1,4 @@
-import {
-  ModalSubmitInteraction,
-  EmbedBuilder,
-  SelectMenuBuilder,
-  ActionRowBuilder,
-} from 'discord.js'
+import { ModalSubmitInteraction, EmbedBuilder } from 'discord.js'
 
 export default {
   execute(interaction: ModalSubmitInteraction) {

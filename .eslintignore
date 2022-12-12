@@ -1,0 +1,5 @@
+.yarn/
+.pnp.*
+dist/
+.vscode/
+src/localization/

@@ -1,17 +1,24 @@
-import { ActivityType, GatewayIntentBits, InteractionType } from 'discord.js'
-import { Mbpr } from 'mbpr-rodule'
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import {
+  ActivityType,
+  type APIEmbed,
+  type EmbedBuilder,
+  GatewayIntentBits,
+  InteractionType,
+} from 'discord.js'
+import { Mbpr, red, white } from 'mbpr-rodule'
 import path from 'path'
 import { config } from 'dotenv'
 import Dokdo from 'dokdo'
 import SelectMenus from '@interactions/SelectMenus'
 import Modal from '@interactions/Modals'
-import { Koreanbots } from 'koreanbots'
+import { koreanbots } from 'koreanbots-lite'
 
 config()
 
 declare module 'discord.js' {
   interface Client {
-    SendDMWithDeveloperForEmbed(embed: any): void
+    SendDMWithDeveloperForEmbed(embed: APIEmbed | EmbedBuilder): void
     supportText: string
     dokdo: Dokdo
   }
@@ -37,41 +44,36 @@ const client = new Mbpr(
 client
   .once('ready', () => {
     if (!process.env.KRBOTS_TOKEN) {
-      return console.info(
-        '[MbprClient>KoreanBots] KoreanBots Token is undefined. Not define of koreanbots variable.'
+      return client.loger.sendConsoleMessage(
+        `KoreanBots Token is ${red}undefined.${white} Not define of koreanbots variable.`
       )
     } else {
-      const koreanbots = new Koreanbots({
-        api: {
-          token: process.env.KRBOTS_TOKEN,
-        },
-        clientID: client.user!.id,
-      })
-
       const update = () =>
-        koreanbots.mybot
-          .update({
-            servers: client.guilds.cache.size,
-          })
-          .then(res =>
-            client.loger.sendConsoleMessage(`Response: ${res.message}`)
-          )
-      update()
+        koreanbots({
+          token: process.env.TOKEN!,
+          id: client.user!.id,
+          servers: client.guilds.cache.size,
+        }).then(async response =>
+          client.loger.sendConsoleMessage(await response.body.json())
+        )
+
       setInterval(update, 600000)
-      client.dokdo = new Dokdo(client, {
-        prefix: `<@${client.user!.id}>`,
-        aliases: ['dok', 'dokdo', 'eval'],
-        noPerm: msg => {
-          msg.reply({ content: '❌ 해당 명령어는 개발자 전용이에요.' })
-        },
-        owners: [process.env.OWNER_ID!],
-      })
     }
+    client.dokdo = new Dokdo(client, {
+      prefix: `<@${client.user!.id}>`,
+      aliases: ['dok', 'dokdo', 'eval'],
+      noPerm: msg => {
+        msg.reply({ content: '❌ 해당 명령어는 개발자 전용이에요.' })
+      },
+      owners: [process.env.OWNER_ID!],
+    })
+
     const changeStatus = () =>
       client.user!.setActivity({
-        name: '/도움말',
+        name: '/help | /도움말',
         type: ActivityType.Listening,
       })
+    changeStatus()
     setInterval(changeStatus, 10000)
   })
   .on('interactionCreate', async interaction => {
@@ -79,7 +81,7 @@ client
       // @ts-ignore
       Modal[interaction.customId].default.execute(interaction)
     } else if (interaction.type === InteractionType.MessageComponent) {
-      if (!interaction.isSelectMenu()) return
+      if (!interaction.isStringSelectMenu()) return
       if (interaction.customId.startsWith('Doremi-select$support')) {
         // @ts-ignore
         SelectMenus[interaction.customId].default.execute(
@@ -98,7 +100,7 @@ client
   .on('messageCreate', msg => {
     if (msg.author.bot) return
     client.dokdo.run(msg)
-  }).SendDMWithDeveloperForEmbed = (embed: any) => {
+  }).SendDMWithDeveloperForEmbed = (embed: APIEmbed | EmbedBuilder) => {
   client.users!.cache!.get(process.env.OWNER_ID!)!.send({
     embeds: [embed],
   })

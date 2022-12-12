@@ -2,18 +2,23 @@
   "name": "doremi",
   "description": "Doremi for mbpr",
   "private": true,
-  "version": "3.0.0-dev.0",
+  "version": "3.0.0-dev",
   "main": "dist/index.js",
   "license": "AGPL-3.0",
   "dependencies": {
     "discord.js": "^14.7.0",
     "dokdo": "^0.6.2",
     "dotenv": "^16.0.3",
-    "koreanbots": "^3.2.0",
-    "mbpr-rodule": "^7.0.0"
+    "koreanbots-lite": "^1.1.0",
+    "mbpr-rodule": "^7.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.11.10",
+    "@typescript-eslint/eslint-plugin": "^5.46.0",
+    "@typescript-eslint/parser": "^5.46.0",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.0",
     "tsc-alias": "^1.8.1",
     "typescript": "^4.9.3"

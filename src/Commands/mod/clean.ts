@@ -55,21 +55,20 @@ export = class extends Command {
         limit: interaction.options.getNumber('청소제한') as number,
       })
       .then(messages => {
-        interaction.guild?.channels.fetch(interaction.channelId).then(a => {
-          // @ts-ignore
-          a.bulkDelete(messages, true)
-          interaction.reply({
-            embeds: [
-              new EmbedBuilder()
-                .setTitle('clean')
-                .setDescription(
-                  `${interaction.options.getNumber(
-                    '청소제한'
-                  )}개의 채팅을 청소 했어요.`
-                ),
-            ],
-            ephemeral: true,
-          })
+        const channel = interaction.channel!
+        if (channel.type !== ChannelType.GuildText) return
+        channel.bulkDelete(messages, true)
+        interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle('clean')
+              .setDescription(
+                `${interaction.options.getNumber(
+                  '청소제한'
+                )}개의 채팅을 청소 했어요.`
+              ),
+          ],
+          ephemeral: true,
         })
       })
       .catch(error => console.log(error))

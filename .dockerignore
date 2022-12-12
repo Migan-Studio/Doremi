@@ -4,3 +4,8 @@ dist/
 .gitignore
 .git
 .prettier*
+.eslint*
+.yarn/sdks
+.yarn/cache
+.yarn/unplugged
+.yarn/install-state.gz

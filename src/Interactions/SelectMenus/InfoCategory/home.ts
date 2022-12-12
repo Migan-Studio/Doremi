@@ -1,42 +1,61 @@
-import { EmbedBuilder, codeBlock, SelectMenuInteraction } from 'discord.js'
-import os from 'os'
+import { korean, englishUS } from '@localizations'
+import {
+  EmbedBuilder,
+  codeBlock,
+  StringSelectMenuInteraction,
+  Locale,
+} from 'discord.js'
 
 export = {
-  execute(interaction: SelectMenuInteraction) {
-    interaction.update({
-      embeds: [
-        new EmbedBuilder()
-          .setAuthor({
-            name: interaction.user.tag,
-            iconURL: interaction.user.displayAvatarURL(),
-          })
-          .setTitle(`${interaction.client.user!.username} 정보`)
-          .setDescription(
-            codeBlock(
-              'md',
-              `# OS 정보
-- ${os.platform} ${os.arch}
-
-# 봇 개발자
-- ${interaction.client.users!.cache!.get(process.env.OWNER_ID!)!.tag}
-
-# Node.js 버전
-- ${process.version}
-
-# PID
-- ${process.pid}
-
-# 서버수
-- ${interaction.client.guilds.cache.size}
-
-# 유저수
-- ${interaction.client.users.cache.size}
-
-# 지연시간
-- ${interaction.client.ws.ping}`
-            )
-          ),
-      ],
-    })
+  execute(interaction: StringSelectMenuInteraction) {
+    if (interaction.locale === Locale.Korean) {
+      interaction.update({
+        embeds: [
+          new EmbedBuilder()
+            .setAuthor({
+              name: interaction.user.tag,
+              iconURL: interaction.user.displayAvatarURL(),
+            })
+            .setTitle(korean.info.embeds.bot.title)
+            .setDescription(
+              codeBlock(
+                'md',
+                korean.info.embeds.bot.description({
+                  developerTag: interaction.client.users.cache.get(
+                    process.env.OWNER_ID!
+                  )!.tag,
+                  serverCount: interaction.client.guilds.cache.size,
+                  userCount: interaction.client.users.cache.size,
+                  wsPing: interaction.client.ws.ping,
+                })
+              )
+            ),
+        ],
+      })
+    } else {
+      interaction.update({
+        embeds: [
+          new EmbedBuilder()
+            .setAuthor({
+              name: interaction.user.tag,
+              iconURL: interaction.user.displayAvatarURL(),
+            })
+            .setTitle(englishUS.info.embeds.bot.title)
+            .setDescription(
+              codeBlock(
+                'md',
+                englishUS.info.embeds.bot.description({
+                  developerTag: interaction.client.users.cache.get(
+                    process.env.OWNER_ID!
+                  )!.tag,
+                  serverCount: interaction.client.guilds.cache.size,
+                  userCount: interaction.client.users.cache.size,
+                  wsPing: interaction.client.ws.ping,
+                })
+              )
+            ),
+        ],
+      })
+    }
   },
 }

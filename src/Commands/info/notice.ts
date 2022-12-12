@@ -7,9 +7,12 @@ import {
   TextInputStyle,
 } from 'discord.js'
 
-export = class extends Command {
-  name = '공지'
-  description = '[개발자 전용] Doremi의 공지'
+export default class NoticeCommands extends Command {
+  public constructor() {
+    super()
+    this.name = '공지'
+    this.description = '[개발자 전용] Doremi의 공지'
+  }
   execute(interaction: ChatInputCommandInteraction) {
     if (interaction.user.id !== process.env.OWNER_ID)
       return interaction.reply({
@@ -21,21 +24,22 @@ export = class extends Command {
       .setCustomId('Doremi-modal$notice')
       .setTitle('공지 내용')
 
-    const noticeTitle = new ActionRowBuilder().addComponents(
+    const noticeTitle = new ActionRowBuilder<TextInputBuilder>().addComponents(
       new TextInputBuilder()
         .setCustomId('Doremi-notice$title')
         .setLabel('공지의 제목')
         .setStyle(TextInputStyle.Short)
     )
 
-    const noticeContent = new ActionRowBuilder().addComponents(
-      new TextInputBuilder()
-        .setCustomId('Doremi-notice$content')
-        .setLabel('공지의 내용')
-        .setStyle(TextInputStyle.Paragraph)
-    )
+    const noticeContent =
+      new ActionRowBuilder<TextInputBuilder>().addComponents(
+        new TextInputBuilder()
+          .setCustomId('Doremi-notice$content')
+          .setLabel('공지의 내용')
+          .setStyle(TextInputStyle.Paragraph)
+      )
 
-    // @ts-ignore
-    interaction.showModal(modal.addComponents([noticeTitle, noticeContent]))
+    modal.addComponents([noticeTitle, noticeContent])
+    interaction.showModal(modal)
   }
 }

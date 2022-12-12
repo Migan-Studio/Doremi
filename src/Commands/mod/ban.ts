@@ -28,7 +28,7 @@ export = class extends Command {
   ]
 
   execute(interaction: ChatInputCommandInteraction) {
-    let member = interaction.options.getMember('멤버') as GuildMember
+    const member = interaction.options.getMember('멤버') as GuildMember
     if (interaction.channel!.type === ChannelType.DM)
       return interaction.reply({
         content: '❌ 개인 메세지에선 해당 명령어를 사용 할 수 없어요. :(',

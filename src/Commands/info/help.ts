@@ -1,38 +1,52 @@
 import { Command } from 'mbpr-rodule'
 import {
   ChatInputCommandInteraction,
-  EmbedBuilder,
   codeBlock,
+  EmbedBuilder,
+  Locale,
 } from 'discord.js'
+import { englishUS, korean } from '@localizations'
 
-export = class extends Command {
-  name = '도움말'
-  description = 'Doremi의 도움말'
+export default class HelpCommands extends Command {
+  public constructor() {
+    super()
+    this.name = englishUS.help.name
+    this.nameLocalizations = { ko: korean.help.name }
+    this.description = englishUS.help.description
+    this.descriptionLocalizations = { ko: korean.help.description }
+  }
 
   execute(interaction: ChatInputCommandInteraction) {
-    interaction.reply({
-      embeds: [
-        new EmbedBuilder()
-          .setTitle(`${interaction.client.user!.username}의 도움말`)
-          .setThumbnail(interaction.client.user!.displayAvatarURL())
-          .setDescription(`
-            **참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**
-            ${codeBlock(
-              'md',
+    if (interaction.locale === Locale.Korean) {
+      interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle(
+              korean.help.embeds.title(interaction.client.user!.username)
+            )
+            .setThumbnail(interaction.client.user!.displayAvatarURL())
+            .setDescription(
               `
-# 정보
-- 도움말
-- 정보
-- 지원
-
-# 관리
-- 추방
-- 차단
-- 채팅청소
-- 차단해제`
-            )}
-          `),
-      ],
-    })
+            **참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**
+            ${codeBlock('md', korean.help.embeds.description)}`
+            )
+            .setTimestamp(),
+        ],
+      })
+    } else {
+      interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle(
+              englishUS.help.embeds.title(interaction.client.user!.username)
+            )
+            .setDescription(
+              `**Note, this bot is based on the [mbpr] (https://github.com/Migan-Studio/mbpr) project.**
+              ${codeBlock('md', englishUS.help.embeds.description)}`
+            )
+            .setTimestamp(),
+        ],
+      })
+    }
   }
 }
