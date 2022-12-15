@@ -2,72 +2,135 @@ import { Command } from 'mbpr-rodule'
 import {
   EmbedBuilder,
   ChannelType,
-  ApplicationCommandOptionData,
-  ChatInputCommandInteraction,
+  type ChatInputCommandInteraction,
   GuildMember,
   ApplicationCommandOptionType,
   PermissionsBitField,
+  Locale,
 } from 'discord.js'
+import { englishUS, ifDM, ifNonePermissions, korean } from '@localizations'
 
-export = class extends Command {
-  name = '차단'
-  description = '[멤버 차단하기 권한 필요] Doremi의 차단'
-  options: ApplicationCommandOptionData[] = [
-    {
-      type: ApplicationCommandOptionType.User,
-      name: '멤버',
-      description: '차단할 멤버',
-      required: true,
-    },
-    {
-      type: ApplicationCommandOptionType.String,
-      name: '사유',
-      description: '차단 사유',
-      required: false,
-    },
-  ]
+export default class BanCommands extends Command {
+  public constructor() {
+    super()
+    this.name = englishUS.ban.name
+    this.nameLocalizations = { ko: korean.ban.name }
+    this.description = englishUS.ban.description
+    this.descriptionLocalizations = { ko: korean.ban.description }
+    this.options = [
+      {
+        type: ApplicationCommandOptionType.User,
+        name: englishUS.ban.options[0].name,
+        nameLocalizations: { ko: korean.ban.options[0].name },
+        description: englishUS.ban.options[0].description,
+        descriptionLocalizations: { ko: korean.ban.options[0].description },
+        required: true,
+      },
+      {
+        type: ApplicationCommandOptionType.String,
+        name: englishUS.ban.options[1].name,
+        nameLocalizations: { ko: korean.ban.options[1].name },
+        description: englishUS.ban.options[1].description,
+        descriptionLocalizations: { ko: korean.ban.options[1].description },
+        required: false,
+      },
+    ]
+  }
 
   execute(interaction: ChatInputCommandInteraction) {
-    const member = interaction.options.getMember('멤버') as GuildMember
-    if (interaction.channel!.type === ChannelType.DM)
-      return interaction.reply({
-        content: '❌ 개인 메세지에선 해당 명령어를 사용 할 수 없어요. :(',
-        ephemeral: true,
-      })
-    if (
-      !interaction
-        .guild!.members!.cache!.get(interaction.user.id)!
-        .permissions.has(PermissionsBitField.Flags.BanMembers)
-    )
-      return interaction.reply({
-        content: '❌ `멤버 차단하기` 권한이 필요해요 :(',
-        ephemeral: true,
-      })
-    if (
-      !interaction.guild!.members!.me!.permissions.has(
-        PermissionsBitField.Flags.BanMembers
-      )
-    )
-      return interaction.reply({
-        content: '❌ 이 봇에 `멤버 차단하기` 권한이 필요해요 :(',
-        ephemeral: true,
-      })
+    const member = interaction.options.getMember('member')
+    const reason = interaction.options.getString('reason')
 
-    try {
-      member.ban({
-        reason: interaction.options.getString('reason') || '없음',
-      })
-      interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setTitle('차단')
-            .setDescription(`멤버 ${member.user.tag}을/를 차단했어요.`)
-            .setTimestamp(),
-        ],
-        ephemeral: true,
-      })
-    } catch (error) {
-      console.log(error)
+    if (member instanceof GuildMember) {
+      if (interaction.locale === Locale.Korean) {
+        if (interaction.channel!.type === ChannelType.DM)
+          return interaction.reply({
+            content: ifDM(Locale.Korean),
+            ephemeral: true,
+          })
+
+        if (
+          !interaction
+            .guild!.members!.cache!.get(interaction.user.id)!
+            .permissions.has(PermissionsBitField.Flags.BanMembers)
+        )
+          return interaction.reply({
+            content: ifNonePermissions(Locale.Korean, '멤버 차단하기', false),
+            ephemeral: true,
+          })
+
+        if (
+          !interaction.guild!.members!.me!.permissions.has(
+            PermissionsBitField.Flags.BanMembers
+          )
+        )
+          return interaction.reply({
+            content: ifNonePermissions(Locale.Korean, '멤버 차단하기', true),
+            ephemeral: true,
+          })
+
+        try {
+          member.ban({
+            reason: reason || '없음',
+          })
+          interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle(korean.ban.embeds.title)
+                .setDescription(korean.ban.embeds.description(member.user.tag))
+                .setTimestamp(),
+            ],
+            ephemeral: true,
+          })
+        } catch (error) {
+          console.log(error)
+        }
+      } else {
+        if (interaction.channel!.type === ChannelType.DM)
+          return interaction.reply({
+            content: ifDM(Locale.EnglishUS),
+            ephemeral: true,
+          })
+
+        if (
+          !interaction
+            .guild!.members!.cache!.get(interaction.user.id)!
+            .permissions.has(PermissionsBitField.Flags.BanMembers)
+        )
+          return interaction.reply({
+            content: ifNonePermissions(Locale.EnglishUS, 'Ban Members', false),
+            ephemeral: true,
+          })
+
+        if (
+          !interaction.guild!.members!.me!.permissions.has(
+            PermissionsBitField.Flags.BanMembers
+          )
+        )
+          return interaction.reply({
+            content: ifNonePermissions(Locale.EnglishUS, 'Ban Members', true),
+            ephemeral: true,
+          })
+
+        try {
+          member.ban({
+            reason: reason || 'None',
+          })
+          interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle(englishUS.ban.embeds.title)
+                .setDescription(
+                  englishUS.ban.embeds.description(member.user.tag)
+                )
+                .setTimestamp(),
+            ],
+            ephemeral: true,
+          })
+        } catch (error) {
+          console.log(error)
+        }
+      }
     }
   }
 }

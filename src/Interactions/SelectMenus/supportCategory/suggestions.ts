@@ -2,7 +2,7 @@ import { korean, englishUS } from '@localizations'
 import { EmbedBuilder, Locale, StringSelectMenuInteraction } from 'discord.js'
 
 export default {
-  execute(interaction: StringSelectMenuInteraction, content: string) {
+  execute(interaction: StringSelectMenuInteraction) {
     if (interaction.locale === Locale.Korean) {
       interaction.client.SendDMWithDeveloperForEmbed(
         new EmbedBuilder()
@@ -12,7 +12,10 @@ export default {
           })
           .setTitle(korean.support.name)
           .setDescription(
-            korean.support.embeds.send.description('건의', content)
+            korean.support.embeds.send.description(
+              '건의',
+              interaction.client.supportText
+            )
           )
           .setTimestamp()
       )
@@ -37,7 +40,10 @@ export default {
           })
           .setTitle(englishUS.support.name)
           .setDescription(
-            englishUS.support.embeds.send.description('suggestion', content)
+            englishUS.support.embeds.send.description(
+              'suggestion',
+              interaction.client.supportText
+            )
           )
           .setTimestamp()
       )

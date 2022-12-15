@@ -1,6 +1,6 @@
 import { Command } from 'mbpr-rodule'
 import {
-  ChatInputCommandInteraction,
+  type ChatInputCommandInteraction,
   ActionRowBuilder,
   ModalBuilder,
   TextInputBuilder,

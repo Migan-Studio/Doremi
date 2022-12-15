@@ -20,7 +20,6 @@ declare module 'discord.js' {
   interface Client {
     SendDMWithDeveloperForEmbed(embed: APIEmbed | EmbedBuilder): void
     supportText: string
-    dokdo: Dokdo
   }
 }
 
@@ -59,14 +58,6 @@ client
 
       setInterval(update, 600000)
     }
-    client.dokdo = new Dokdo(client, {
-      prefix: `<@${client.user!.id}>`,
-      aliases: ['dok', 'dokdo', 'eval'],
-      noPerm: msg => {
-        msg.reply({ content: '❌ 해당 명령어는 개발자 전용이에요.' })
-      },
-      owners: [process.env.OWNER_ID!],
-    })
 
     const changeStatus = () =>
       client.user!.setActivity({
@@ -80,26 +71,27 @@ client
     if (interaction.type === InteractionType.ModalSubmit) {
       // @ts-ignore
       Modal[interaction.customId].default.execute(interaction)
+
+      client.supportText = interaction.fields.getTextInputValue(
+        'Doremi-support$text'
+      )
     } else if (interaction.type === InteractionType.MessageComponent) {
       if (!interaction.isStringSelectMenu()) return
-      if (interaction.customId.startsWith('Doremi-select$support')) {
-        // @ts-ignore
-        SelectMenus[interaction.customId].default.execute(
-          interaction,
-          client.supportText
-        )
-      } else {
-        // @ts-ignore
-        SelectMenus[interaction.customId].default.execute(
-          interaction,
-          interaction.user.id
-        )
-      }
+      // @ts-ignore
+      SelectMenus[interaction.customId].default.execute(interaction)
     }
   })
   .on('messageCreate', msg => {
     if (msg.author.bot) return
-    client.dokdo.run(msg)
+    const dokdo = new Dokdo(client, {
+      prefix: `<@${client.user!.id}>`,
+      aliases: ['dok', 'dokdo', 'eval'],
+      noPerm: msg => {
+        msg.reply({ content: '❌ 해당 명령어는 개발자 전용이에요.' })
+      },
+      owners: [process.env.OWNER_ID!],
+    })
+    dokdo.run(msg)
   }).SendDMWithDeveloperForEmbed = (embed: APIEmbed | EmbedBuilder) => {
   client.users!.cache!.get(process.env.OWNER_ID!)!.send({
     embeds: [embed],
