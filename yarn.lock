@@ -98,6 +98,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@migan/prettier-config@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@migan/prettier-config@npm:1.0.0"
+  peerDependencies:
+    prettier: ^2.7.1
+  checksum: fc4d797be4255801db6a5e6a2977a0d0f70df21040e65fa4a363adcbf92373feb5efc462cd04c41fa82647c7884882832c5852868bef9669aa894eeb9e880d7a
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -741,6 +750,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "doremi@workspace:."
   dependencies:
+    "@migan/prettier-config": ^1.0.0
     "@types/node": ^18.11.10
     "@typescript-eslint/eslint-plugin": ^5.46.0
     "@typescript-eslint/parser": ^5.46.0

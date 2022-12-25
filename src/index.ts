@@ -40,6 +40,16 @@ const client = new Mbpr(
     commandFolderLoadDir: path.join(__dirname, 'Commands'),
   }
 )
+
+const dokdo = new Dokdo(client, {
+  prefix: `drm!`,
+  aliases: ['dok', 'dokdo', 'eval'],
+  noPerm: msg => {
+    msg.reply({ content: '❌ 해당 명령어는 개발자 전용이에요.' })
+  },
+  owners: [process.env.OWNER_ID!],
+})
+
 client
   .once('ready', () => {
     if (!process.env.KRBOTS_TOKEN) {
@@ -83,14 +93,6 @@ client
   })
   .on('messageCreate', msg => {
     if (msg.author.bot) return
-    const dokdo = new Dokdo(client, {
-      prefix: `<@${client.user!.id}>`,
-      aliases: ['dok', 'dokdo', 'eval'],
-      noPerm: msg => {
-        msg.reply({ content: '❌ 해당 명령어는 개발자 전용이에요.' })
-      },
-      owners: [process.env.OWNER_ID!],
-    })
     dokdo.run(msg)
   }).SendDMWithDeveloperForEmbed = (embed: APIEmbed | EmbedBuilder) => {
   client.users!.cache!.get(process.env.OWNER_ID!)!.send({

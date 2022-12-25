@@ -13,6 +13,7 @@
     "mbpr-rodule": "^7.0.1"
   },
   "devDependencies": {
+    "@migan/prettier-config": "^1.0.0",
     "@types/node": "^18.11.10",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
