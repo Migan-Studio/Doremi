@@ -8,13 +8,11 @@ import {
 } from 'discord.js'
 import { Mbpr, red, white } from 'mbpr-rodule'
 import path from 'path'
-import { config } from 'dotenv'
 import Dokdo from 'dokdo'
 import SelectMenus from '@interactions/SelectMenus'
 import Modal from '@interactions/Modals'
 import { koreanbots } from 'koreanbots-lite'
-
-config()
+require('dotenv/config')
 
 declare module 'discord.js' {
   interface Client {
@@ -45,7 +43,7 @@ const dokdo = new Dokdo(client, {
   prefix: `drm!`,
   aliases: ['dok', 'dokdo', 'eval'],
   noPerm: msg => {
-    msg.reply({ content: '❌ 해당 명령어는 개발자 전용이에요.' })
+    msg.reply({ content: '❌ This command is developer only.' })
   },
   owners: [process.env.OWNER_ID!],
 })

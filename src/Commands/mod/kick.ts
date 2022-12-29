@@ -2,69 +2,126 @@ import { Command } from 'mbpr-rodule'
 import {
   EmbedBuilder,
   ChatInputCommandInteraction,
-  ApplicationCommandOptionData,
   GuildMember,
   ChannelType,
   PermissionsBitField,
   ApplicationCommandOptionType,
+  Locale,
 } from 'discord.js'
+import { englishUS, ifDM, ifNonePermissions, korean } from '@localizations'
 
-module.exports = class extends Command {
-  name = '추방'
-  description = '[멤버 추방하기 권한 필요] Doremi의 추방'
-  options: ApplicationCommandOptionData[] = [
-    {
-      type: ApplicationCommandOptionType.User,
-      name: '멤버',
-      description: '추방할 멤버',
-      required: true,
-    },
-    {
-      type: ApplicationCommandOptionType.String,
-      name: '사유',
-      description: '차단 사유',
-      required: false,
-    },
-  ]
+export default class KickCommands extends Command {
+  constructor() {
+    super()
+    this.name = englishUS.kick.name
+    this.nameLocalizations = { ko: korean.kick.name }
+    this.description = englishUS.kick.description
+    this.descriptionLocalizations = { ko: korean.kick.description }
+    this.options = [
+      {
+        type: ApplicationCommandOptionType.User,
+        name: englishUS.kick.options[0].name,
+        nameLocalizations: { ko: korean.kick.options[0].name },
+        description: englishUS.kick.options[0].description,
+        descriptionLocalizations: { ko: korean.kick.options[0].description },
+        required: true,
+      },
+      {
+        type: ApplicationCommandOptionType.String,
+        name: englishUS.kick.options[1].name,
+        nameLocalizations: { ko: korean.kick.options[1].name },
+        description: englishUS.kick.options[1].description,
+        descriptionLocalizations: { ko: korean.kick.options[1].description },
+        required: false,
+      },
+    ]
+  }
+
   execute(interaction: ChatInputCommandInteraction) {
-    const member = interaction.options.getMember('멤버') as GuildMember
-    if (interaction.channel!.type === ChannelType.DM)
-      return interaction.reply({
-        content: '❌ 개인 메세지에선 해당 명령어를 사용 할 수 없어요. :(',
-        ephemeral: true,
-      })
-    if (
-      !interaction
-        .guild!.members!.cache!.get(interaction.user.id)!
-        .permissions.has(PermissionsBitField.Flags.KickMembers)
-    )
-      return interaction.reply({
-        content: '❌ `멤버 추방하기` 권한이 필요해요 :(',
-        ephemeral: true,
-      })
-    if (
-      !interaction.guild!.members.me!.permissions.has(
-        PermissionsBitField.Flags.KickMembers
-      )
-    )
-      return interaction.reply({
-        content: '❌ 이 봇에 `멤버 추방하기` 권한이 필요해요 :(',
-        ephemeral: true,
-      })
+    const member = interaction.options.getMember('member')
+    const reason = interaction.options.getString('reason')
+    if (member instanceof GuildMember) {
+      if (interaction.locale === Locale.Korean) {
+        if (interaction.channel!.type === ChannelType.DM)
+          return interaction.reply({
+            content: ifDM(Locale.Korean),
+            ephemeral: true,
+          })
+        if (
+          !interaction
+            .guild!.members!.cache!.get(interaction.user.id)!
+            .permissions.has(PermissionsBitField.Flags.KickMembers)
+        )
+          return interaction.reply({
+            content: ifNonePermissions(Locale.Korean, '멤버 추방하기', false),
+            ephemeral: true,
+          })
+        if (
+          !interaction.guild!.members.me!.permissions.has(
+            PermissionsBitField.Flags.KickMembers
+          )
+        )
+          return interaction.reply({
+            content: ifNonePermissions(Locale.Korean, '멤버 추방하기', true),
+            ephemeral: true,
+          })
 
-    try {
-      member.kick(interaction.options.getString('사유') || '없음')
-      interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setTitle('추방')
-            .setDescription(`멤버 ${member.user.tag}을/를 추방했어요.`)
-            .setTimestamp(),
-        ],
-        ephemeral: true,
-      })
-    } catch (error) {
-      console.log(error)
+        try {
+          member.kick(reason || '없음')
+          interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle(korean.kick.embeds.title)
+                .setDescription(korean.kick.embeds.description(member.user.tag))
+                .setTimestamp(),
+            ],
+            ephemeral: true,
+          })
+        } catch (error) {
+          console.log(error)
+        }
+      } else {
+        if (interaction.channel!.type === ChannelType.DM)
+          return interaction.reply({
+            content: ifDM(Locale.EnglishUS),
+            ephemeral: true,
+          })
+        if (
+          !interaction
+            .guild!.members!.cache!.get(interaction.user.id)!
+            .permissions.has(PermissionsBitField.Flags.KickMembers)
+        )
+          return interaction.reply({
+            content: ifNonePermissions(Locale.EnglishUS, 'Kick Members', false),
+            ephemeral: true,
+          })
+        if (
+          !interaction.guild!.members.me!.permissions.has(
+            PermissionsBitField.Flags.KickMembers
+          )
+        )
+          return interaction.reply({
+            content: ifNonePermissions(Locale.EnglishUS, 'Kick Members', true),
+            ephemeral: true,
+          })
+
+        try {
+          member.kick(reason || 'None')
+          interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle(englishUS.kick.embeds.title)
+                .setDescription(
+                  englishUS.kick.embeds.description(member.user.tag)
+                )
+                .setTimestamp(),
+            ],
+            ephemeral: true,
+          })
+        } catch (error) {
+          console.log(error)
+        }
+      }
     }
   }
 }

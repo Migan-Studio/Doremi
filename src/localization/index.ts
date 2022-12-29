@@ -4,15 +4,15 @@ import { Locale } from 'discord.js'
 
 function ifNonePermissions(
   locale: Locale,
-  Permissions: string,
+  permissions: string,
   bot: boolean
 ): string {
   if (locale === Locale.Korean) {
-    if (bot) return `❌ 이 봇에 \`${Permissions}\` 권한이 필요해요 :(`
-    return `❌ \`${Permissions}\` 권한이 필요해요 :(`
+    if (bot) return `❌ 이 봇에 \`${permissions}\` 권한이 필요해요 :(`
+    return `❌ \`${permissions}\` 권한이 필요해요 :(`
   } else {
-    if (bot) return `❌ i'm not have permissions has \`${Permissions}\` :(`
-    return `❌ You not have permissions has \`${Permissions}\` :(`
+    if (bot) return `❌ I'm not have permissions has \`${permissions}\` :(`
+    return `❌ You not have permissions has \`${permissions}\` :(`
   }
 }
 

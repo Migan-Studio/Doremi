@@ -13,7 +13,7 @@ export default class extends Command {
   public constructor() {
     super()
     this.name = englishUS.clean.name
-    this.nameLocalizations = { ko: korean.clean.description }
+    this.nameLocalizations = { ko: korean.clean.name }
     this.description = englishUS.clean.description
     this.descriptionLocalizations = { ko: korean.clean.description }
     this.options = [
