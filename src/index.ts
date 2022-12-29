@@ -6,12 +6,13 @@ import {
   GatewayIntentBits,
   InteractionType,
 } from 'discord.js'
-import { Mbpr, red, white } from 'mbpr-rodule'
+import { Mbpr } from 'mbpr-rodule'
 import path from 'path'
 import Dokdo from 'dokdo'
 import SelectMenus from '@interactions/SelectMenus'
 import Modal from '@interactions/Modals'
 import { koreanbots } from 'koreanbots-lite'
+import chalk from 'chalk'
 require('dotenv/config')
 
 declare module 'discord.js' {
@@ -52,7 +53,9 @@ client
   .once('ready', () => {
     if (!process.env.KRBOTS_TOKEN) {
       return client.loger.sendConsoleMessage(
-        `KoreanBots Token is ${red}undefined.${white} Not define of koreanbots variable.`
+        `KoreanBots Token is ${chalk.red(
+          'undefined'
+        )}. Not define of koreanbots variable.`
       )
     } else {
       const update = () =>

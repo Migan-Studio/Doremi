@@ -557,7 +557,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0":
+"chalk@npm:^4.0.0, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -754,6 +754,7 @@ __metadata:
     "@types/node": ^18.11.10
     "@typescript-eslint/eslint-plugin": ^5.46.0
     "@typescript-eslint/parser": ^5.46.0
+    chalk: ^4.1.2
     discord.js: ^14.7.0
     dokdo: ^0.6.2
     dotenv: ^16.0.3
@@ -761,7 +762,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
     koreanbots-lite: ^1.1.0
-    mbpr-rodule: ^7.0.1
+    mbpr-rodule: ^7.1.0
     prettier: ^2.8.1
     tsc-alias: ^1.8.1
     typescript: ^4.9.3
@@ -1531,10 +1532,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mbpr-rodule@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "mbpr-rodule@npm:7.0.1"
-  checksum: 001f2392e82e62ef21a01ff14c38bfe8deaec831470d8e5e4cc325748d52d966bffc2613864d5a2cee984591cfbcbdc711e678d9caac582ba4c4b744534493b2
+"mbpr-rodule@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "mbpr-rodule@npm:7.1.0"
+  dependencies:
+    chalk: ^4.1.2
+  checksum: 0c30c823d0e6ba4ccfb9bb2a77ae9fc786eb7186d0f13422d09b89908dc8e56b96071fa3b47b508687eefe633708680a32f675210f06b221defd4e9e8b4e1120
   languageName: node
   linkType: hard
 
