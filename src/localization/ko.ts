@@ -101,6 +101,7 @@ export default {
       title: '차단 해제',
       description: '해당 멤버를 차단해제 했어요.',
     },
+    error: '❌ Unblocking is impossible :(',
   },
   info: {
     name: '정보',

@@ -102,6 +102,7 @@ export default {
       title: 'unban',
       description: 'The member has been unbaned.',
     },
+    error: '',
   },
   info: {
     name: 'information',
