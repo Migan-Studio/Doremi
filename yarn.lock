@@ -699,6 +699,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"discommand@npm:^11.0.1":
+  version: 11.0.1
+  resolution: "discommand@npm:11.0.1"
+  checksum: 16fa367af17770b8760930284620e38c16554f93cc4c97c3e957f50d120649262499e0bc0f8232dac1e9c519f35f229367e21b377e748e7d65b75d9ea6b9e37b
+  languageName: node
+  linkType: hard
+
 "discord-api-types@npm:^0.37.20":
   version: 0.37.20
   resolution: "discord-api-types@npm:0.37.20"
@@ -754,7 +761,6 @@ __metadata:
     "@types/node": ^18.11.10
     "@typescript-eslint/eslint-plugin": ^5.46.0
     "@typescript-eslint/parser": ^5.46.0
-    chalk: ^4.1.2
     discord.js: ^14.7.0
     dokdo: ^0.6.2
     dotenv: ^16.0.3
@@ -762,7 +768,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
     koreanbots-lite: ^1.1.0
-    mbpr-rodule: ^7.1.0
+    mbpr-rodule: ^8.0.0
     prettier: ^2.8.1
     tsc-alias: ^1.8.1
     typescript: ^4.9.3
@@ -1532,12 +1538,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mbpr-rodule@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "mbpr-rodule@npm:7.1.0"
+"mbpr-rodule@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "mbpr-rodule@npm:8.0.0"
   dependencies:
     chalk: ^4.1.2
-  checksum: 0c30c823d0e6ba4ccfb9bb2a77ae9fc786eb7186d0f13422d09b89908dc8e56b96071fa3b47b508687eefe633708680a32f675210f06b221defd4e9e8b4e1120
+    discommand: ^11.0.1
+  checksum: 39bc590942a2c524f5ec097c5592e6fbab1631c8bd3fe4b566e3b157400757d3b8650a25d64ab6a6c2070094409aa6cbefdc4eec4414bce8c5b66643e000ec5a
   languageName: node
   linkType: hard
 

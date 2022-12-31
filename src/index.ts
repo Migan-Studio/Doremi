@@ -12,7 +12,7 @@ import Dokdo from 'dokdo'
 import SelectMenus from '@interactions/SelectMenus'
 import Modal from '@interactions/Modals'
 import { koreanbots } from 'koreanbots-lite'
-import chalk from 'chalk'
+import chalk from 'mbpr-rodule'
 require('dotenv/config')
 
 declare module 'discord.js' {
@@ -36,7 +36,9 @@ const client = new Mbpr(
   {
     token: process.env.TOKEN!,
     defaultHelpCommand: false,
-    commandFolderLoadDir: path.join(__dirname, 'Commands'),
+    directory: {
+      command: path.join(__dirname, 'Commands'),
+    },
   }
 )
 

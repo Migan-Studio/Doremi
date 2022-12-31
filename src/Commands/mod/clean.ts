@@ -11,23 +11,25 @@ import { Command } from 'mbpr-rodule'
 
 export default class extends Command {
   public constructor() {
-    super()
-    this.name = englishUS.clean.name
-    this.nameLocalizations = { ko: korean.clean.name }
-    this.description = englishUS.clean.description
-    this.descriptionLocalizations = { ko: korean.clean.description }
-    this.options = [
-      {
-        type: ApplicationCommandOptionType.Number,
-        name: englishUS.clean.options[0].name,
-        nameLocalizations: { ko: korean.clean.options[0].name },
-        description: englishUS.clean.options[0].description,
-        descriptionLocalizations: { ko: korean.clean.options[0].description },
-        required: true,
-        minValue: 1,
-        maxValue: 100,
-      },
-    ]
+    super(englishUS.clean.name)
+    this.data = {
+      name: englishUS.clean.name,
+      nameLocalizations: { ko: korean.clean.name },
+      description: englishUS.clean.description,
+      descriptionLocalizations: { ko: korean.clean.description },
+      options: [
+        {
+          type: ApplicationCommandOptionType.Number,
+          name: englishUS.clean.options[0].name,
+          nameLocalizations: { ko: korean.clean.options[0].name },
+          description: englishUS.clean.options[0].description,
+          descriptionLocalizations: { ko: korean.clean.options[0].description },
+          required: true,
+          minValue: 1,
+          maxValue: 100,
+        },
+      ],
+    }
   }
 
   async execute(interaction: ChatInputCommandInteraction) {

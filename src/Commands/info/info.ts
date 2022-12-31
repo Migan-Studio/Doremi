@@ -12,11 +12,13 @@ import { englishUS, ifDM, korean } from '@localizations'
 
 export default class InfoCommands extends Command {
   public constructor() {
-    super()
-    this.name = englishUS.info.name
-    this.nameLocalizations = { ko: korean.info.name }
-    this.description = englishUS.info.description
-    this.descriptionLocalizations = { ko: korean.info.description }
+    super(englishUS.info.name)
+    this.data = {
+      name: englishUS.info.name,
+      nameLocalizations: { ko: korean.info.name },
+      description: englishUS.info.description,
+      descriptionLocalizations: { ko: korean.info.description },
+    }
   }
   execute(interaction: ChatInputCommandInteraction) {
     if (interaction.locale === Locale.Korean) {

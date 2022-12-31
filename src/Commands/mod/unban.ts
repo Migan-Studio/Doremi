@@ -11,21 +11,23 @@ import { englishUS, ifDM, ifNonePermissions, korean } from '@localizations'
 
 module.exports = class extends Command {
   public constructor() {
-    super()
-    this.name = englishUS.unban.name
-    this.nameLocalizations = { ko: korean.unban.name }
-    this.description = englishUS.unban.description
-    this.descriptionLocalizations = { ko: korean.unban.description }
-    this.options = [
-      {
-        type: ApplicationCommandOptionType.String,
-        name: englishUS.unban.options[0].name,
-        nameLocalizations: { ko: korean.unban.options[0].name },
-        description: englishUS.unban.options[0].description,
-        descriptionLocalizations: { ko: korean.unban.options[0].name },
-        required: true,
-      },
-    ]
+    super(englishUS.unban.name)
+    this.data = {
+      name: englishUS.unban.name,
+      nameLocalizations: { ko: korean.unban.name },
+      description: englishUS.unban.description,
+      descriptionLocalizations: { ko: korean.unban.description },
+      options: [
+        {
+          type: ApplicationCommandOptionType.String,
+          name: englishUS.unban.options[0].name,
+          nameLocalizations: { ko: korean.unban.options[0].name },
+          description: englishUS.unban.options[0].description,
+          descriptionLocalizations: { ko: korean.unban.options[0].name },
+          required: true,
+        },
+      ],
+    }
   }
 
   execute(interaction: ChatInputCommandInteraction) {

@@ -12,29 +12,31 @@ import { englishUS, ifDM, ifNonePermissions, korean } from '@localizations'
 
 export default class BanCommands extends Command {
   public constructor() {
-    super()
-    this.name = englishUS.ban.name
-    this.nameLocalizations = { ko: korean.ban.name }
-    this.description = englishUS.ban.description
-    this.descriptionLocalizations = { ko: korean.ban.description }
-    this.options = [
-      {
-        type: ApplicationCommandOptionType.User,
-        name: englishUS.ban.options[0].name,
-        nameLocalizations: { ko: korean.ban.options[0].name },
-        description: englishUS.ban.options[0].description,
-        descriptionLocalizations: { ko: korean.ban.options[0].description },
-        required: true,
-      },
-      {
-        type: ApplicationCommandOptionType.String,
-        name: englishUS.ban.options[1].name,
-        nameLocalizations: { ko: korean.ban.options[1].name },
-        description: englishUS.ban.options[1].description,
-        descriptionLocalizations: { ko: korean.ban.options[1].description },
-        required: false,
-      },
-    ]
+    super(englishUS.ban.name)
+    this.data = {
+      name: englishUS.ban.name,
+      nameLocalizations: { ko: korean.ban.name },
+      description: englishUS.ban.description,
+      descriptionLocalizations: { ko: korean.ban.description },
+      options: [
+        {
+          type: ApplicationCommandOptionType.User,
+          name: englishUS.ban.options[0].name,
+          nameLocalizations: { ko: korean.ban.options[0].name },
+          description: englishUS.ban.options[0].description,
+          descriptionLocalizations: { ko: korean.ban.options[0].description },
+          required: true,
+        },
+        {
+          type: ApplicationCommandOptionType.String,
+          name: englishUS.ban.options[1].name,
+          nameLocalizations: { ko: korean.ban.options[1].name },
+          description: englishUS.ban.options[1].description,
+          descriptionLocalizations: { ko: korean.ban.options[1].description },
+          required: false,
+        },
+      ],
+    }
   }
 
   execute(interaction: ChatInputCommandInteraction) {

@@ -7,9 +7,14 @@ import {
   TextInputStyle,
 } from 'discord.js'
 
-export = class extends Command {
-  name = '지원답장'
-  description = '[개발자 전용] Doremi의 지원답장'
+export default class extends Command {
+  public constructor() {
+    super('지원답장')
+    this.data = {
+      name: '지원답장',
+      description: '[개발자 전용] Doremi의 지원답장',
+    }
+  }
   execute(interaction: ChatInputCommandInteraction) {
     if (interaction.user.id !== process.env.OWNER_ID)
       return interaction.reply({

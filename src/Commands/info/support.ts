@@ -12,11 +12,13 @@ import { englishUS, korean } from '@localizations'
 
 export default class SupportCommands extends Command {
   public constructor() {
-    super()
-    this.name = englishUS.support.name
-    this.nameLocalizations = { ko: korean.support.name }
-    this.description = englishUS.support.description
-    this.descriptionLocalizations = { ko: korean.support.descirption }
+    super(englishUS.support.name)
+    this.data = {
+      name: englishUS.support.name,
+      nameLocalizations: { ko: korean.support.name },
+      description: englishUS.support.description,
+      descriptionLocalizations: { ko: korean.support.descirption },
+    }
   }
   execute(interaction: ChatInputCommandInteraction) {
     if (interaction.locale === Locale.Korean) {

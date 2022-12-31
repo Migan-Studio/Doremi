@@ -12,29 +12,31 @@ import { englishUS, ifDM, ifNonePermissions, korean } from '@localizations'
 
 export default class KickCommands extends Command {
   constructor() {
-    super()
-    this.name = englishUS.kick.name
-    this.nameLocalizations = { ko: korean.kick.name }
-    this.description = englishUS.kick.description
-    this.descriptionLocalizations = { ko: korean.kick.description }
-    this.options = [
-      {
-        type: ApplicationCommandOptionType.User,
-        name: englishUS.kick.options[0].name,
-        nameLocalizations: { ko: korean.kick.options[0].name },
-        description: englishUS.kick.options[0].description,
-        descriptionLocalizations: { ko: korean.kick.options[0].description },
-        required: true,
-      },
-      {
-        type: ApplicationCommandOptionType.String,
-        name: englishUS.kick.options[1].name,
-        nameLocalizations: { ko: korean.kick.options[1].name },
-        description: englishUS.kick.options[1].description,
-        descriptionLocalizations: { ko: korean.kick.options[1].description },
-        required: false,
-      },
-    ]
+    super(englishUS.kick.name)
+    this.data = {
+      name: englishUS.kick.name,
+      nameLocalizations: { ko: korean.kick.name },
+      description: englishUS.kick.description,
+      descriptionLocalizations: { ko: korean.kick.description },
+      options: [
+        {
+          type: ApplicationCommandOptionType.User,
+          name: englishUS.kick.options[0].name,
+          nameLocalizations: { ko: korean.kick.options[0].name },
+          description: englishUS.kick.options[0].description,
+          descriptionLocalizations: { ko: korean.kick.options[0].description },
+          required: true,
+        },
+        {
+          type: ApplicationCommandOptionType.String,
+          name: englishUS.kick.options[1].name,
+          nameLocalizations: { ko: korean.kick.options[1].name },
+          description: englishUS.kick.options[1].description,
+          descriptionLocalizations: { ko: korean.kick.options[1].description },
+          required: false,
+        },
+      ],
+    }
   }
 
   execute(interaction: ChatInputCommandInteraction) {

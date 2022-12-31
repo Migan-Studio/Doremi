@@ -9,11 +9,13 @@ import { englishUS, korean } from '@localizations'
 
 export default class HelpCommands extends Command {
   public constructor() {
-    super()
-    this.name = englishUS.help.name
-    this.nameLocalizations = { ko: korean.help.name }
-    this.description = englishUS.help.description
-    this.descriptionLocalizations = { ko: korean.help.description }
+    super(englishUS.help.name)
+    this.data = {
+      name: englishUS.help.name,
+      nameLocalizations: { ko: korean.help.name },
+      description: englishUS.help.description,
+      descriptionLocalizations: { ko: korean.help.description },
+    }
   }
 
   execute(interaction: ChatInputCommandInteraction) {
@@ -41,7 +43,7 @@ export default class HelpCommands extends Command {
               englishUS.help.embeds.title(interaction.client.user!.username)
             )
             .setDescription(
-              `**Note, this bot is based on the [mbpr] (https://github.com/Migan-Studio/mbpr) project.**
+              `**Note, this bot is based on the [mbpr](https://github.com/Migan-Studio/mbpr) project.**
               ${codeBlock('md', englishUS.help.embeds.description)}`
             )
             .setTimestamp(),
