@@ -7,7 +7,7 @@ import {
   time,
 } from 'discord.js'
 
-export = {
+export default {
   execute(interaction: StringSelectMenuInteraction) {
     const member = interaction.guild!.members.cache.get(interaction.user.id)!
     const embed = new EmbedBuilder()
@@ -22,9 +22,9 @@ export = {
           case 'idle':
             return '자리 비움'
           case 'dnd':
-            '다른 용무 중'
+            return '다른 용무 중'
           case 'offline':
-            '오프라인'
+            return '오프라인'
         }
       }
       interaction.update({

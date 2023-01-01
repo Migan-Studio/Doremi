@@ -8,7 +8,7 @@ import {
   Locale,
 } from 'discord.js'
 
-export = {
+export default {
   execute(interaction: StringSelectMenuInteraction) {
     if (interaction.locale === Locale.Korean) {
       function returnServerSecurity() {

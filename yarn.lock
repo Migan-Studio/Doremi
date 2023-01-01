@@ -98,6 +98,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@migan/koreanbots@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@migan/koreanbots@npm:1.0.0"
+  dependencies:
+    undici: ^5.14.0
+  checksum: 6d32f405cd4a8c4e0053e11f8cffa6bdc7895bcde3c0bdfc008dd9973febe4f4aff8afe9c3ac41ed780ef24f73070cdeab3387df629a51364d3296af9e408d3a
+  languageName: node
+  linkType: hard
+
 "@migan/prettier-config@npm:^1.0.0":
   version: 1.0.0
   resolution: "@migan/prettier-config@npm:1.0.0"
@@ -757,6 +766,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "doremi@workspace:."
   dependencies:
+    "@migan/koreanbots": ^1.0.0
     "@migan/prettier-config": ^1.0.0
     "@types/node": ^18.11.10
     "@typescript-eslint/eslint-plugin": ^5.46.0
@@ -767,7 +777,6 @@ __metadata:
     eslint: ^8.29.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
-    koreanbots-lite: ^1.1.0
     mbpr-rodule: ^8.0.0
     prettier: ^2.8.1
     tsc-alias: ^1.8.1
@@ -1446,15 +1455,6 @@ __metadata:
   version: 1.0.1
   resolution: "json-stable-stringify-without-jsonify@npm:1.0.1"
   checksum: cff44156ddce9c67c44386ad5cddf91925fe06b1d217f2da9c4910d01f358c6e3989c4d5a02683c7a5667f9727ff05831f7aa8ae66c8ff691c556f0884d49215
-  languageName: node
-  linkType: hard
-
-"koreanbots-lite@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "koreanbots-lite@npm:1.1.0"
-  dependencies:
-    undici: ^5.13.0
-  checksum: abedc2258c070c81942ccb1b3ecb751715122d3582d2004349f731730081f25a72ba73bf58e25f380ddded0208b79f8ba191141ad215037fa9948c034241358d
   languageName: node
   linkType: hard
 
@@ -2316,6 +2316,15 @@ __metadata:
   dependencies:
     busboy: ^1.6.0
   checksum: 15b8f7df4bd8c9bf9d777456d16b51eb621f25d3ee60f575a8693192a647b3a8b33671e984386636e8df42085488f86a52d0d47db1b8c22edcc591134892a424
+  languageName: node
+  linkType: hard
+
+"undici@npm:^5.14.0":
+  version: 5.14.0
+  resolution: "undici@npm:5.14.0"
+  dependencies:
+    busboy: ^1.6.0
+  checksum: 7a076e44d84b25844b4eb657034437b8b9bb91f17d347de474fdea1d4263ce7ae9406db79cd30de5642519277b4893f43073258bcc8fed420b295da3fdd11b26
   languageName: node
   linkType: hard
 
