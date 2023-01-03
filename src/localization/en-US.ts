@@ -1,5 +1,5 @@
 import os from 'os'
-import { Snowflake } from 'discord.js'
+import type { Snowflake } from 'discord.js'
 
 export default {
   help: {
@@ -255,7 +255,7 @@ ${stickers}`
         description: 'The inquiry went successfully.',
       },
     },
-    componets: {
+    components: {
       bug: {
         label: 'bug',
         description:

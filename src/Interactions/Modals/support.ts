@@ -27,18 +27,19 @@ export default {
               .setCustomId('Doremi-select$support')
               .setOptions(
                 {
-                  label: korean.support.componets.bug.label,
-                  description: korean.support.componets.bug.description,
+                  label: korean.support.components.bug.label,
+                  description: korean.support.components.bug.description,
                   value: 'Doremi-support$bug',
                 },
                 {
-                  label: korean.support.componets.suggestions.label,
-                  description: korean.support.componets.suggestions.description,
+                  label: korean.support.components.suggestions.label,
+                  description:
+                    korean.support.components.suggestions.description,
                   value: 'Doremi-support$suggestion',
                 },
                 {
-                  label: korean.support.componets.other.label,
-                  description: korean.support.componets.other.description,
+                  label: korean.support.components.other.label,
+                  description: korean.support.components.other.description,
                   value: 'Doremi-support$other',
                 }
               )
@@ -64,19 +65,19 @@ export default {
               .setCustomId('Doremi-select$support')
               .setOptions(
                 {
-                  label: englishUS.support.componets.bug.label,
-                  description: englishUS.support.componets.bug.description,
+                  label: englishUS.support.components.bug.label,
+                  description: englishUS.support.components.bug.description,
                   value: 'Doremi-support$bug',
                 },
                 {
-                  label: englishUS.support.componets.suggestions.label,
+                  label: englishUS.support.components.suggestions.label,
                   description:
-                    englishUS.support.componets.suggestions.description,
+                    englishUS.support.components.suggestions.description,
                   value: 'Doremi-support$suggestion',
                 },
                 {
-                  label: englishUS.support.componets.other.label,
-                  description: englishUS.support.componets.other.description,
+                  label: englishUS.support.components.other.label,
+                  description: englishUS.support.components.other.description,
                   value: 'Doremi-support$other',
                 }
               )

@@ -10,8 +10,8 @@ import {
 
 export default {
   execute(interaction: StringSelectMenuInteraction) {
-    if (interaction.locale === Locale.Korean) {
-      function returnServerSecurity() {
+    function returnServerSecurity() {
+      if (interaction.locale === Locale.Korean) {
         switch (interaction.guild!.verificationLevel) {
           case GuildVerificationLevel.High:
             return '높음'
@@ -24,8 +24,22 @@ export default {
           case GuildVerificationLevel.VeryHigh:
             return '매우 높음'
         }
+      } else {
+        switch (interaction.guild!.verificationLevel) {
+          case GuildVerificationLevel.High:
+            return 'High'
+          case GuildVerificationLevel.Low:
+            return 'Low'
+          case GuildVerificationLevel.Medium:
+            return 'Medium'
+          case GuildVerificationLevel.None:
+            return 'None'
+          case GuildVerificationLevel.VeryHigh:
+            return 'Very High'
+        }
       }
-
+    }
+    if (interaction.locale === Locale.Korean) {
       interaction.update({
         embeds: [
           new EmbedBuilder()
@@ -68,21 +82,6 @@ export default {
         ],
       })
     } else {
-      function returnServerSecurity() {
-        switch (interaction.guild!.verificationLevel) {
-          case GuildVerificationLevel.High:
-            return 'High'
-          case GuildVerificationLevel.Low:
-            return 'Low'
-          case GuildVerificationLevel.Medium:
-            return 'Medium'
-          case GuildVerificationLevel.None:
-            return 'None'
-          case GuildVerificationLevel.VeryHigh:
-            return 'Very High'
-        }
-      }
-
       interaction.update({
         embeds: [
           new EmbedBuilder()

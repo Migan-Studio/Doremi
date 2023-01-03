@@ -254,7 +254,7 @@ ${stickers}`
         description: '문의가 성공적으로 갔어요.',
       },
     },
-    componets: {
+    components: {
       bug: {
         label: '버그',
         description:

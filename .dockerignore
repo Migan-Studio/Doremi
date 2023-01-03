@@ -1,10 +1,8 @@
 dist/
-.env
-.gitignore
-.git
+*.env
+.git*
 .prettier*
 .eslint*
-.yarn/sdks
-.yarn/cache
-.yarn/unplugged
-.yarn/install-state.gz
+.yarn/*
+!.yarn/releases
+.pnp*
