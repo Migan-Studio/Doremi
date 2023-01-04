@@ -5,15 +5,15 @@ import {
   EmbedBuilder,
   Locale,
 } from 'discord.js'
-import { englishUS, korean } from '@localizations'
+import { english, korean } from '@localizations'
 
 export default class HelpCommands extends Command {
   public constructor() {
-    super(englishUS.help.name)
+    super(english.help.name)
     this.data = {
-      name: englishUS.help.name,
+      name: english.help.name,
       nameLocalizations: { ko: korean.help.name },
-      description: englishUS.help.description,
+      description: english.help.description,
       descriptionLocalizations: { ko: korean.help.description },
     }
   }
@@ -24,13 +24,15 @@ export default class HelpCommands extends Command {
         embeds: [
           new EmbedBuilder()
             .setTitle(
-              korean.help.embeds.title(interaction.client.user!.username)
+              korean.help.embeds.title.replace(
+                '{botName}',
+                interaction.client.user!.username
+              )
             )
             .setThumbnail(interaction.client.user!.displayAvatarURL())
             .setDescription(
-              `
-            **참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**
-            ${codeBlock('md', korean.help.embeds.description)}`
+              `**참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**
+${codeBlock('md', korean.help.embeds.description)}`
             )
             .setTimestamp(),
         ],
@@ -40,11 +42,14 @@ export default class HelpCommands extends Command {
         embeds: [
           new EmbedBuilder()
             .setTitle(
-              englishUS.help.embeds.title(interaction.client.user!.username)
+              english.help.embeds.title.replace(
+                '{botName}',
+                interaction.client.user!.username
+              )
             )
             .setDescription(
               `**Note, this bot is based on the [mbpr](https://github.com/Migan-Studio/mbpr) project.**
-              ${codeBlock('md', englishUS.help.embeds.description)}`
+${codeBlock('md', english.help.embeds.description)}`
             )
             .setTimestamp(),
         ],

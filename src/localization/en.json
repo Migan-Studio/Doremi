@@ -1,0 +1,115 @@
+{
+  "help": {
+    "name": "help",
+    "description": "Doremi's help",
+    "embeds": {
+      "title": "{botName}('s) help",
+      "description": "# Information \n- help\n- ping \n\n# moderation\n- kick\n- ban\n- client\n- unban"
+    }
+  },
+  "kick": {
+    "name": "kick",
+    "description": "Doremi's kick",
+    "options": {
+      "member": {
+        "name": "member",
+        "description": "Member to kick"
+      },
+      "reason": {
+        "name": "reason",
+        "description": "a reason to kick"
+      }
+    },
+    "embeds": {
+      "description": "Member {member} has been kicked."
+    }
+  },
+  "ban": {
+    "name": "ban",
+    "description": "Doremi's ban",
+    "options": {
+      "member": {
+        "name": "member",
+        "description": "Member to ban"
+      },
+      "reason": {
+        "name": "reason",
+        "description": "a reason to ban5"
+      }
+    },
+    "embeds": {
+      "description": "Member {member} has been banned."
+    }
+  },
+  "clean": {
+    "name": "clean",
+    "description": "Doremi's clean",
+    "options": {
+      "name": "clean-limit",
+      "description": "clean chat's limit"
+    },
+    "embeds": {
+      "description": "{count} chat(s) have been deleted."
+    }
+  },
+  "unban": {
+    "name": "unban",
+    "description": "Doremi's unban",
+    "options": {
+      "name": "id",
+      "description": "the unban member's id"
+    },
+    "IDIsNaN": "The value `id` is the member's ID.",
+    "embeds": {
+      "description": "The member has been unbanned."
+    },
+    "error": "❌ Unblocking is impossible :("
+  },
+  "info": {
+    "name": "information",
+    "description": "Doremi's information",
+    "embeds": {
+      "title": "{name}'s information"
+    },
+    "components": {
+      "bot": {
+        "label": "default",
+        "description": "Doremi's default info"
+      },
+      "guild": {
+        "label": "server info",
+        "description": "About the server using the command"
+      },
+      "user": {
+        "label": "user info",
+        "description": "User's Information Using Commands"
+      }
+    }
+  },
+  "support": {
+    "name": "support",
+    "description": "Doremi's support",
+    "embeds": {
+      "select": {
+        "description": "Which item are you going to inquire about?"
+      },
+      "end": {
+        "description": "The inquiry went successfully."
+      }
+    },
+    "components": {
+      "bug": {
+        "label": "bug",
+        "description": "You can inquire about a bug that occurred while using Doremi."
+      },
+      "suggestions": {
+        "label": "suggestion",
+        "description": "You can inquire about any inconveniences or additional features you had while using Doremi."
+      },
+      "other": {
+        "label": "other",
+        "description": "You can ask questions while using Doremi."
+      }
+    }
+  }
+}

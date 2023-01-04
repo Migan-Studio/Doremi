@@ -7,23 +7,23 @@ import {
   PermissionsBitField,
 } from 'discord.js'
 import { Command } from 'mbpr-rodule'
-import { englishUS, ifDM, ifNonePermissions, korean } from '@localizations'
+import { english, ifDM, ifNonePermissions, korean } from '@localizations'
 
 module.exports = class extends Command {
   public constructor() {
-    super(englishUS.unban.name)
+    super(english.unban.name)
     this.data = {
-      name: englishUS.unban.name,
+      name: english.unban.name,
       nameLocalizations: { ko: korean.unban.name },
-      description: englishUS.unban.description,
+      description: english.unban.description,
       descriptionLocalizations: { ko: korean.unban.description },
       options: [
         {
           type: ApplicationCommandOptionType.String,
-          name: englishUS.unban.options[0].name,
-          nameLocalizations: { ko: korean.unban.options[0].name },
-          description: englishUS.unban.options[0].description,
-          descriptionLocalizations: { ko: korean.unban.options[0].name },
+          name: english.unban.options.name,
+          nameLocalizations: { ko: korean.unban.options.name },
+          description: english.unban.options.description,
+          descriptionLocalizations: { ko: korean.unban.options.name },
           required: true,
         },
       ],
@@ -66,7 +66,7 @@ module.exports = class extends Command {
           interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setTitle(korean.unban.embeds.title)
+                .setTitle(korean.unban.name)
                 .setDescription(korean.unban.embeds.description)
                 .setTimestamp(),
             ],
@@ -105,7 +105,7 @@ module.exports = class extends Command {
         })
       if (isNaN(interaction.options.getString('id') as unknown as number))
         return interaction.reply({
-          content: englishUS.unban.IDIsNaN,
+          content: english.unban.IDIsNaN,
           ephemeral: true,
         })
       interaction!
@@ -114,15 +114,15 @@ module.exports = class extends Command {
           interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setTitle(englishUS.unban.embeds.title)
-                .setDescription(englishUS.unban.embeds.description)
+                .setTitle(english.unban.name)
+                .setDescription(english.unban.embeds.description)
                 .setTimestamp(),
             ],
           })
         })
         .catch(error => {
           interaction.reply({
-            content: englishUS.unban.error,
+            content: english.unban.error,
             ephemeral: true,
           })
           console.log(error)

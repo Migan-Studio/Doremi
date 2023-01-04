@@ -1,4 +1,4 @@
-import { englishUS, korean } from '@localizations'
+import { english, korean } from '@localizations'
 import {
   codeBlock,
   EmbedBuilder,
@@ -30,17 +30,29 @@ export default {
       interaction.update({
         embeds: [
           embed
-            .setTitle(korean.info.embeds.user.title(member.user.username))
+            .setTitle(
+              korean.info.embeds.title.replace(
+                '{name}',
+                interaction.user.username
+              )
+            )
             .setDescription(
               codeBlock(
                 'md',
-                korean.info.embeds.user.description({
-                  userName: member.user.username,
-                  discriminator: member.user.discriminator,
-                  presence: returnPresence()!,
-                  isBot: member.user.bot ? '봇' : '봇아님',
-                  nickname: member.nickname || '없음',
-                })
+                `# 이름
+- ${interaction.user.username}
+
+# 태그
+- ${interaction.user.discriminator}
+
+# 상태
+- ${returnPresence()}
+
+# bot 
+- ${member.user.bot ? '봇이에요' : '봇이 아니에요'}
+
+# nick 
+- ${member.nickname || '없음'}`
               )
             )
             .setFields([
@@ -66,17 +78,29 @@ export default {
       interaction.update({
         embeds: [
           embed
-            .setTitle(englishUS.info.embeds.user.title(member.user.username))
+            .setTitle(
+              english.info.embeds.title.replace(
+                '{name}',
+                interaction.user.username
+              )
+            )
             .setDescription(
               codeBlock(
                 'md',
-                englishUS.info.embeds.user.description({
-                  userName: member.user.username,
-                  discriminator: member.user.discriminator,
-                  presence: member.presence!.status || 'None',
-                  isBot: member.user.bot ? 'bot' : 'not bot',
-                  nickname: member.nickname || 'None',
-                })
+                `# name 
+- ${interaction.user.username}
+
+# tag
+- ${interaction.user.discriminator}
+
+# presence
+- ${member.presence!.status || 'None'}
+
+# bot 
+- ${member.user.bot ? 'Bot' : 'Not bot'}
+
+# nick 
+- ${member.nickname || 'None'}`
               )
             )
             .setFields([

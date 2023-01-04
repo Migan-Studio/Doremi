@@ -1,4 +1,4 @@
-import { korean, englishUS } from '@localizations'
+import { korean, english } from '@localizations'
 import {
   ModalSubmitInteraction,
   EmbedBuilder,
@@ -55,8 +55,8 @@ export default {
               name: interaction.user.tag,
               iconURL: interaction.user.displayAvatarURL(),
             })
-            .setTitle(englishUS.support.name)
-            .setDescription(englishUS.support.embeds.select.description)
+            .setTitle(english.support.name)
+            .setDescription(english.support.embeds.select.description)
             .setTimestamp(),
         ],
         components: [
@@ -65,19 +65,19 @@ export default {
               .setCustomId('Doremi-select$support')
               .setOptions(
                 {
-                  label: englishUS.support.components.bug.label,
-                  description: englishUS.support.components.bug.description,
+                  label: english.support.components.bug.label,
+                  description: english.support.components.bug.description,
                   value: 'Doremi-support$bug',
                 },
                 {
-                  label: englishUS.support.components.suggestions.label,
+                  label: english.support.components.suggestions.label,
                   description:
-                    englishUS.support.components.suggestions.description,
+                    english.support.components.suggestions.description,
                   value: 'Doremi-support$suggestion',
                 },
                 {
-                  label: englishUS.support.components.other.label,
-                  description: englishUS.support.components.other.description,
+                  label: english.support.components.other.label,
+                  description: english.support.components.other.description,
                   value: 'Doremi-support$other',
                 }
               )

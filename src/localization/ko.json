@@ -1,0 +1,115 @@
+{
+  "help": {
+    "name": "도움말",
+    "description": "Doremi의 도움말",
+    "embeds": {
+      "title": "{botName}의 도움말",
+      "description": "# 정보\n- 도움말\n #관리\n- 추방\n- 차단\n- 채팅청소\n- 차단해제"
+    }
+  },
+  "kick": {
+    "name": "추방",
+    "description": "Doremi의 추방",
+    "options": {
+      "member": {
+        "name": "멤버",
+        "description": "추방할 멤버"
+      },
+      "reason": {
+        "name": "이유",
+        "description": "추방한 이유"
+      }
+    },
+    "embeds": {
+      "description": "멤버 {member}을/를 추방했어요."
+    }
+  },
+  "ban": {
+    "name": "차단",
+    "description": "Doremi의 추방",
+    "options": {
+      "member": {
+        "name": "멤버",
+        "description": "차단할 멤버"
+      },
+      "reason": {
+        "name": "이유",
+        "description": "차단한 이유"
+      }
+    },
+    "embeds": {
+      "description": "멤버 {member}을/를 차단했어요."
+    }
+  },
+  "clean": {
+    "name": "채팅청소",
+    "description": "Doremi의 채팅청소",
+    "options": {
+      "name": "청소-제한",
+      "description": "청소할 채팅의 개수"
+    },
+    "embeds": {
+      "description": "{count}개의 채팅을 청소했어요."
+    }
+  },
+  "unban": {
+    "name": "차단해제",
+    "description": "Doremi의 차단해제",
+    "options": {
+      "name": "아이디",
+      "description": "차단해제할 유저의 ID"
+    },
+    "IDIsNaN": "값 `아이디`는 멤버의 ID입니다.",
+    "embeds": {
+      "description": "유저를 차단해제 했어요."
+    },
+    "error": "❌ 차단해제가 불가능해요 :("
+  },
+  "info": {
+    "name": "정보",
+    "description": "Doremi의 정보",
+    "embeds": {
+      "title": "{name}의 정보"
+    },
+    "components": {
+      "bot": {
+        "label": "기본 정보",
+        "description": "Doremi의 기본 정보"
+      },
+      "guild": {
+        "label": "서버 정보",
+        "description": "명령어를 사용한 서버의 정보"
+      },
+      "user": {
+        "label": "유저 정보",
+        "description": "명령어를 사용한 유저의 정보"
+      }
+    }
+  },
+  "support": {
+    "name": "지원",
+    "description": "Doremi의 지원",
+    "embeds": {
+      "select": {
+        "description": "어느 항목으로 문의를 하실껀가요?"
+      },
+      "end": {
+        "description": "문의가 성공적으로 갔어요."
+      }
+    },
+    "components": {
+      "bug": {
+        "label": "버그",
+        "description": "Doremi를 사용하면서 발생한 버그에 대해 문의하실 수 있어요."
+      },
+      "suggestions": {
+        "label": "건의",
+        "description": "Doremi를 사용하면서 불편했던 점이나 추가 되면 좋을 꺼 같은 기능을 문의하실 수 있어요."
+      },
+      "other": {
+        "label": "기타",
+        "description": "Doremi를 사용하면서 궁금 했던 점을 문의하실 수 있어요."
+      }
+    }
+  }
+}

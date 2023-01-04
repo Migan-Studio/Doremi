@@ -1,5 +1,5 @@
-import korean from './ko'
-import englishUS from './en-US'
+import korean from './ko.json'
+import english from './en.json'
 import { Locale } from 'discord.js'
 
 function ifNonePermissions(
@@ -24,4 +24,4 @@ function ifDM(locale: Locale): string {
   }
 }
 
-export { korean, englishUS, ifNonePermissions, ifDM }
+export { korean, english, ifNonePermissions, ifDM }

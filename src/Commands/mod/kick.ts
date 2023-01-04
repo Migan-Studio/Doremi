@@ -8,31 +8,35 @@ import {
   ApplicationCommandOptionType,
   Locale,
 } from 'discord.js'
-import { englishUS, ifDM, ifNonePermissions, korean } from '@localizations'
+import { english, ifDM, ifNonePermissions, korean } from '@localizations'
 
 export default class KickCommands extends Command {
   constructor() {
-    super(englishUS.kick.name)
+    super(english.kick.name)
     this.data = {
-      name: englishUS.kick.name,
+      name: english.kick.name,
       nameLocalizations: { ko: korean.kick.name },
-      description: englishUS.kick.description,
+      description: english.kick.description,
       descriptionLocalizations: { ko: korean.kick.description },
       options: [
         {
           type: ApplicationCommandOptionType.User,
-          name: englishUS.kick.options[0].name,
-          nameLocalizations: { ko: korean.kick.options[0].name },
-          description: englishUS.kick.options[0].description,
-          descriptionLocalizations: { ko: korean.kick.options[0].description },
+          name: english.kick.options.member.name,
+          nameLocalizations: { ko: korean.kick.options.member.name },
+          description: english.kick.options.member.description,
+          descriptionLocalizations: {
+            ko: korean.kick.options.member.description,
+          },
           required: true,
         },
         {
           type: ApplicationCommandOptionType.String,
-          name: englishUS.kick.options[1].name,
-          nameLocalizations: { ko: korean.kick.options[1].name },
-          description: englishUS.kick.options[1].description,
-          descriptionLocalizations: { ko: korean.kick.options[1].description },
+          name: english.kick.options.reason.name,
+          nameLocalizations: { ko: korean.kick.options.reason.name },
+          description: english.kick.options.reason.description,
+          descriptionLocalizations: {
+            ko: korean.kick.options.reason.description,
+          },
           required: false,
         },
       ],
@@ -73,8 +77,13 @@ export default class KickCommands extends Command {
           interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setTitle(korean.kick.embeds.title)
-                .setDescription(korean.kick.embeds.description(member.user.tag))
+                .setTitle(korean.kick.name)
+                .setDescription(
+                  korean.kick.embeds.description.replace(
+                    '{member}',
+                    member.user.tag
+                  )
+                )
                 .setTimestamp(),
             ],
             ephemeral: true,
@@ -112,9 +121,12 @@ export default class KickCommands extends Command {
           interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setTitle(englishUS.kick.embeds.title)
+                .setTitle(english.kick.name)
                 .setDescription(
-                  englishUS.kick.embeds.description(member.user.tag)
+                  english.kick.embeds.description.replace(
+                    '{member}',
+                    member.user.tag
+                  )
                 )
                 .setTimestamp(),
             ],

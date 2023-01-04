@@ -1,4 +1,4 @@
-import { englishUS, ifDM, ifNonePermissions, korean } from '@localizations'
+import { english, ifDM, ifNonePermissions, korean } from '@localizations'
 import {
   ApplicationCommandOptionType,
   ChannelType,
@@ -11,19 +11,19 @@ import { Command } from 'mbpr-rodule'
 
 export default class extends Command {
   public constructor() {
-    super(englishUS.clean.name)
+    super(english.clean.name)
     this.data = {
-      name: englishUS.clean.name,
+      name: english.clean.name,
       nameLocalizations: { ko: korean.clean.name },
-      description: englishUS.clean.description,
+      description: english.clean.description,
       descriptionLocalizations: { ko: korean.clean.description },
       options: [
         {
           type: ApplicationCommandOptionType.Number,
-          name: englishUS.clean.options[0].name,
-          nameLocalizations: { ko: korean.clean.options[0].name },
-          description: englishUS.clean.options[0].description,
-          descriptionLocalizations: { ko: korean.clean.options[0].description },
+          name: english.clean.options.name,
+          nameLocalizations: { ko: korean.clean.options.name },
+          description: english.clean.options.description,
+          descriptionLocalizations: { ko: korean.clean.options.description },
           required: true,
           minValue: 1,
           maxValue: 100,
@@ -33,7 +33,10 @@ export default class extends Command {
   }
 
   async execute(interaction: ChatInputCommandInteraction) {
-    const cleanLimit = interaction.options.getNumber('clean-limit', true)
+    const cleanLimit = interaction.options.getNumber(
+      english.clean.options.name,
+      true
+    )
     if (interaction.locale === Locale.Korean) {
       if (interaction.channel!.type === ChannelType.DM)
         return interaction.reply({
@@ -73,8 +76,13 @@ export default class extends Command {
           interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setTitle(korean.clean.embeds.title)
-                .setDescription(korean.clean.embeds.description(cleanLimit)),
+                .setTitle(korean.clean.name)
+                .setDescription(
+                  korean.clean.embeds.description.replace(
+                    '{count}',
+                    `${cleanLimit}`
+                  )
+                ),
             ],
             ephemeral: true,
           })
@@ -123,8 +131,13 @@ export default class extends Command {
           interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setTitle(englishUS.clean.embeds.title)
-                .setDescription(englishUS.clean.embeds.description(cleanLimit)),
+                .setTitle(english.clean.name)
+                .setDescription(
+                  english.clean.embeds.description.replace(
+                    '{count}',
+                    `${cleanLimit}`
+                  )
+                ),
             ],
             ephemeral: true,
           })

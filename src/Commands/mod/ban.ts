@@ -8,31 +8,35 @@ import {
   PermissionsBitField,
   Locale,
 } from 'discord.js'
-import { englishUS, ifDM, ifNonePermissions, korean } from '@localizations'
+import { english, ifDM, ifNonePermissions, korean } from '@localizations'
 
 export default class BanCommands extends Command {
   public constructor() {
-    super(englishUS.ban.name)
+    super(english.ban.name)
     this.data = {
-      name: englishUS.ban.name,
+      name: english.ban.name,
       nameLocalizations: { ko: korean.ban.name },
-      description: englishUS.ban.description,
+      description: english.ban.description,
       descriptionLocalizations: { ko: korean.ban.description },
       options: [
         {
           type: ApplicationCommandOptionType.User,
-          name: englishUS.ban.options[0].name,
-          nameLocalizations: { ko: korean.ban.options[0].name },
-          description: englishUS.ban.options[0].description,
-          descriptionLocalizations: { ko: korean.ban.options[0].description },
+          name: english.ban.options.member.name,
+          nameLocalizations: { ko: korean.ban.options.member.name },
+          description: english.ban.options.member.description,
+          descriptionLocalizations: {
+            ko: korean.ban.options.member.description,
+          },
           required: true,
         },
         {
           type: ApplicationCommandOptionType.String,
-          name: englishUS.ban.options[1].name,
-          nameLocalizations: { ko: korean.ban.options[1].name },
-          description: englishUS.ban.options[1].description,
-          descriptionLocalizations: { ko: korean.ban.options[1].description },
+          name: english.ban.options.reason.name,
+          nameLocalizations: { ko: korean.ban.options.reason.name },
+          description: english.ban.options.reason.description,
+          descriptionLocalizations: {
+            ko: korean.ban.options.reason.description,
+          },
           required: false,
         },
       ],
@@ -78,8 +82,13 @@ export default class BanCommands extends Command {
           interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setTitle(korean.ban.embeds.title)
-                .setDescription(korean.ban.embeds.description(member.user.tag))
+                .setTitle(korean.ban.name)
+                .setDescription(
+                  korean.ban.embeds.description.replace(
+                    '{member}',
+                    member.user.tag
+                  )
+                )
                 .setTimestamp(),
             ],
             ephemeral: true,
@@ -121,9 +130,12 @@ export default class BanCommands extends Command {
           interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setTitle(englishUS.ban.embeds.title)
+                .setTitle(english.ban.name)
                 .setDescription(
-                  englishUS.ban.embeds.description(member.user.tag)
+                  english.ban.embeds.description.replace(
+                    '{member}',
+                    member.user.tag
+                  )
                 )
                 .setTimestamp(),
             ],

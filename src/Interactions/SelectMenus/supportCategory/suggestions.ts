@@ -1,4 +1,4 @@
-import { korean, englishUS } from '@localizations'
+import { korean, english } from '@localizations'
 import { EmbedBuilder, Locale, StringSelectMenuInteraction } from 'discord.js'
 
 export default {
@@ -11,12 +11,7 @@ export default {
             iconURL: interaction.user.displayAvatarURL(),
           })
           .setTitle(korean.support.name)
-          .setDescription(
-            korean.support.embeds.send.description(
-              '건의',
-              interaction.client.supportText
-            )
-          )
+          .setDescription(`건의 카테고리 ${interaction.client.supportText}`)
           .setTimestamp()
       )
       interaction.update({
@@ -38,12 +33,9 @@ export default {
             name: `sender: ${interaction.user.tag} (${interaction.user.id})`,
             iconURL: interaction.user.displayAvatarURL(),
           })
-          .setTitle(englishUS.support.name)
+          .setTitle(english.support.name)
           .setDescription(
-            englishUS.support.embeds.send.description(
-              'suggestion',
-              interaction.client.supportText
-            )
+            `suggestion category ${interaction.client.supportText}`
           )
           .setTimestamp()
       )
@@ -54,8 +46,8 @@ export default {
               name: interaction.user.tag,
               iconURL: interaction.user.displayAvatarURL(),
             })
-            .setTitle(englishUS.support.name)
-            .setDescription(englishUS.support.embeds.end.description),
+            .setTitle(english.support.name)
+            .setDescription(english.support.embeds.end.description),
         ],
         components: [],
       })

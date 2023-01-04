@@ -8,16 +8,16 @@ import {
   InteractionType,
   Locale,
 } from 'discord.js'
-import { englishUS, korean } from '@localizations'
+import { english, korean } from '@localizations'
 
 export default class SupportCommands extends Command {
   public constructor() {
-    super(englishUS.support.name)
+    super(english.support.name)
     this.data = {
-      name: englishUS.support.name,
+      name: english.support.name,
       nameLocalizations: { ko: korean.support.name },
-      description: englishUS.support.description,
-      descriptionLocalizations: { ko: korean.support.descirption },
+      description: english.support.description,
+      descriptionLocalizations: { ko: korean.support.description },
     }
   }
   execute(interaction: ChatInputCommandInteraction) {
@@ -45,7 +45,7 @@ export default class SupportCommands extends Command {
     } else {
       const modal = new ModalBuilder()
         .setCustomId('Doremi-modal$support')
-        .setTitle(englishUS.support.name)
+        .setTitle(english.support.name)
 
       const supportText = new TextInputBuilder()
         .setCustomId('Doremi-support$text')
