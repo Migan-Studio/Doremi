@@ -1,11 +1,16 @@
-import { ModalSubmitInteraction, EmbedBuilder, ChannelType } from 'discord.js'
+import {
+  type ModalSubmitInteraction,
+  EmbedBuilder,
+  ChannelType,
+} from 'discord.js'
 
 export default {
   execute(interaction: ModalSubmitInteraction) {
     interaction.client.channels.cache.forEach(channel => {
       if (channel.type !== ChannelType.GuildText) return
       if (
-        channel.topic?.includes(`${interaction.client.user?.username}-공지`)
+        channel.topic?.includes(`${interaction.client.user?.username}-공지`) ||
+        channel.topic?.includes(`${interaction.client.user?.username}-notice`)
       ) {
         channel.send({
           embeds: [

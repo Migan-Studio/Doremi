@@ -7,7 +7,7 @@ import {
   TextInputStyle,
 } from 'discord.js'
 
-export default class extends Command {
+export default class SupportReplyCommands extends Command {
   public constructor() {
     super('지원답장')
     this.data = {
@@ -21,33 +21,24 @@ export default class extends Command {
         content: '❌ 해당 명령어는 개발자만 사용 가능해요. :(',
         ephemeral: true,
       })
-    const modal = new ModalBuilder()
-      .setTitle('지원답장')
-      .setCustomId('Doremi-modal$support-reply')
-
-    const replyByUserID = new TextInputBuilder()
-      .setCustomId('Doremi-support-reply$id')
-      .setLabel('답장 할 유저의 ID를 적어주세요.')
-      .setStyle(TextInputStyle.Short)
-
-    const replyText = new TextInputBuilder()
-      .setCustomId('Doremi-support-reply$text')
-      .setLabel('답장 할 내용을 적어주세요.')
-      .setStyle(TextInputStyle.Paragraph)
-
-    const ActionRow = new ActionRowBuilder<TextInputBuilder>().addComponents([
-      replyByUserID,
-    ])
-    const actionRow = new ActionRowBuilder<TextInputBuilder>().addComponents([
-      replyText,
-    ])
-    modal.addComponents([ActionRow, actionRow])
-    interaction
-      .showModal(modal)
-      .catch(e =>
-        console.log(
-          e.rawError.errors.data.components[0].components[1]._errors[0]
-        )
-      )
+    interaction.showModal(
+      new ModalBuilder()
+        .setTitle('지원답장')
+        .setCustomId('Doremi-modal$support-reply')
+        .addComponents([
+          new ActionRowBuilder<TextInputBuilder>().addComponents([
+            new TextInputBuilder()
+              .setCustomId('Doremi-support-reply$id')
+              .setLabel('답장 할 유저의 ID를 적어주세요.')
+              .setStyle(TextInputStyle.Short),
+          ]),
+          new ActionRowBuilder<TextInputBuilder>().addComponents([
+            new TextInputBuilder()
+              .setCustomId('Doremi-support-reply$text')
+              .setLabel('답장 할 내용을 적어주세요.')
+              .setStyle(TextInputStyle.Paragraph),
+          ]),
+        ])
+    )
   }
 }

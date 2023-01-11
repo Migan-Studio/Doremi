@@ -1,7 +1,6 @@
 import { Listener } from 'mbpr-rodule'
-import { Events, Interaction, InteractionType } from 'discord.js'
-import Modals from '@interactions/Modals'
-import SelectMenus from '@interactions/SelectMenus'
+import { Events, type Interaction, InteractionType } from 'discord.js'
+import { Modals } from '@interactions'
 
 export default class InteractionCreateListener extends Listener {
   public constructor() {
@@ -11,12 +10,10 @@ export default class InteractionCreateListener extends Listener {
     if (interaction.type === InteractionType.ModalSubmit) {
       new Modals(interaction.customId).execute(interaction)
 
-      interaction.client.supportText = interaction.fields.getTextInputValue(
-        'Doremi-support$text'
-      )
-    } else if (interaction.type === InteractionType.MessageComponent) {
-      if (!interaction.isStringSelectMenu()) return
-      new SelectMenus(interaction.customId).execute(interaction)
+      if (interaction.customId === 'Doremi-modal$support')
+        interaction.client.supportText = interaction.fields.getTextInputValue(
+          'Doremi-support$text'
+        )
     }
   }
 }

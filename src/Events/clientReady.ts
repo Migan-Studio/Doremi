@@ -1,6 +1,5 @@
 import chalk, { Listener } from 'mbpr-rodule'
 import { type Client, Events, ActivityType } from 'discord.js'
-import process from 'process'
 import { Koreanbots } from '@migan/koreanbots'
 
 export default class ClientReady extends Listener {
@@ -17,7 +16,7 @@ export default class ClientReady extends Listener {
     } else {
       const koreanbots = new Koreanbots({
         api: {
-          token: process.env.KRBOTS_TOKEN!,
+          token: process.env.KRBOTS_TOKEN,
         },
         clientId: client.user!.id,
       })

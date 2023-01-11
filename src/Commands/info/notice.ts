@@ -22,26 +22,24 @@ export default class NoticeCommands extends Command {
         ephemeral: true,
       })
 
-    const modal = new ModalBuilder()
-      .setCustomId('Doremi-modal$notice')
-      .setTitle('공지 내용')
-
-    const noticeTitle = new ActionRowBuilder<TextInputBuilder>().addComponents(
-      new TextInputBuilder()
-        .setCustomId('Doremi-notice$title')
-        .setLabel('공지의 제목')
-        .setStyle(TextInputStyle.Short)
+    interaction.showModal(
+      new ModalBuilder()
+        .setCustomId('Doremi-modal$notice')
+        .setTitle('공지 내용')
+        .addComponents([
+          new ActionRowBuilder<TextInputBuilder>().addComponents(
+            new TextInputBuilder()
+              .setCustomId('Doremi-notice$title')
+              .setLabel('공지의 제목')
+              .setStyle(TextInputStyle.Short)
+          ),
+          new ActionRowBuilder<TextInputBuilder>().addComponents(
+            new TextInputBuilder()
+              .setCustomId('Doremi-notice$content')
+              .setLabel('공지의 내용')
+              .setStyle(TextInputStyle.Paragraph)
+          ),
+        ])
     )
-
-    const noticeContent =
-      new ActionRowBuilder<TextInputBuilder>().addComponents(
-        new TextInputBuilder()
-          .setCustomId('Doremi-notice$content')
-          .setLabel('공지의 내용')
-          .setStyle(TextInputStyle.Paragraph)
-      )
-
-    modal.addComponents([noticeTitle, noticeContent])
-    interaction.showModal(modal)
   }
 }

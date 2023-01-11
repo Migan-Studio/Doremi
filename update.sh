@@ -1,5 +1,5 @@
-docker compose stop
-docker compose rm -s -f
-docker compose build
-docker compose up -d
-docker compose logs -f
+sudo docker compose stop
+sudo docker compose rm -s -f
+sudo docker compose build
+sudo docker compose up -d
+sudo docker compose logs -f

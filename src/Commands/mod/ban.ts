@@ -47,14 +47,14 @@ export default class BanCommands extends Command {
     const member = interaction.options.getMember('member')
     const reason = interaction.options.getString('reason')
 
+    if (interaction.channel!.type === ChannelType.DM)
+      return interaction.reply({
+        content: ifDM(interaction.locale),
+        ephemeral: true,
+      })
+
     if (member instanceof GuildMember) {
       if (interaction.locale === Locale.Korean) {
-        if (interaction.channel!.type === ChannelType.DM)
-          return interaction.reply({
-            content: ifDM(Locale.Korean),
-            ephemeral: true,
-          })
-
         if (
           !interaction
             .guild!.members!.cache!.get(interaction.user.id)!
@@ -97,12 +97,6 @@ export default class BanCommands extends Command {
           console.log(error)
         }
       } else {
-        if (interaction.channel!.type === ChannelType.DM)
-          return interaction.reply({
-            content: ifDM(Locale.EnglishUS),
-            ephemeral: true,
-          })
-
         if (
           !interaction
             .guild!.members!.cache!.get(interaction.user.id)!
