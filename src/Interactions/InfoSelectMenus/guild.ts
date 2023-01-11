@@ -64,12 +64,16 @@ ${
   
 # 부스트 갯수
 ${interaction.guild?.premiumSubscriptionCount || 0}
+
 # security 
 ${returnServerSecurity()}
+
 # 멤버  (봇 제외)
 ${interaction.guild!.memberCount}
+
 # 이모지 수
 ${interaction.guild?.emojis.cache.size || 0}
+
 # 스티커 수
 ${interaction.guild?.stickers.cache.size || 0}`
               )
@@ -112,15 +116,19 @@ ${interaction.guild!.name}
 ${
   interaction.guild!.members.cache.get(interaction.guild!.ownerId)!.user.tag
 } (${interaction.guild!.members.cache.get(interaction.guild!.ownerId)!.user.id})
-  
+
 # boost count
 ${interaction.guild?.premiumSubscriptionCount || 0}
+
 # security 
 ${returnServerSecurity()}
+
 # member count (bot include)
 ${interaction.guild!.memberCount}
+
 # emoji count
 ${interaction.guild?.emojis.cache.size || 0}
+
 # sticker count
 ${interaction.guild?.stickers.cache.size || 0}`
               )

@@ -41,12 +41,16 @@ export default {
                 'md',
                 `# 이름
 - ${interaction.user.username}
+
 # 태그
 - ${interaction.user.discriminator}
+
 # 상태
 - ${returnPresence()}
+
 # bot 
 - ${member.user.bot ? '봇이에요' : '봇이 아니에요'}
+
 # nick 
 - ${member.nickname || '없음'}`
               )
@@ -85,12 +89,16 @@ export default {
                 'md',
                 `# name 
 - ${interaction.user.username}
+
 # tag
 - ${interaction.user.discriminator}
+
 # presence
 - ${member.presence!.status || 'None'}
+
 # bot 
 - ${member.user.bot ? 'Bot' : 'Not bot'}
+
 # nick 
 - ${member.nickname || 'None'}`
               )

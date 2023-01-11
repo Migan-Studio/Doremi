@@ -7,6 +7,6 @@ export default class InfoSelectMenus extends MessageComponent {
     super('Doremi-select$info')
   }
   execute(interaction: StringSelectMenuInteraction) {
-    new InfoSelectMenu().execute(interaction)
+    InfoSelectMenu.execute(interaction)
   }
 }

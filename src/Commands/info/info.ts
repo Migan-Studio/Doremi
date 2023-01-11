@@ -64,7 +64,7 @@ export default class InfoCommands extends Command {
 - ${interaction.client.users.cache.size}
 
 # 지연시간
-- ${interaction.client.ws.ping}`
+- ${interaction.client.ws.ping}ms`
               )
             ),
         ],
@@ -133,7 +133,7 @@ export default class InfoCommands extends Command {
 - ${interaction.client.users.cache.size}
 
 # ping
-- ${interaction.client.ws.ping}`
+- ${interaction.client.ws.ping}ms`
               )
             ),
         ],
