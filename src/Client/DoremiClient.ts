@@ -6,7 +6,7 @@ import {
 import { Mbpr } from 'mbpr-rodule'
 import { join } from 'path'
 import { readdirSync } from 'fs'
-require('dotenv/config')
+import 'dotenv/config'
 
 export default class DoremiClient extends Mbpr {
   public constructor() {
