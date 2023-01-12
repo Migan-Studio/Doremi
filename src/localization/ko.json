@@ -4,7 +4,7 @@
     "description": "Doremi의 도움말",
     "embeds": {
       "title": "{botName}의 도움말",
-      "description": "# 정보\n- 도움말\n #관리\n- 추방\n- 차단\n- 채팅청소\n- 차단해제"
+      "description": "# 정보\n- 도움말\n\n# 관리\n- 추방\n- 차단\n- 채팅청소\n- 차단해제"
     }
   },
   "kick": {

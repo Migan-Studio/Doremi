@@ -8,7 +8,7 @@ import { join } from 'path'
 import { readdirSync } from 'fs'
 import 'dotenv/config'
 
-export default class DoremiClient extends Mbpr {
+export class DoremiClient extends Mbpr {
   public constructor() {
     super(
       {
@@ -54,13 +54,5 @@ export default class DoremiClient extends Mbpr {
 
   public sendDMWithDeveloperForEmbed(embed: APIEmbed) {
     this.users.cache.get(process.env.OWNER_ID!)!.send({ embeds: [embed] })
-  }
-}
-
-declare module 'discord.js' {
-  interface Client {
-    sendDMWithDeveloperForEmbed(embed: APIEmbed): void
-    supportText: string
-    selectMenuHandler: ComponentHandler
   }
 }

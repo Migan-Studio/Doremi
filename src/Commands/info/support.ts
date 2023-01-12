@@ -21,33 +21,33 @@ export default class SupportCommands extends Command {
   }
   execute(interaction: ChatInputCommandInteraction) {
     if (interaction.locale === Locale.Korean) {
-      const modal = new ModalBuilder()
-        .setCustomId('Doremi-modal$support')
-        .setTitle(korean.support.name)
-
-      const supportText = new TextInputBuilder()
-        .setCustomId('Doremi-support$text')
-        .setLabel('문의 내용을 적어주세요.')
-        .setStyle(TextInputStyle.Short)
-
-      modal.addComponents([
-        new ActionRowBuilder<TextInputBuilder>().addComponents([supportText]),
-      ])
-      interaction.showModal(modal)
+      interaction.showModal(
+        new ModalBuilder()
+          .setCustomId('Doremi-modal$support')
+          .setTitle(korean.support.name)
+          .addComponents([
+            new ActionRowBuilder<TextInputBuilder>().addComponents([
+              new TextInputBuilder()
+                .setCustomId('Doremi-support$text')
+                .setLabel('문의 내용을 적어주세요.')
+                .setStyle(TextInputStyle.Short),
+            ]),
+          ])
+      )
     } else {
-      const modal = new ModalBuilder()
-        .setCustomId('Doremi-modal$support')
-        .setTitle(english.support.name)
-
-      const supportText = new TextInputBuilder()
-        .setCustomId('Doremi-support$text')
-        .setLabel('Please write down your inquiry.')
-        .setStyle(TextInputStyle.Short)
-
-      modal.addComponents([
-        new ActionRowBuilder<TextInputBuilder>().addComponents([supportText]),
-      ])
-      interaction.showModal(modal)
+      interaction.showModal(
+        new ModalBuilder()
+          .setCustomId('Doremi-modal$support')
+          .setTitle(english.support.name)
+          .addComponents([
+            new ActionRowBuilder<TextInputBuilder>().addComponents([
+              new TextInputBuilder()
+                .setCustomId('Doremi-support$text')
+                .setLabel('Please write down your inquiry.')
+                .setStyle(TextInputStyle.Short),
+            ]),
+          ])
+      )
     }
   }
 }

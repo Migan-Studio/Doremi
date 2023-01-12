@@ -1,10 +1,5 @@
 import { Command } from 'mbpr-rodule'
-import {
-  type ChatInputCommandInteraction,
-  codeBlock,
-  EmbedBuilder,
-  Locale,
-} from 'discord.js'
+import { type ChatInputCommandInteraction, codeBlock, Locale } from 'discord.js'
 import { english, korean } from '@localizations'
 
 export default class HelpCommands extends Command {
@@ -22,36 +17,35 @@ export default class HelpCommands extends Command {
     if (interaction.locale === Locale.Korean) {
       interaction.reply({
         embeds: [
-          new EmbedBuilder()
-            .setTitle(
-              korean.help.embeds.title.replace(
-                '{botName}',
-                interaction.client.user!.username
-              )
-            )
-            .setThumbnail(interaction.client.user!.displayAvatarURL())
-            .setDescription(
-              `**참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**
-${codeBlock('md', korean.help.embeds.description)}`
-            )
-            .setTimestamp(),
+          {
+            title: korean.help.embeds.title.replace(
+              '{botName}',
+              interaction.client.user!.username
+            ),
+            thumbnail: {
+              url: interaction.client.user!.displayAvatarURL(),
+            },
+            description: `**참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**
+${codeBlock('md', korean.help.embeds.description)}`,
+            timestamp: new Date().toISOString(),
+          },
         ],
       })
     } else {
       interaction.reply({
         embeds: [
-          new EmbedBuilder()
-            .setTitle(
-              english.help.embeds.title.replace(
-                '{botName}',
-                interaction.client.user!.username
-              )
-            )
-            .setDescription(
-              `**Note, this bot is based on the [mbpr](https://github.com/Migan-Studio/mbpr) project.**
-${codeBlock('md', english.help.embeds.description)}`
-            )
-            .setTimestamp(),
+          {
+            title: english.help.embeds.title.replace(
+              '{botName}',
+              interaction.client.user!.username
+            ),
+            thumbnail: {
+              url: interaction.client.user!.displayAvatarURL(),
+            },
+            description: `**Note, this bot is based on the [mbpr](https://github.com/Migan-Studio/mbpr) project.**
+${codeBlock('md', english.help.embeds.description)}`,
+            timestamp: new Date().toISOString(),
+          },
         ],
       })
     }
