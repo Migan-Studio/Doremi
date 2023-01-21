@@ -9,10 +9,9 @@ import {
 import { Command } from 'mbpr-rodule'
 import { english, ifDM, ifNonePermissions, korean } from '@localizations'
 
-module.exports = class extends Command {
+export default class extends Command {
   public constructor() {
-    super(english.unban.name)
-    this.data = {
+    super({
       name: english.unban.name,
       nameLocalizations: { ko: korean.unban.name },
       description: english.unban.description,
@@ -27,9 +26,8 @@ module.exports = class extends Command {
           required: true,
         },
       ],
-    }
+    })
   }
-
   execute(interaction: ChatInputCommandInteraction) {
     if (interaction.locale === Locale.Korean) {
       if (interaction.channel!.type === ChannelType.DM)

@@ -11,8 +11,7 @@ import { Command } from 'mbpr-rodule'
 
 export default class extends Command {
   public constructor() {
-    super(english.clean.name)
-    this.data = {
+    super({
       name: english.clean.name,
       nameLocalizations: { ko: korean.clean.name },
       description: english.clean.description,
@@ -29,9 +28,8 @@ export default class extends Command {
           maxValue: 100,
         },
       ],
-    }
+    })
   }
-
   async execute(interaction: ChatInputCommandInteraction) {
     const cleanLimit = interaction.options.getNumber(
       english.clean.options.name,

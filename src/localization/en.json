@@ -3,7 +3,7 @@
     "name": "help",
     "description": "Doremi's help",
     "embeds": {
-      "title": "{botName}('s) help",
+      "title": "{botName}'s help",
       "description": "# Information \n- help\n- ping \n\n# moderation\n- kick\n- ban\n- client\n- unban"
     }
   },

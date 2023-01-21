@@ -12,8 +12,7 @@ import { english, ifDM, ifNonePermissions, korean } from '@localizations'
 
 export default class BanCommands extends Command {
   public constructor() {
-    super(english.ban.name)
-    this.data = {
+    super({
       name: english.ban.name,
       nameLocalizations: { ko: korean.ban.name },
       description: english.ban.description,
@@ -40,9 +39,8 @@ export default class BanCommands extends Command {
           required: false,
         },
       ],
-    }
+    })
   }
-
   execute(interaction: ChatInputCommandInteraction) {
     const member = interaction.options.getMember('member')
     const reason = interaction.options.getString('reason')

@@ -9,13 +9,12 @@ import { english, korean } from '@localizations'
 
 export default class HelpCommands extends Command {
   public constructor() {
-    super(english.help.name)
-    this.data = {
+    super({
       name: english.help.name,
       nameLocalizations: { ko: korean.help.name },
       description: english.help.description,
       descriptionLocalizations: { ko: korean.help.description },
-    }
+    })
   }
 
   execute(interaction: ChatInputCommandInteraction) {

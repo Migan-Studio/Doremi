@@ -13,13 +13,12 @@ import os from 'os'
 
 export default class InfoCommands extends Command {
   public constructor() {
-    super(english.info.name)
-    this.data = {
+    super({
       name: english.info.name,
       nameLocalizations: { ko: korean.info.name },
       description: english.info.description,
       descriptionLocalizations: { ko: korean.info.description },
-    }
+    })
   }
   execute(interaction: ChatInputCommandInteraction) {
     if (interaction.locale === Locale.Korean) {

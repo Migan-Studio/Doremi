@@ -9,11 +9,10 @@ import {
 
 export default class NoticeCommands extends Command {
   public constructor() {
-    super('공지')
-    this.data = {
+    super({
       name: '공지',
       description: '[개발자 전용] Doremi의 공지',
-    }
+    })
   }
   execute(interaction: ChatInputCommandInteraction) {
     if (interaction.user.id !== process.env.OWNER_ID)

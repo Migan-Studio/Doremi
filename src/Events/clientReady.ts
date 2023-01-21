@@ -1,6 +1,7 @@
-import chalk, { Listener } from 'mbpr-rodule'
+import { Listener } from 'mbpr-rodule'
 import { type Client, Events, ActivityType } from 'discord.js'
 import { Koreanbots } from '@migan/koreanbots'
+import chalk from 'chalk'
 
 export default class ClientReady extends Listener {
   public constructor() {
@@ -8,7 +9,7 @@ export default class ClientReady extends Listener {
   }
   execute(client: Client) {
     if (!process.env.KRBOTS_TOKEN) {
-      return client.loger.sendConsoleMessage(
+      return client.logger.log(
         `KoreanBots Token is ${chalk.red(
           'undefined'
         )}. Not define of koreanbots variable.`
@@ -25,7 +26,7 @@ export default class ClientReady extends Listener {
           .update({
             servers: client.guilds.cache.size,
           })
-          .then(response => client.loger.sendConsoleMessage(response.message))
+          .then(response => client.logger.log(response.message))
 
       setInterval(update, 600000)
     }

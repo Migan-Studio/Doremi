@@ -12,8 +12,7 @@ import { english, ifDM, ifNonePermissions, korean } from '@localizations'
 
 export default class KickCommands extends Command {
   constructor() {
-    super(english.kick.name)
-    this.data = {
+    super({
       name: english.kick.name,
       nameLocalizations: { ko: korean.kick.name },
       description: english.kick.description,
@@ -40,9 +39,8 @@ export default class KickCommands extends Command {
           required: false,
         },
       ],
-    }
+    })
   }
-
   execute(interaction: ChatInputCommandInteraction) {
     const member = interaction.options.getMember('member')
     const reason = interaction.options.getString('reason')

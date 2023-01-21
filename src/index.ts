@@ -1,1 +1,1 @@
-import('@client').then(client => new client.DoremiClient().start())
+import('@client').then(a => new a.DoremiClient().start())
