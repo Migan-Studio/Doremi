@@ -8,14 +8,18 @@ export default class SupportSelectMenus extends MessageComponent {
   }
   execute(interaction: StringSelectMenuInteraction) {
     const category = interaction.values[0].replace('Doremi-support$', '')
-    interaction.client.sendDMWithDeveloperForEmbed({
-      author: {
-        name: `문의 발신자: ${interaction.user.tag} (${interaction.user.id})`,
-        icon_url: interaction.user.displayAvatarURL(),
-      },
-      title: `${korean.support.name} ${category}`,
-      description: interaction.client.supportText,
-      timestamp: new Date().toISOString(),
+    interaction.client.sendDeveloper({
+      embeds: [
+        {
+          author: {
+            name: `문의 발신자: ${interaction.user.tag} (${interaction.user.id})`,
+            icon_url: interaction.user.displayAvatarURL(),
+          },
+          title: `${korean.support.name} ${category}`,
+          description: interaction.client.supportText,
+          timestamp: new Date().toISOString(),
+        },
+      ],
     })
     if (interaction.locale === Locale.Korean) {
       interaction.update({

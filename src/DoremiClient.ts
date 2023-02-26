@@ -1,4 +1,9 @@
-import { type APIEmbed, GatewayIntentBits } from 'discord.js'
+import {
+  type APIEmbed,
+  GatewayIntentBits,
+  type MessageCreateOptions,
+  type MessagePayload,
+} from 'discord.js'
 import {
   ComponentHandler,
   type MessageComponent,
@@ -55,14 +60,29 @@ export class DoremiClient extends Mbpr {
     this.selectMenuHandler.load(modules)
   }
 
+  public sendDeveloper(
+    options: string | MessagePayload | MessageCreateOptions
+  ) {
+    this.users.send(process.env.OWNER_ID!, options)
+  }
+
+  /**
+   * @__PURE__
+   * @deprecated use sendDeveloper
+   * */
   public sendDMWithDeveloperForEmbed(embed: APIEmbed) {
-    this.users.cache.get(process.env.OWNER_ID!)!.send({ embeds: [embed] })
+    this.sendDeveloper({ embeds: [embed] })
   }
 }
 
 declare module 'discord.js' {
   interface Client {
+    /**
+     * @__PURE__
+     * @deprecated use sendDeveloper
+     * */
     sendDMWithDeveloperForEmbed(embed: APIEmbed): void
+    sendDeveloper(options: string | MessagePayload | MessageCreateOptions): void
     supportText: string
     selectMenuHandler: ComponentHandler
   }
