@@ -6,7 +6,7 @@ export default class MessageCreate extends Listener {
   public constructor() {
     super(Events.MessageCreate)
   }
-  execute(msg: Message) {
+  public execute(msg: Message) {
     new Dokdo(msg.client, {
       prefix: `<@${msg.client.user!.id}> `,
       aliases: ['dok', 'dokdo', 'eval'],

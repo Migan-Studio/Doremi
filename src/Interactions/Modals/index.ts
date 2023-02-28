@@ -7,9 +7,17 @@ export default class Modals {
   }
 
   execute(interaction: ModalSubmitInteraction) {
-    const fileName = this.name.replace('Doremi-modal$', '')
-    import(`./${fileName.replace('-r', 'R')}`).then(a =>
-      a.default.execute(interaction)
-    )
+    const fileName = this.name.replace('Doremi-modal$', '').replace('-r', 'R')
+    switch (fileName) {
+      case 'notice':
+        import(`./notice.js`).then(a => a.default.execute(interaction))
+        break
+      case 'support':
+        import(`./support.js`).then(a => a.default.execute(interaction))
+        break
+      case 'supportReply':
+        import(`./supportReply.js`).then(a => a.default.execute(interaction))
+        break
+    }
   }
 }

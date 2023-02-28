@@ -6,7 +6,7 @@ export default class InteractionCreateListener extends Listener {
   public constructor() {
     super(Events.InteractionCreate)
   }
-  execute(interaction: Interaction) {
+  public execute(interaction: Interaction) {
     if (interaction.type === InteractionType.ModalSubmit) {
       new Modals(interaction.customId).execute(interaction)
 
