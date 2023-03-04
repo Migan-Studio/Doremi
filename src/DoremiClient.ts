@@ -84,6 +84,10 @@ declare module 'discord.js' {
     sendDMWithDeveloperForEmbed(embed: APIEmbed): void
     sendDeveloper(options: string | MessagePayload | MessageCreateOptions): void
     supportText: string
+    notice: {
+      title: string
+      content: string
+    }
     selectMenuHandler: ComponentHandler
   }
 }

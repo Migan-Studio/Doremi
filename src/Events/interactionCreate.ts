@@ -14,6 +14,13 @@ export default class InteractionCreateListener extends Listener {
         interaction.client.supportText = interaction.fields.getTextInputValue(
           'Doremi-support$text'
         )
+      else if (interaction.customId === 'Doremi-modal$notice')
+        interaction.client.notice = {
+          title: interaction.fields.getTextInputValue('Doremi-notice$title'),
+          content: interaction.fields.getTextInputValue(
+            'Doremi-notice$content'
+          ),
+        }
     }
   }
 }
