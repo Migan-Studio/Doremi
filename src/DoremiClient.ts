@@ -3,6 +3,7 @@ import {
   GatewayIntentBits,
   type MessageCreateOptions,
   type MessagePayload,
+  type Snowflake,
 } from 'discord.js'
 import {
   ComponentHandler,
@@ -87,6 +88,10 @@ declare module 'discord.js' {
     notice: {
       title: string
       content: string
+    }
+    supportReply: {
+      id: Snowflake
+      text: string
     }
     selectMenuHandler: ComponentHandler
   }

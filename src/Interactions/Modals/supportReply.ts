@@ -1,35 +1,46 @@
-import { ModalSubmitInteraction, EmbedBuilder } from 'discord.js'
+import { ComponentType, type ModalSubmitInteraction } from 'discord.js'
 
 export default {
   execute(interaction: ModalSubmitInteraction) {
-    const replyText = interaction.fields.getTextInputValue(
-      'Doremi-support-reply$text'
+    if (
+      !interaction.client.users.cache.get(
+        interaction.fields.getTextInputValue('Doremi-supportReply$id')
+      )
     )
-    const replyByUserID = interaction.fields.getTextInputValue(
-      'Doremi-support-reply$id'
-    )
-
-    const replyMember = interaction.client.users.cache.get(replyByUserID)
-
-    if (!replyMember) return
-
-    replyMember.send({
-      embeds: [
-        new EmbedBuilder()
-          .setAuthor({
-            name: `답변자: ${interaction.user.tag}`,
-            iconURL: interaction.user.displayAvatarURL(),
-          })
-          .setTitle('지원')
-          .setDescription(
-            `지원 내용에 대해 답장이 왔어요.\n답장 내용: \`${replyText}\``
-          )
-          .setTimestamp(),
-      ],
-    })
-
+      return interaction.reply({
+        content: '해당 하는 유저가 없어요 :(',
+        ephemeral: true,
+      })
     interaction.reply({
-      content: '답장 내용이 성공적으로 갔어요. :)',
+      embeds: [
+        {
+          title: '지원답장',
+          description: '답장을 보낼 언어를 선택해 주세요.',
+        },
+      ],
+      components: [
+        {
+          type: ComponentType.ActionRow,
+          components: [
+            {
+              type: ComponentType.StringSelect,
+              customId: 'Doremi-select$supportReply',
+              options: [
+                {
+                  label: '한국어',
+                  description: '한국어로 답장합니다.',
+                  value: 'Doremi-supportReply$ko',
+                },
+                {
+                  label: '영어',
+                  description: '영어로 답장합니다.',
+                  value: 'Doremi-supportReply$en',
+                },
+              ],
+            },
+          ],
+        },
+      ],
       ephemeral: true,
     })
   },

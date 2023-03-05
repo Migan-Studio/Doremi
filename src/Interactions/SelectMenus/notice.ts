@@ -1,5 +1,5 @@
 import { MessageComponent } from '@discommand/message-components'
-import { ChannelType, StringSelectMenuInteraction } from 'discord.js'
+import { ChannelType, type StringSelectMenuInteraction } from 'discord.js'
 
 export default class NoticeSelectMenus extends MessageComponent {
   public constructor() {

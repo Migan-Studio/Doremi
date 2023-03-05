@@ -1,9 +1,7 @@
 import { Command } from 'mbpr-rodule'
 import {
-  ActionRowBuilder,
   type ChatInputCommandInteraction,
-  ModalBuilder,
-  TextInputBuilder,
+  ComponentType,
   TextInputStyle,
 } from 'discord.js'
 
@@ -21,23 +19,51 @@ export default class SupportReplyCommands extends Command {
         ephemeral: true,
       })
     interaction.showModal(
-      new ModalBuilder()
-        .setTitle('지원답장')
-        .setCustomId('Doremi-modal$support-reply')
-        .addComponents([
-          new ActionRowBuilder<TextInputBuilder>().addComponents([
-            new TextInputBuilder()
-              .setCustomId('Doremi-support-reply$id')
-              .setLabel('답장 할 유저의 ID를 적어주세요.')
-              .setStyle(TextInputStyle.Short),
-          ]),
-          new ActionRowBuilder<TextInputBuilder>().addComponents([
-            new TextInputBuilder()
-              .setCustomId('Doremi-support-reply$text')
-              .setLabel('답장 할 내용을 적어주세요.')
-              .setStyle(TextInputStyle.Paragraph),
-          ]),
-        ])
+      // new ModalBuilder()
+      //   .setTitle('지원답장')
+      //   .setCustomId('Doremi-modal$supportReply')
+      //   .addComponents([
+      //     new ActionRowBuilder<TextInputBuilder>().addComponents([
+      //       new TextInputBuilder()
+      //         .setCustomId('Doremi-supportReply$id')
+      //         .setLabel('답장 할 유저의 ID를 적어주세요.')
+      //         .setStyle(TextInputStyle.Short),
+      //     ]),
+      //     new ActionRowBuilder<TextInputBuilder>().addComponents([
+      //       new TextInputBuilder()
+      //         .setCustomId('Doremi-supportReply$text')
+      //         .setLabel('답장 할 내용을 적어주세요.')
+      //         .setStyle(TextInputStyle.Paragraph),
+      //     ]),
+      //   ])
+      {
+        customId: 'Doremi-modal$supportReply',
+        title: '지원답장',
+        components: [
+          {
+            type: ComponentType.ActionRow,
+            components: [
+              {
+                customId: 'Doremi-supportReply$id',
+                type: ComponentType.TextInput,
+                label: '답장 할 유저의 ID를 적어주세요.',
+                style: TextInputStyle.Short,
+              },
+            ],
+          },
+          {
+            type: ComponentType.ActionRow,
+            components: [
+              {
+                customId: 'Doremi-supportReply$text',
+                type: ComponentType.TextInput,
+                label: '답장 할 내용을 적어주세요.',
+                style: TextInputStyle.Paragraph,
+              },
+            ],
+          },
+        ],
+      }
     )
   }
 }

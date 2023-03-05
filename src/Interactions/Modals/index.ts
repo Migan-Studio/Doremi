@@ -7,7 +7,7 @@ export default class Modals {
   }
 
   execute(interaction: ModalSubmitInteraction) {
-    const fileName = this.name.replace('Doremi-modal$', '').replace('-r', 'R')
+    const fileName = this.name.replace('Doremi-modal$', '')
     switch (fileName) {
       case 'notice':
         import(`./notice.js`).then(a => a.default.execute(interaction))
