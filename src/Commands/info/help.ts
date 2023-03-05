@@ -1,9 +1,12 @@
 import { Command } from 'mbpr-rodule'
 import {
-  APIEmbed,
+  type APIEmbed,
   type ChatInputCommandInteraction,
   codeBlock,
   Locale,
+  type APIButtonComponent,
+  ButtonStyle,
+  ComponentType,
 } from 'discord.js'
 import { english, korean } from '@localizations'
 
@@ -24,6 +27,12 @@ export default class HelpCommands extends Command {
         url: interaction.client.user!.displayAvatarURL(),
       },
     }
+    const button: APIButtonComponent = {
+      type: ComponentType.Button,
+      style: ButtonStyle.Link,
+      url: 'https://github.com/Migan-Studio/Doremi',
+    }
+
     if (interaction.locale === Locale.Korean) {
       interaction.reply({
         embeds: [
@@ -35,6 +44,17 @@ export default class HelpCommands extends Command {
             ),
             description: `**참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**
 ${codeBlock('md', korean.help.embeds.description)}`,
+          },
+        ],
+        components: [
+          {
+            type: ComponentType.ActionRow,
+            components: [
+              {
+                ...button,
+                label: 'Doremi 소스코드',
+              },
+            ],
           },
         ],
       })
@@ -49,6 +69,17 @@ ${codeBlock('md', korean.help.embeds.description)}`,
             ),
             description: `**Note, this bot is based on the [mbpr](https://github.com/Migan-Studio/mbpr) project.**
 ${codeBlock('md', english.help.embeds.description)}`,
+          },
+        ],
+        components: [
+          {
+            type: ComponentType.ActionRow,
+            components: [
+              {
+                ...button,
+                label: 'Doremi Source code',
+              },
+            ],
           },
         ],
       })
