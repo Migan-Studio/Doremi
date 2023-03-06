@@ -1,5 +1,5 @@
-import korean from './ko.json'
-import english from './en.json'
+import korean from './json/ko.json'
+import english from './json/en.json'
 import { Locale } from 'discord.js'
 
 function ifNonePermissions(
@@ -24,4 +24,10 @@ function ifDM(locale: Locale): string {
   }
 }
 
-export { korean, english, ifNonePermissions, ifDM }
+function ifNotDeveloper(locale: Locale): string {
+  if (locale === Locale.Korean)
+    return '❌ 해당 명령어는 개발자만 사용 가능해요 :('
+  else return '❌ This command is developer only :('
+}
+
+export { korean, english, ifNonePermissions, ifDM, ifNotDeveloper }

@@ -7,6 +7,7 @@ import {
   ComponentType,
 } from 'discord.js'
 import { english, korean } from '@localizations'
+import { ifNotDeveloper } from '../../localization/index.js'
 
 export default class SupportCommands extends Command {
   public constructor() {
@@ -79,11 +80,12 @@ export default class SupportCommands extends Command {
         }
         break
       case 'reply':
-        if (interaction.user.id !== process.env.OWNER_ID)
-          return interaction.reply({
-            content: '❌ 해당 명령어는 개발자만 사용 가능해요. :(',
-            ephemeral: true,
-          })
+        if (interaction.locale === Locale.Korean)
+          if (interaction.user.id !== process.env.OWNER_ID)
+            return interaction.reply({
+              content: ifNotDeveloper(interaction.locale),
+              ephemeral: true,
+            })
 
         interaction.showModal({
           customId: 'Doremi-modal$supportReply',

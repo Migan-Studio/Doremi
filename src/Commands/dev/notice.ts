@@ -4,18 +4,21 @@ import {
   TextInputStyle,
   ComponentType,
 } from 'discord.js'
+import { ifNotDeveloper } from '../../localization/index.js'
 
 export default class NoticeCommands extends Command {
   public constructor() {
     super({
       name: '공지',
+      nameLocalizations: { 'en-US': 'notice' },
       description: '[개발자 전용] Doremi의 공지',
+      descriptionLocalizations: { 'en-US': "[Developer only] Doremi's notice" },
     })
   }
   execute(interaction: ChatInputCommandInteraction) {
     if (interaction.user.id !== process.env.OWNER_ID)
       return interaction.reply({
-        content: '❌ 해당 명령어는 개발자만 사용 가능해요. :(',
+        content: ifNotDeveloper(interaction.locale),
         ephemeral: true,
       })
 
