@@ -7,7 +7,16 @@ export default class ClientReady extends Listener {
   public constructor() {
     super(Events.ClientReady)
   }
-  public execute(client: Client) {
+  public execute(client: Client<true>) {
+    function changeStatus() {
+      client.user.setActivity({
+        name: '/help | /도움말',
+        type: ActivityType.Listening,
+      })
+    }
+    changeStatus()
+    setInterval(changeStatus, 10000)
+
     if (!process.env.KRBOTS_TOKEN) {
       return client.logger.log(
         `KoreanBots Token is ${chalk.red(
@@ -19,9 +28,9 @@ export default class ClientReady extends Listener {
         api: {
           token: process.env.KRBOTS_TOKEN,
         },
-        clientId: client.user!.id,
+        clientId: client.user.id,
       })
-      const update = () => {
+      function update() {
         koreanBots.myBot
           .update({
             servers: client.guilds.cache.size,
@@ -32,14 +41,5 @@ export default class ClientReady extends Listener {
       update()
       setInterval(update, 600000)
     }
-
-    const changeStatus = () => {
-      client.user!.setActivity({
-        name: '/help | /도움말',
-        type: ActivityType.Listening,
-      })
-    }
-    changeStatus()
-    setInterval(changeStatus, 10000)
   }
 }
