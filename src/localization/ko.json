@@ -110,6 +110,16 @@
         "label": "기타",
         "description": "Doremi를 사용하면서 궁금 했던 점을 문의하실 수 있어요."
       }
+    },
+    "options": {
+      "send": {
+        "name": "보내기",
+        "description": "Doremi의 지원 보내기"
+      },
+      "reply": {
+        "name": "답장",
+        "description": "[개발자 전용] Doremi의 지원 답장"
+      }
     }
   }
 }

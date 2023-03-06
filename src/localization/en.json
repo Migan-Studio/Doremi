@@ -110,6 +110,16 @@
         "label": "other",
         "description": "You can ask questions while using Doremi."
       }
+    },
+    "options": {
+      "send": {
+        "name": "send",
+        "description": "Doremi's support reply"
+      },
+      "reply": {
+        "name": "reply",
+        "description": "[Developer only] Doremi's support reply"
+      }
     }
   }
 }

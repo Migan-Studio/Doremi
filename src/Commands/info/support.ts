@@ -1,11 +1,10 @@
 import { Command } from 'mbpr-rodule'
 import {
   type ChatInputCommandInteraction,
-  ModalBuilder,
-  TextInputBuilder,
   TextInputStyle,
-  ActionRowBuilder,
   Locale,
+  ApplicationCommandOptionType,
+  ComponentType,
 } from 'discord.js'
 import { english, korean } from '@localizations'
 
@@ -16,37 +15,105 @@ export default class SupportCommands extends Command {
       nameLocalizations: { ko: korean.support.name },
       description: english.support.description,
       descriptionLocalizations: { ko: korean.support.description },
+      options: [
+        {
+          type: ApplicationCommandOptionType.Subcommand,
+          name: english.support.options.send.name,
+          nameLocalizations: { ko: korean.support.options.send.name },
+          description: english.support.options.send.description,
+          descriptionLocalizations: {
+            ko: korean.support.options.send.description,
+          },
+        },
+        {
+          type: ApplicationCommandOptionType.Subcommand,
+          name: english.support.options.reply.name,
+          nameLocalizations: { ko: korean.support.options.reply.name },
+          description: english.support.options.reply.description,
+          descriptionLocalizations: {
+            ko: korean.support.options.reply.description,
+          },
+        },
+      ],
     })
   }
   execute(interaction: ChatInputCommandInteraction) {
-    if (interaction.locale === Locale.Korean) {
-      interaction.showModal(
-        new ModalBuilder()
-          .setCustomId('Doremi-modal$support')
-          .setTitle(korean.support.name)
-          .addComponents([
-            new ActionRowBuilder<TextInputBuilder>().addComponents([
-              new TextInputBuilder()
-                .setCustomId('Doremi-support$text')
-                .setLabel('문의 내용을 적어주세요.')
-                .setStyle(TextInputStyle.Short),
-            ]),
-          ])
-      )
-    } else {
-      interaction.showModal(
-        new ModalBuilder()
-          .setCustomId('Doremi-modal$support')
-          .setTitle(english.support.name)
-          .addComponents([
-            new ActionRowBuilder<TextInputBuilder>().addComponents([
-              new TextInputBuilder()
-                .setCustomId('Doremi-support$text')
-                .setLabel('Please write down your inquiry.')
-                .setStyle(TextInputStyle.Short),
-            ]),
-          ])
-      )
+    switch (interaction.options.getSubcommand()) {
+      case 'send':
+        if (interaction.locale === Locale.Korean) {
+          interaction.showModal({
+            customId: 'Doremi-modal$support',
+            title: korean.support.name,
+            components: [
+              {
+                type: ComponentType.ActionRow,
+                components: [
+                  {
+                    type: ComponentType.TextInput,
+                    label: '문의 내용을 적어주세요.',
+                    style: TextInputStyle.Short,
+                    customId: 'Doremi-support$text',
+                  },
+                ],
+              },
+            ],
+          })
+        } else {
+          interaction.showModal({
+            customId: 'Doremi-modal$support',
+            title: korean.support.name,
+            components: [
+              {
+                type: ComponentType.ActionRow,
+                components: [
+                  {
+                    type: ComponentType.TextInput,
+                    label: 'Please write down your inquiry.',
+                    style: TextInputStyle.Short,
+                    customId: 'Doremi-support$text',
+                  },
+                ],
+              },
+            ],
+          })
+        }
+        break
+      case 'reply':
+        if (interaction.user.id !== process.env.OWNER_ID)
+          return interaction.reply({
+            content: '❌ 해당 명령어는 개발자만 사용 가능해요. :(',
+            ephemeral: true,
+          })
+
+        interaction.showModal({
+          customId: 'Doremi-modal$supportReply',
+          title: '지원답장',
+          components: [
+            {
+              type: ComponentType.ActionRow,
+              components: [
+                {
+                  customId: 'Doremi-supportReply$id',
+                  type: ComponentType.TextInput,
+                  label: '답장 할 유저의 ID를 적어주세요.',
+                  style: TextInputStyle.Short,
+                },
+              ],
+            },
+            {
+              type: ComponentType.ActionRow,
+              components: [
+                {
+                  customId: 'Doremi-supportReply$text',
+                  type: ComponentType.TextInput,
+                  label: '답장 할 내용을 적어주세요.',
+                  style: TextInputStyle.Paragraph,
+                },
+              ],
+            },
+          ],
+        })
+        break
     }
   }
 }

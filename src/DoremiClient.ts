@@ -34,9 +34,12 @@ export class DoremiClient extends Mbpr {
     )
   }
 
-  public selectMenuHandler: ComponentHandler = new ComponentHandler(this, {
-    directory: join(__dirname, 'Interactions', 'SelectMenus'),
-  })
+  public readonly selectMenuHandler: ComponentHandler = new ComponentHandler(
+    this,
+    {
+      directory: join(__dirname, 'Interactions', 'SelectMenus'),
+    }
+  )
 
   public async start() {
     super.start()
@@ -62,6 +65,6 @@ declare module 'discord.js' {
       id: Snowflake
       text: string
     }
-    selectMenuHandler: ComponentHandler
+    readonly selectMenuHandler: ComponentHandler
   }
 }
