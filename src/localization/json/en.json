@@ -4,7 +4,13 @@
     "description": "Doremi's help",
     "embeds": {
       "title": "{botName}'s help",
-      "description": "# Information \n- help\n- ping \n\n# moderation\n- kick\n- ban\n- client\n- unban"
+      "description": {
+        "commands": "# Information \n- help\n- ping \n\n# moderation\n- kick\n- ban\n- client\n- unban",
+        "copyright": "**Note, this bot is based on the [mbpr](https://github.com/Migan-Studio/mbpr) project.**"
+      }
+    },
+    "components": {
+      "link": "Doremi source code"
     }
   },
   "kick": {
@@ -109,7 +115,8 @@
       "other": {
         "label": "other",
         "description": "You can ask questions while using Doremi."
-      }
+      },
+      "modal": "Please write down your inquiry."
     },
     "options": {
       "send": {

@@ -1,10 +1,15 @@
-import { english, ifDM, ifNonePermissions, korean } from '@localizations'
+import {
+  english,
+  ifDM,
+  ifNonePermissions,
+  korean,
+  getPermissions,
+  localizations,
+} from '@localizations'
 import {
   ApplicationCommandOptionType,
   ChannelType,
   ChatInputCommandInteraction,
-  EmbedBuilder,
-  Locale,
   PermissionsBitField,
 } from 'discord.js'
 import { Command } from 'mbpr-rodule'
@@ -35,112 +40,70 @@ export default class extends Command {
       english.clean.options.name,
       true
     )
-    if (interaction.locale === Locale.Korean) {
-      if (interaction.channel!.type === ChannelType.DM)
-        return interaction.reply({
-          content: ifDM(Locale.Korean),
-          ephemeral: true,
-        })
-      if (
-        !interaction
-          .guild!.members!.cache.get(interaction.user.id)!
-          .permissions.has(
-            PermissionsBitField.Flags.ManageMessages ||
-              PermissionsBitField.Flags.Administrator
-          )
-      )
-        return interaction.reply({
-          content: ifNonePermissions(Locale.Korean, '메세지 관리하기', false),
-          ephemeral: true,
-        })
-      if (
-        !interaction.guild!.members.me!.permissions.has(
+    const locale = localizations(interaction.locale)
+
+    if (interaction.channel!.type === ChannelType.DM)
+      return interaction.reply({
+        content: ifDM(interaction.locale),
+        ephemeral: true,
+      })
+    if (
+      !interaction
+        .guild!.members!.cache.get(interaction.user.id)!
+        .permissions.has(
           PermissionsBitField.Flags.ManageMessages ||
             PermissionsBitField.Flags.Administrator
         )
+    )
+      return interaction.reply({
+        content: ifNonePermissions(
+          interaction.locale,
+          getPermissions(
+            interaction.locale,
+            PermissionsBitField.Flags.ManageMessages
+          )!,
+          false
+        ),
+        ephemeral: true,
+      })
+    if (
+      !interaction.guild!.members.me!.permissions.has(
+        PermissionsBitField.Flags.ManageMessages ||
+          PermissionsBitField.Flags.Administrator
       )
-        return interaction.reply({
-          content: ifNonePermissions(Locale.Korean, '메세지 관리하기', true),
+    )
+      return interaction.reply({
+        content: ifNonePermissions(
+          interaction.locale,
+          getPermissions(
+            interaction.locale,
+            PermissionsBitField.Flags.ManageMessages
+          )!,
+          true
+        ),
+        ephemeral: true,
+      })
+    await interaction.channel?.messages
+      .fetch({
+        limit: cleanLimit,
+      })
+      .then(messages => {
+        const channel = interaction.channel!
+        if (channel.type !== ChannelType.GuildText) return
+        channel.bulkDelete(messages, true)
+        interaction.reply({
+          embeds: [
+            {
+              title: locale.clean.name,
+              description: locale.clean.embeds.description.replace(
+                '{count}',
+                `${cleanLimit}`
+              ),
+            },
+          ],
           ephemeral: true,
         })
-      await interaction.channel?.messages
-        .fetch({
-          limit: cleanLimit,
-        })
-        .then(messages => {
-          const channel = interaction.channel!
-          if (channel.type !== ChannelType.GuildText) return
-          channel.bulkDelete(messages, true)
-          interaction.reply({
-            embeds: [
-              new EmbedBuilder()
-                .setTitle(korean.clean.name)
-                .setDescription(
-                  korean.clean.embeds.description.replace(
-                    '{count}',
-                    `${cleanLimit}`
-                  )
-                ),
-            ],
-            ephemeral: true,
-          })
-        })
-        .catch(error => console.log(error))
-    } else {
-      if (interaction.channel!.type === ChannelType.DM)
-        return interaction.reply({
-          content: ifDM(Locale.EnglishUS),
-          ephemeral: true,
-        })
-      if (
-        !interaction
-          .guild!.members!.cache.get(interaction.user.id)!
-          .permissions.has(
-            PermissionsBitField.Flags.ManageMessages ||
-              PermissionsBitField.Flags.Administrator
-          )
-      )
-        return interaction.reply({
-          content: ifNonePermissions(
-            Locale.EnglishUS,
-            'Manage Messages',
-            false
-          ),
-          ephemeral: true,
-        })
-      if (
-        !interaction.guild!.members.me!.permissions.has(
-          PermissionsBitField.Flags.ManageMessages ||
-            PermissionsBitField.Flags.Administrator
-        )
-      )
-        return interaction.reply({
-          content: ifNonePermissions(Locale.EnglishUS, 'Manage Message', true),
-          ephemeral: true,
-        })
-      await interaction.channel?.messages
-        .fetch({
-          limit: cleanLimit,
-        })
-        .then(messages => {
-          const channel = interaction.channel!
-          if (channel.type !== ChannelType.GuildText) return
-          channel.bulkDelete(messages, true)
-          interaction.reply({
-            embeds: [
-              new EmbedBuilder()
-                .setTitle(english.clean.name)
-                .setDescription(
-                  english.clean.embeds.description.replace(
-                    '{count}',
-                    `${cleanLimit}`
-                  )
-                ),
-            ],
-            ephemeral: true,
-          })
-        })
-        .catch(error => console.log(error))
-    }
+      })
+      .catch(error => console.log(error))
   }
 }

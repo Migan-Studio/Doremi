@@ -2,12 +2,10 @@ import { Command } from 'mbpr-rodule'
 import {
   type ChatInputCommandInteraction,
   TextInputStyle,
-  Locale,
   ApplicationCommandOptionType,
   ComponentType,
 } from 'discord.js'
-import { english, korean } from '@localizations'
-import { ifNotDeveloper } from '../../localization/index.js'
+import { english, korean, ifNotDeveloper, localizations } from '@localizations'
 
 export default class SupportCommands extends Command {
   public constructor() {
@@ -39,53 +37,33 @@ export default class SupportCommands extends Command {
     })
   }
   execute(interaction: ChatInputCommandInteraction) {
+    const locale = localizations(interaction.locale)
     switch (interaction.options.getSubcommand()) {
       case 'send':
-        if (interaction.locale === Locale.Korean) {
-          interaction.showModal({
-            customId: 'Doremi-modal$support',
-            title: korean.support.name,
-            components: [
-              {
-                type: ComponentType.ActionRow,
-                components: [
-                  {
-                    type: ComponentType.TextInput,
-                    label: '문의 내용을 적어주세요.',
-                    style: TextInputStyle.Short,
-                    customId: 'Doremi-support$text',
-                  },
-                ],
-              },
-            ],
-          })
-        } else {
-          interaction.showModal({
-            customId: 'Doremi-modal$support',
-            title: korean.support.name,
-            components: [
-              {
-                type: ComponentType.ActionRow,
-                components: [
-                  {
-                    type: ComponentType.TextInput,
-                    label: 'Please write down your inquiry.',
-                    style: TextInputStyle.Short,
-                    customId: 'Doremi-support$text',
-                  },
-                ],
-              },
-            ],
-          })
-        }
+        interaction.showModal({
+          customId: 'Doremi-modal$support',
+          title: korean.support.name,
+          components: [
+            {
+              type: ComponentType.ActionRow,
+              components: [
+                {
+                  type: ComponentType.TextInput,
+                  label: locale.support.components.modal,
+                  style: TextInputStyle.Short,
+                  customId: 'Doremi-support$text',
+                },
+              ],
+            },
+          ],
+        })
         break
       case 'reply':
-        if (interaction.locale === Locale.Korean)
-          if (interaction.user.id !== process.env.OWNER_ID)
-            return interaction.reply({
-              content: ifNotDeveloper(interaction.locale),
-              ephemeral: true,
-            })
+        if (interaction.user.id !== process.env.OWNER_ID)
+          return interaction.reply({
+            content: ifNotDeveloper(interaction.locale),
+            ephemeral: true,
+          })
 
         interaction.showModal({
           customId: 'Doremi-modal$supportReply',

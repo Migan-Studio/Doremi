@@ -8,7 +8,7 @@ export default class MessageCreate extends Listener {
   }
   public execute(msg: Message) {
     new Dokdo(msg.client, {
-      prefix: `<@${msg.client.user!.id}> `,
+      prefix: `${msg.client.user.toString()} `,
       aliases: ['dok', 'dokdo', 'eval'],
       noPerm: msg =>
         msg.reply({ content: '❌ This command is developer only.' }),

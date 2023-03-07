@@ -1,14 +1,19 @@
 import { Command } from 'mbpr-rodule'
 import {
-  EmbedBuilder,
   ChannelType,
   type ChatInputCommandInteraction,
   GuildMember,
   ApplicationCommandOptionType,
   PermissionsBitField,
-  Locale,
 } from 'discord.js'
-import { english, ifDM, ifNonePermissions, korean } from '@localizations'
+import {
+  english,
+  ifDM,
+  ifNonePermissions,
+  korean,
+  localizations,
+  getPermissions,
+} from '@localizations'
 
 export default class BanCommands extends Command {
   public constructor() {
@@ -44,6 +49,7 @@ export default class BanCommands extends Command {
   execute(interaction: ChatInputCommandInteraction) {
     const member = interaction.options.getMember('member')
     const reason = interaction.options.getString('reason')
+    const locale = localizations(interaction.locale)
 
     if (interaction.channel!.type === ChannelType.DM)
       return interaction.reply({
@@ -52,90 +58,59 @@ export default class BanCommands extends Command {
       })
 
     if (member instanceof GuildMember) {
-      if (interaction.locale === Locale.Korean) {
-        if (
-          !interaction
-            .guild!.members!.cache!.get(interaction.user.id)!
-            .permissions.has(PermissionsBitField.Flags.BanMembers)
-        )
-          return interaction.reply({
-            content: ifNonePermissions(Locale.Korean, '멤버 차단하기', false),
-            ephemeral: true,
-          })
+      if (
+        !interaction
+          .guild!.members!.cache!.get(interaction.user.id)!
+          .permissions.has(PermissionsBitField.Flags.BanMembers)
+      )
+        return interaction.reply({
+          content: ifNonePermissions(
+            interaction.locale,
+            getPermissions(
+              interaction.locale,
+              PermissionsBitField.Flags.BanMembers
+            )!,
+            false
+          ),
+          ephemeral: true,
+        })
 
-        if (
-          !interaction.guild!.members!.me!.permissions.has(
-            PermissionsBitField.Flags.BanMembers
-          )
+      if (
+        !interaction.guild!.members!.me!.permissions.has(
+          PermissionsBitField.Flags.BanMembers
         )
-          return interaction.reply({
-            content: ifNonePermissions(Locale.Korean, '멤버 차단하기', true),
-            ephemeral: true,
-          })
+      )
+        return interaction.reply({
+          content: ifNonePermissions(
+            interaction.locale,
+            getPermissions(
+              interaction.locale,
+              PermissionsBitField.Flags.BanMembers
+            )!,
+            true
+          ),
+          ephemeral: true,
+        })
 
-        try {
-          member.ban({
-            reason: reason || '없음',
-          })
-          interaction.reply({
-            embeds: [
-              new EmbedBuilder()
-                .setTitle(korean.ban.name)
-                .setDescription(
-                  korean.ban.embeds.description.replace(
-                    '{member}',
-                    member.user.tag
-                  )
-                )
-                .setTimestamp(),
-            ],
-            ephemeral: true,
-          })
-        } catch (error) {
-          console.log(error)
-        }
-      } else {
-        if (
-          !interaction
-            .guild!.members!.cache!.get(interaction.user.id)!
-            .permissions.has(PermissionsBitField.Flags.BanMembers)
-        )
-          return interaction.reply({
-            content: ifNonePermissions(Locale.EnglishUS, 'Ban Members', false),
-            ephemeral: true,
-          })
-
-        if (
-          !interaction.guild!.members!.me!.permissions.has(
-            PermissionsBitField.Flags.BanMembers
-          )
-        )
-          return interaction.reply({
-            content: ifNonePermissions(Locale.EnglishUS, 'Ban Members', true),
-            ephemeral: true,
-          })
-
-        try {
-          member.ban({
-            reason: reason || 'None',
-          })
-          interaction.reply({
-            embeds: [
-              new EmbedBuilder()
-                .setTitle(english.ban.name)
-                .setDescription(
-                  english.ban.embeds.description.replace(
-                    '{member}',
-                    member.user.tag
-                  )
-                )
-                .setTimestamp(),
-            ],
-            ephemeral: true,
-          })
-        } catch (error) {
-          console.log(error)
-        }
+      try {
+        member.ban({
+          reason: reason || 'None',
+        })
+        interaction.reply({
+          embeds: [
+            {
+              title: locale.ban.name,
+              description: locale.ban.embeds.description.replace(
+                '{member}',
+                member.user.tag
+              ),
+              timestamp: new Date().toISOString(),
+            },
+          ],
+          ephemeral: true,
+        })
+      } catch (error) {
+        console.log(error)
       }
     }
   }

@@ -1,6 +1,6 @@
 import { MessageComponent } from '@discommand/message-components'
-import { Locale, type StringSelectMenuInteraction } from 'discord.js'
-import { english, korean } from '@localizations'
+import { type StringSelectMenuInteraction } from 'discord.js'
+import { korean, localizations } from '@localizations'
 
 export default class SupportSelectMenus extends MessageComponent {
   constructor() {
@@ -8,11 +8,13 @@ export default class SupportSelectMenus extends MessageComponent {
   }
   execute(interaction: StringSelectMenuInteraction) {
     const category = interaction.values[0].replace('Doremi-support$', '')
+    const locale = localizations(interaction.locale)
+
     interaction.client.sendDeveloper({
       embeds: [
         {
           author: {
-            name: `문의 발신자: ${interaction.user.tag} (${interaction.user.id})`,
+            name: `지원자: ${interaction.user.tag} (${interaction.user.id})`,
             icon_url: interaction.user.displayAvatarURL(),
           },
           title: `${korean.support.name} ${category}`,
@@ -21,36 +23,36 @@ export default class SupportSelectMenus extends MessageComponent {
         },
       ],
     })
-    if (interaction.locale === Locale.Korean) {
-      interaction.update({
-        embeds: [
-          {
-            author: {
-              name: interaction.user.tag,
-              icon_url: interaction.user.displayAvatarURL(),
-            },
-            title: korean.support.name,
-            description: korean.support.embeds.end.description,
-            timestamp: new Date().toISOString(),
+    // if (interaction.locale === Locale.Korean) {
+    interaction.update({
+      embeds: [
+        {
+          author: {
+            name: interaction.user.tag,
+            icon_url: interaction.user.displayAvatarURL(),
           },
-        ],
-        components: [],
-      })
-    } else {
-      interaction.update({
-        embeds: [
-          {
-            author: {
-              name: interaction.user.tag,
-              icon_url: interaction.user.displayAvatarURL(),
-            },
-            title: english.support.name,
-            description: english.support.embeds.end.description,
-            timestamp: new Date().toISOString(),
-          },
-        ],
-        components: [],
-      })
-    }
+          title: locale.support.name,
+          description: locale.support.embeds.end.description,
+          timestamp: new Date().toISOString(),
+        },
+      ],
+      components: [],
+    })
+    // } else {
+    //   interaction.update({
+    //     embeds: [
+    //       {
+    //         author: {
+    //           name: interaction.user.tag,
+    //           icon_url: interaction.user.displayAvatarURL(),
+    //         },
+    //         title: english.support.name,
+    //         description: english.support.embeds.end.description,
+    //         timestamp: new Date().toISOString(),
+    //       },
+    //     ],
+    //     components: [],
+    //   })
+    // }
   }
 }
