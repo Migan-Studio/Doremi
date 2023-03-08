@@ -1,4 +1,4 @@
-import { korean, english } from '@localizations'
+import { localizations, getInfo } from '@localizations'
 import {
   StringSelectMenuInteraction,
   codeBlock,
@@ -23,6 +23,9 @@ export default {
         url: interaction.guild!.iconURL()!,
       },
     }
+    const locale = localizations(interaction.locale)
+    const owner = interaction.client.users.cache.get(interaction.guild!.ownerId)
+
     function returnServerSecurity() {
       if (interaction.locale === Locale.Korean) {
         switch (interaction.guild!.verificationLevel) {
@@ -52,196 +55,39 @@ export default {
         }
       }
     }
-    if (interaction.locale === Locale.Korean) {
-      interaction.update({
-        embeds: [
-          {
-            ...embed,
-            title: korean.info.embeds.title.replace(
-              '{name}',
-              interaction.guild!.name
-            ),
-            description: codeBlock(
-              'md',
-              `# 이름
-           ${interaction.guild!.name}
-
-# 소유자
-${
-  interaction.guild!.members.cache.get(interaction.guild!.ownerId)!.user.tag
-} (${interaction.guild!.members.cache.get(interaction.guild!.ownerId)!.user.id})
-
-# 부스트 갯수
-${interaction.guild?.premiumSubscriptionCount || 0}
-
-# security
-${returnServerSecurity()}
-
-# 멤버  (봇 제외)
-${interaction.guild!.memberCount}
-
-# 이모지 수
-${interaction.guild?.emojis.cache.size || 0}
-
-# 스티커 수
-${interaction.guild?.stickers.cache.size || 0}`
-            ),
-            fields: [
-              {
-                name: '서버의 생성일',
-                value,
+    interaction.update({
+      embeds: [
+        {
+          ...embed,
+          title: locale.info.embeds.title.replace(
+            '{name}',
+            interaction.guild!.name
+          ),
+          description: codeBlock(
+            'md',
+            getInfo(interaction.locale).guild({
+              name: interaction.guild!.name,
+              owner: {
+                name: owner!.tag,
+                id: owner!.id,
               },
-            ],
-          },
-        ],
-      })
-      //           new EmbedBuilder()
-      //             .setAuthor({
-      //               name: interaction.user.tag,
-      //               iconURL: interaction.user.displayAvatarURL(),
-      //             })
-      //             .setTitle(
-      //               korean.info.embeds.title.replace('name', interaction.guild!.name)
-      //             )
-      //             .setThumbnail(interaction.guild!.iconURL())
-      //             .setDescription(
-      //               codeBlock(
-      //                 'md',
-      //                 `# 이름
-      // ${interaction.guild!.name}
-      //
-      // # 소유자
-      // ${
-      //   interaction.guild!.members.cache.get(interaction.guild!.ownerId)!.user.tag
-      // } (${interaction.guild!.members.cache.get(interaction.guild!.ownerId)!.user.id})
-      //
-      // # 부스트 갯수
-      // ${interaction.guild?.premiumSubscriptionCount || 0}
-      //
-      // # security
-      // ${returnServerSecurity()}
-      //
-      // # 멤버  (봇 제외)
-      // ${interaction.guild!.memberCount}
-      //
-      // # 이모지 수
-      // ${interaction.guild?.emojis.cache.size || 0}
-      //
-      // # 스티커 수
-      // ${interaction.guild?.stickers.cache.size || 0}`
-      //               )
-      //             )
-      //             .addFields([
-      //               {
-      //                 name: '서버의 생성일',
-      //                 value: `${time(
-      //                   Math.floor(interaction.guild!.createdTimestamp / 1000)
-      //                 )} (${time(
-      //                   Math.floor(interaction.guild!.createdTimestamp / 1000),
-      //                   'R'
-      //                 )})`,
-      //               },
-      //             ]),
-      //         ],
-      //       })
-    } else {
-      interaction.update({
-        embeds: [
-          {
-            ...embed,
-            title: english.info.embeds.title.replace(
-              '{name}',
-              interaction.guild!.name
-            ),
-            description: codeBlock(
-              'md',
-              `# name
-${interaction.guild!.name}
-
-# owner
-${
-  interaction.guild!.members.cache.get(interaction.guild!.ownerId)!.user.tag
-} (${interaction.guild!.members.cache.get(interaction.guild!.ownerId)!.user.id})
-
-# boost count
-${interaction.guild?.premiumSubscriptionCount || 0}
-
-# security
-${returnServerSecurity()}
-
-# member count (bot include)
-${interaction.guild!.memberCount}
-
-# emoji count
-${interaction.guild?.emojis.cache.size || 0}
-
-# sticker count
-${interaction.guild?.stickers.cache.size || 0}`
-            ),
-            fields: [
-              {
-                name: `Server create date`,
-                value,
+              count: {
+                boost: interaction.guild!.premiumSubscriptionCount || 0,
+                member: interaction.guild!.memberCount,
+                emoji: interaction.guild!.emojis.cache.size,
+                sticky: interaction.guild!.stickers.cache.size,
               },
-            ],
-          },
-          // new EmbedBuilder()
-          //   .setAuthor({
-          //     name: interaction.user.tag,
-          //     iconURL: interaction.user.displayAvatarURL(),
-          //   })
-          //   .setTitle(
-          //     english.info.embeds.title.replace(
-          //       '{name}',
-          //       interaction.guild!.name
-          //     )
-          //   )
-          //   .setThumbnail(interaction.guild!.iconURL())
-          //   .setDescription(
-          //     codeBlock(
-          //       'md',
-          //       `# name
-          // ${interaction.guild!.name}
-          //
-          // # owner
-          // ${
-          //   interaction.guild!.members.cache.get(interaction.guild!.ownerId)!
-          //     .user.tag
-          // } (${
-          //         interaction.guild!.members.cache.get(
-          //           interaction.guild!.ownerId
-          //         )!.user.id
-          //       })
-          //
-          // # boost count
-          // ${interaction.guild?.premiumSubscriptionCount || 0}
-          //
-          // # security
-          // ${returnServerSecurity()}
-          //
-          // # member count (bot include)
-          // ${interaction.guild!.memberCount}
-          //
-          // # emoji count
-          // ${interaction.guild?.emojis.cache.size || 0}
-          //
-          // # sticker count
-          // ${interaction.guild?.stickers.cache.size || 0}`
-          //     )
-          //   )
-          //   .addFields([
-          //     {
-          //       name: 'server create date',
-          //       value: `${time(
-          //         Math.floor(interaction.guild!.createdTimestamp / 1000)
-          //       )} (${time(
-          //         Math.floor(interaction.guild!.createdTimestamp / 1000),
-          //         'R'
-          //       )})`,
-          //     },
-          //   ]),
-        ],
-      })
-    }
+              security: returnServerSecurity(),
+            })
+          ),
+          fields: [
+            {
+              name: locale.info.embeds.fields.create_date.guild,
+              value,
+            },
+          ],
+        },
+      ],
+    })
   },
 }

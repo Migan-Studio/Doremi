@@ -1,6 +1,11 @@
 import korean from './json/ko.json'
 import english from './json/en.json'
-import { Locale, PermissionFlagsBits } from 'discord.js'
+import {
+  Locale,
+  PermissionFlagsBits,
+  type PresenceStatus,
+  Snowflake,
+} from 'discord.js'
 
 export function ifNonePermissions(
   locale: Locale,
@@ -14,6 +19,64 @@ export function ifNonePermissions(
     if (bot) return `❌ I'm not have permissions has \`${permissions}\` :(`
     return `❌ You not have permissions has \`${permissions}\` :(`
   }
+}
+
+interface InfoBotOptions {
+  os: {
+    platform: string
+    arch: string
+  }
+  owner: string
+  nodeJSVersion: string
+  pid: number
+  count: {
+    guild: number
+    user: number
+  }
+  wsPing: number
+}
+
+type InfoGuildSecurity =
+  | '높음'
+  | '낮음'
+  | '중간'
+  | '없음'
+  | '매우 높음'
+  | 'High'
+  | 'Low'
+  | 'Medium'
+  | 'None'
+  | 'Very High'
+
+interface InfoGuildOptions {
+  name: string
+  owner: {
+    name: string
+    id: Snowflake
+  }
+  count: {
+    boost: number
+    member: number
+    emoji: number
+    sticky: number
+  }
+  security: InfoGuildSecurity
+}
+
+interface InfoUserOptions {
+  name: string
+  tag: string
+  status:
+    | '없음'
+    | '온라인'
+    | '자리 비움'
+    | '다른 용무 중'
+    | '오프라인'
+    | undefined
+    | PresenceStatus
+    | 'None'
+  isBot: string
+  nickname: string
 }
 
 export function ifDM(locale: Locale): string {
@@ -58,6 +121,39 @@ export function getPermissions(locale: Locale, permission: bigint) {
       return 'Kick Members'
     else if (permission === PermissionFlagsBits.ManageChannels)
       return 'Manage Channels'
+  }
+}
+
+export function getInfo(locale: Locale) {
+  const localization = localizations(locale)
+  return {
+    bot: (options: InfoBotOptions): string =>
+      localization.info.embeds.description.bot
+        .replace('{platform}', options.os.platform)
+        .replace('{arch}', options.os.arch)
+        .replace('{owner}', options.owner)
+        .replace('{NodeJSVersion}', options.nodeJSVersion)
+        .replace('{pid}', `${options.pid}`)
+        .replace('{guildCount}', `${options.count.guild}`)
+        .replace('{userCount}', `${options.count.user}`)
+        .replace('{wsPing}', `${options.wsPing}`),
+    guild: (options: InfoGuildOptions): string =>
+      localization.info.embeds.description.guild
+        .replace('{name}', options.name)
+        .replace('{ownerName}', options.owner.name)
+        .replace('{ownerID}', options.owner.id)
+        .replace('{boostCount}', `${options.count.boost}`)
+        .replace('{security}', options.security)
+        .replace('{memberCount}', `${options.count.member}`)
+        .replace('{emojiCount}', `${options.count.emoji}`)
+        .replace('{stickyCount}', `${options.count.sticky}`),
+    user: (options: InfoUserOptions) =>
+      localization.info.embeds.description.user
+        .replace('{name}', options.name)
+        .replace('{tag}', options.tag)
+        .replace('{status}', options.status!)
+        .replace('{isBot}', options.isBot)
+        .replace('{nickname}', options.nickname),
   }
 }
 
