@@ -34,6 +34,7 @@ interface InfoBotOptions {
     user: number
   }
   wsPing: number
+  version: string
 }
 
 type InfoGuildSecurity =
@@ -136,7 +137,8 @@ export function getInfo(locale: Locale) {
         .replace('{pid}', `${options.pid}`)
         .replace('{guildCount}', `${options.count.guild}`)
         .replace('{userCount}', `${options.count.user}`)
-        .replace('{wsPing}', `${options.wsPing}`),
+        .replace('{wsPing}', `${options.wsPing}`)
+        .replace('{version}', options.version),
     guild: (options: InfoGuildOptions): string =>
       localization.info.embeds.description.guild
         .replace('{name}', options.name)

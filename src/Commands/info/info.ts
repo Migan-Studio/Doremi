@@ -5,9 +5,8 @@ import {
   codeBlock,
   ComponentType,
 } from 'discord.js'
-import { english, ifDM, korean, localizations } from '@localizations'
-import os from 'os'
-import { getInfo } from '../../localization/index.js'
+import { english, ifDM, korean, localizations, getInfo } from '@localizations'
+import os from 'node:os'
 
 export default class InfoCommands extends Command {
   public constructor() {
@@ -21,7 +20,6 @@ export default class InfoCommands extends Command {
   execute(interaction: ChatInputCommandInteraction) {
     const locale = localizations(interaction.locale)
 
-    // if (interaction.locale === Locale.Korean) {
     if (interaction.channel!.type === ChannelType.DM)
       return interaction.reply({
         content: ifDM(interaction.locale),
@@ -55,6 +53,7 @@ export default class InfoCommands extends Command {
                 guild: interaction.client.guilds.cache.size,
               },
               wsPing: interaction.client.ws.ping,
+              version: interaction.client.version,
             })
           ),
         },
@@ -88,75 +87,5 @@ export default class InfoCommands extends Command {
         },
       ],
     })
-    //     } else {
-    //       if (interaction.channel!.type === ChannelType.DM)
-    //         return interaction.reply({
-    //           content: ifDM(Locale.EnglishUS),
-    //           ephemeral: true,
-    //         })
-    //       interaction.reply({
-    //         embeds: [
-    //           new EmbedBuilder()
-    //             .setAuthor({
-    //               name: interaction.user.tag,
-    //               iconURL: interaction.user.displayAvatarURL(),
-    //             })
-    //             .setTitle(
-    //               english.info.embeds.title.replace(
-    //                 '{name}',
-    //                 interaction.client.user!.username
-    //               )
-    //             )
-    //             .setDescription(
-    //               codeBlock(
-    //                 'md',
-    //                 `# OS info
-    // - ${os.platform} ${os.arch}
-    //
-    // # developer
-    // - ${interaction.client.users.cache.get(process.env.OWNER_ID!)!.tag}
-    //
-    // # Node.js version
-    // - ${process.version}
-    //
-    // # PID
-    // - ${process.pid}
-    //
-    // # server count
-    // - ${interaction.client.guilds.cache.size}
-    //
-    // # user count
-    // - ${interaction.client.users.cache.size}
-    //
-    // # ping
-    // - ${interaction.client.ws.ping}ms`
-    //               )
-    //             ),
-    //         ],
-    //         components: [
-    //           new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-    //             new StringSelectMenuBuilder()
-    //               .setCustomId('Doremi-select$info')
-    //               .setOptions([
-    //                 {
-    //                   label: english.info.components.bot.label,
-    //                   description: english.info.components.bot.description,
-    //                   value: 'Doremi-info$home',
-    //                 },
-    //                 {
-    //                   label: english.info.components.guild.label,
-    //                   description: english.info.components.guild.description,
-    //                   value: 'Doremi-info$guild',
-    //                 },
-    //                 {
-    //                   label: english.info.components.user.label,
-    //                   description: english.info.components.user.description,
-    //                   value: 'Doremi-info$user',
-    //                 },
-    //               ])
-    //           ),
-    //         ],
-    //       })
-    //     }
   }
 }

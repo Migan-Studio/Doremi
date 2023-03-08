@@ -1,6 +1,6 @@
 import { localizations, getInfo } from '@localizations'
 import { codeBlock, StringSelectMenuInteraction } from 'discord.js'
-import os from 'os'
+import os from 'node:os'
 
 export default {
   execute(interaction: StringSelectMenuInteraction) {
@@ -32,6 +32,7 @@ export default {
                 guild: interaction.client.guilds.cache.size,
               },
               wsPing: interaction.client.ws.ping,
+              version: interaction.client.version,
             })
           ),
         },
