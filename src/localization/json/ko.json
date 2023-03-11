@@ -5,7 +5,7 @@
     "embeds": {
       "title": "{botName}의 도움말",
       "description": {
-        "commands": "# 정보\n- 도움말\n\n# 관리\n- 추방\n- 차단\n- 채팅청소\n- 차단해제",
+        "commands": "# 정보\n- 도움말\n\n# 관리\n- 추방\n- 차단\n- 채팅청소\n- 차단해제\n- 슬로우모드",
         "copyright": "**참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**"
       }
     },
@@ -140,6 +140,30 @@
         "name": "답장",
         "description": "[개발자 전용] Doremi의 지원 답장"
       }
+    }
+  },
+  "slowmode": {
+    "name": "슬로우모드",
+    "description": "Doremi의 슬로우모드",
+    "options": {
+      "second": {
+        "name": "초",
+        "description": "슬로우모드 초"
+      },
+      "minute": {
+        "name": "분",
+        "description": "슬로우모드 분"
+      },
+      "hour": {
+        "name": "시",
+        "description": "슬로우모드 시"
+      }
+    },
+    "embeds": {
+      "second": "이 채널에 슬로우모드를 {time}초(으)로 설정하였어요.",
+      "minute": "이 채널에 슬로우모드를 {time}분(으)로 설정하였어요.",
+      "hour": "이 채널에 슬로우모드를 {time}시간(으)로 설정하였어요.",
+      "error": "이 채널에 슬로우모드를 설정하지 못했어요. 3개의 옵션 중 하나라도 있으셔야해요."
     }
   }
 }

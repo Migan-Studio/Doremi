@@ -5,7 +5,7 @@
     "embeds": {
       "title": "{botName}'s help",
       "description": {
-        "commands": "# Information \n- help\n- ping \n\n# moderation\n- kick\n- ban\n- client\n- unban",
+        "commands": "# Information \n- help\n\n# moderation\n- kick\n- ban\n- client\n- unban\n- slowmode",
         "copyright": "**Note, this bot is based on the [mbpr](https://github.com/Migan-Studio/mbpr) project.**"
       }
     },
@@ -140,6 +140,30 @@
         "name": "reply",
         "description": "[Developer only] Doremi's support reply"
       }
+    }
+  },
+  "slowmode": {
+    "name": "slowmode",
+    "description": "Doremi's slowmode",
+    "options": {
+      "second": {
+        "name": "second",
+        "description": "slowmode second"
+      },
+      "minute": {
+        "name": "minute",
+        "description": "slowmode minute"
+      },
+      "hour": {
+        "name": "hour",
+        "description": "slowmode hour"
+      }
+    },
+    "embeds": {
+      "second": "I set the slow mode for this channel to {time} second.",
+      "minute": "I set the slow mode for this channel to {time} minute.",
+      "hour": "I set the slow mode for this channel to {time} hour.",
+      "error": "Failed to set slow mode for this channel. You need to have one of the three options."
     }
   }
 }
