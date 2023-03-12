@@ -23,33 +23,47 @@ export default class SlowModeCommands extends Command {
       options: [
         {
           type: ApplicationCommandOptionType.Number,
-          name: english.slowmode.options.second.name,
-          nameLocalizations: { ko: korean.slowmode.options.second.name },
-          description: english.slowmode.options.second.description,
+          name: english.slowmode.options.time.name,
+          nameLocalizations: { ko: korean.slowmode.options.time.name },
+          description: english.slowmode.options.time.description,
           descriptionLocalizations: {
-            ko: korean.slowmode.options.second.description,
+            ko: korean.slowmode.options.time.description,
           },
           maxValue: 21600,
+          required: true,
         },
         {
-          type: ApplicationCommandOptionType.Number,
-          name: english.slowmode.options.minute.name,
-          nameLocalizations: { ko: korean.slowmode.options.minute.name },
-          description: english.slowmode.options.minute.description,
+          type: ApplicationCommandOptionType.String,
+          name: english.slowmode.options.smh.name,
+          nameLocalizations: { ko: korean.slowmode.options.smh.name },
+          description: english.slowmode.options.smh.description,
           descriptionLocalizations: {
-            ko: korean.slowmode.options.minute.description,
+            ko: korean.slowmode.options.smh.description,
           },
-          maxValue: 360,
-        },
-        {
-          type: ApplicationCommandOptionType.Number,
-          name: english.slowmode.options.hour.name,
-          nameLocalizations: { ko: korean.slowmode.options.hour.name },
-          description: english.slowmode.options.hour.description,
-          descriptionLocalizations: {
-            ko: korean.slowmode.options.hour.description,
-          },
-          maxValue: 6,
+          choices: [
+            {
+              name: english.slowmode.options.smh.choices.second,
+              nameLocalizations: {
+                ko: korean.slowmode.options.smh.choices.second,
+              },
+              value: english.slowmode.options.smh.choices.second,
+            },
+            {
+              name: english.slowmode.options.smh.choices.minute,
+              nameLocalizations: {
+                ko: korean.slowmode.options.smh.choices.minute,
+              },
+              value: english.slowmode.options.smh.choices.minute,
+            },
+            {
+              name: english.slowmode.options.smh.choices.hour,
+              nameLocalizations: {
+                ko: korean.slowmode.options.smh.choices.hour,
+              },
+              value: english.slowmode.options.smh.choices.hour,
+            },
+          ],
+          required: true,
         },
       ],
     })
@@ -57,9 +71,8 @@ export default class SlowModeCommands extends Command {
 
   public execute(interaction: ChatInputCommandInteraction) {
     const locale = localizations(interaction.locale)
-    const second = interaction.options.getNumber('second')
-    const minute = interaction.options.getNumber('minute')
-    const hour = interaction.options.getNumber('hour')
+    const time = interaction.options.getNumber('time', true)
+    const smh = interaction.options.getString('smh', true)
 
     if (
       !interaction
@@ -74,6 +87,7 @@ export default class SlowModeCommands extends Command {
             PermissionFlagsBits.ManageChannels
           )!
         ),
+        ephemeral: true,
       })
 
     if (
@@ -90,6 +104,7 @@ export default class SlowModeCommands extends Command {
           )!,
           true
         ),
+        ephemeral: true,
       })
 
     if (interaction.channel!.isDMBased())
@@ -97,48 +112,57 @@ export default class SlowModeCommands extends Command {
         content: ifDM(interaction.locale),
       })
 
-    if (second) {
-      interaction.channel!.setRateLimitPerUser(second)
+    if (smh === 'second') {
+      interaction.channel!.setRateLimitPerUser(time)
       interaction.reply({
         embeds: [
           {
             title: locale.slowmode.name,
             description: locale.slowmode.embeds.second.replace(
               '{time}',
-              `${second}`
+              `${time}`
             ),
           },
         ],
+        ephemeral: true,
       })
-    } else if (minute) {
-      interaction.channel!.setRateLimitPerUser(minute * 60)
+    } else if (smh === 'minute') {
+      if (time > 360)
+        return interaction.reply({
+          content: locale.slowmode.error.minute,
+          ephemeral: true,
+        })
+      interaction.channel!.setRateLimitPerUser(time * 60)
       interaction.reply({
         embeds: [
           {
             title: locale.slowmode.name,
             description: locale.slowmode.embeds.minute.replace(
               '{time}',
-              `${minute}`
+              `${time}`
             ),
           },
         ],
+        ephemeral: true,
       })
-    } else if (hour) {
-      interaction.channel!.setRateLimitPerUser(hour * 3600)
+    } else if (smh === 'hour') {
+      if (time > 6)
+        return interaction.reply({
+          content: locale.slowmode.error.minute,
+          ephemeral: true,
+        })
+      interaction.channel!.setRateLimitPerUser(time * 3600)
       interaction.reply({
         embeds: [
           {
             title: locale.slowmode.name,
             description: locale.slowmode.embeds.hour.replace(
               '{time}',
-              `${hour}`
+              `${time}`
             ),
           },
         ],
-      })
-    } else {
-      return interaction.reply({
-        content: locale.slowmode.embeds.error,
+        ephemeral: true,
       })
     }
   }

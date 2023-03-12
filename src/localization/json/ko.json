@@ -146,17 +146,18 @@
     "name": "슬로우모드",
     "description": "Doremi의 슬로우모드",
     "options": {
-      "second": {
-        "name": "초",
-        "description": "슬로우모드 초"
+      "time": {
+        "name": "시간",
+        "description": "슬로우모드 시간"
       },
-      "minute": {
-        "name": "분",
-        "description": "슬로우모드 분"
-      },
-      "hour": {
-        "name": "시",
-        "description": "슬로우모드 시"
+      "smh": {
+        "name": "초분시",
+        "description": "슬로우모드 초분시",
+        "choices": {
+          "second": "초",
+          "minute": "분",
+          "hour": "시간"
+        }
       }
     },
     "embeds": {
@@ -164,6 +165,9 @@
       "minute": "이 채널에 슬로우모드를 {time}분(으)로 설정하였어요.",
       "hour": "이 채널에 슬로우모드를 {time}시간(으)로 설정하였어요.",
       "error": "이 채널에 슬로우모드를 설정하지 못했어요. 3개의 옵션 중 하나라도 있으셔야해요."
+    },
+    "error": {
+      "minute": "`시간`값은 360이하여야 해요."
     }
   }
 }

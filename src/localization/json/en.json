@@ -146,17 +146,18 @@
     "name": "slowmode",
     "description": "Doremi's slowmode",
     "options": {
-      "second": {
-        "name": "second",
-        "description": "slowmode second"
+      "time": {
+        "name": "time",
+        "description": "slowmode time"
       },
-      "minute": {
-        "name": "minute",
-        "description": "slowmode minute"
-      },
-      "hour": {
-        "name": "hour",
-        "description": "slowmode hour"
+      "smh": {
+        "name": "smh",
+        "description": "slowmode smh",
+        "choices": {
+          "second": "second",
+          "minute": "minute",
+          "hour": "hour"
+        }
       }
     },
     "embeds": {
@@ -164,6 +165,9 @@
       "minute": "I set the slow mode for this channel to {time} minute.",
       "hour": "I set the slow mode for this channel to {time} hour.",
       "error": "Failed to set slow mode for this channel. You need to have one of the three options."
+    },
+    "error": {
+      "minute": "The value of `time` must be less than 360."
     }
   }
 }
