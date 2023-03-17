@@ -1,6 +1,6 @@
 import { localizations, getInfo } from '@localizations'
 import {
-  StringSelectMenuInteraction,
+  type StringSelectMenuInteraction,
   codeBlock,
   time,
   GuildVerificationLevel,
@@ -25,6 +25,12 @@ export default {
     }
     const locale = localizations(interaction.locale)
     const owner = interaction.client.users.cache.get(interaction.guild!.ownerId)
+    let bot = 0
+    let user = 0
+    interaction.guild!.members.cache.forEach(member => {
+      if (member.user.bot) bot++
+      else user++
+    })
 
     function returnServerSecurity() {
       if (interaction.locale === Locale.Korean) {
@@ -74,6 +80,8 @@ export default {
               count: {
                 boost: interaction.guild!.premiumSubscriptionCount || 0,
                 member: interaction.guild!.memberCount,
+                bot: bot,
+                memberOnly: user,
                 emoji: interaction.guild!.emojis.cache.size,
                 sticky: interaction.guild!.stickers.cache.size,
               },

@@ -78,7 +78,7 @@
       "title": "{name}'s information",
       "description": {
         "bot": "# OS info\n- {platform} {arch}\n\n# developer \n- {owner}\n\n# Node.js version \n- {NodeJSVersion}\n\n# PID\n- {pid}\n\n# server count\n- {guildCount}\n\n# user count \n- {userCount}\n\n# ping\n- {wsPing}ms\n\n# version\n- {version}",
-        "guild": "# name\n{name}\n\n# owner\n{ownerName} ({ownerID})\n\n# boost count\n{boostCount}\n\n# security\n{security}\n\n# member count (bot include)\n{memberCount}\n\n# emoji count\n{emojiCount}\n\n# sticker count\n{stickyCount}",
+        "guild": "# name\n{name}\n\n# owner\n{ownerName} ({ownerID})\n\n# boost count\n{boostCount}\n\n# security\n{security}\n\n# member count (bot include)\n{memberCount}\n\n# bot Count\n{botCount}\n\n# member count (bot not include)\n{memberOnlyCount}\n\n# emoji count\n{emojiCount}\n\n# sticker count\n{stickyCount}",
         "user": "# name \n- {name}\n\n# tag\n- {tag}\n\n# presence\n- {status}\n\n# bot \n- {isBot}\n\n# nick \n- {nickname}",
         "none_nickname": "None"
       },

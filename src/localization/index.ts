@@ -58,6 +58,8 @@ interface InfoGuildOptions {
   count: {
     boost: number
     member: number
+    bot: number
+    memberOnly: number
     emoji: number
     sticky: number
   }
@@ -147,6 +149,8 @@ export function getInfo(locale: Locale) {
         .replace('{boostCount}', `${options.count.boost}`)
         .replace('{security}', options.security)
         .replace('{memberCount}', `${options.count.member}`)
+        .replace('{botCount}', `${options.count.bot}`)
+        .replace('{memberOnlyCount}', `${options.count.memberOnly}`)
         .replace('{emojiCount}', `${options.count.emoji}`)
         .replace('{stickyCount}', `${options.count.sticky}`),
     user: (options: InfoUserOptions) =>

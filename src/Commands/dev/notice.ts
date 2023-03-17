@@ -4,7 +4,7 @@ import {
   TextInputStyle,
   ComponentType,
 } from 'discord.js'
-import { ifNotDeveloper } from '../../localization/index.js'
+import { ifNotDeveloper } from '@localizations'
 
 export default class NoticeCommands extends Command {
   public constructor() {
