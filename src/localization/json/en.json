@@ -5,7 +5,7 @@
     "embeds": {
       "title": "{botName}'s help",
       "description": {
-        "commands": "# Information \n- help\n\n# moderation\n- kick\n- ban\n- client\n- unban\n- slowmode",
+        "commands": "# Information \n- help\n- information\n\n# moderation\n- kick\n- ban\n- client\n- unban\n- slowmode\n\n# other\n- support send",
         "copyright": "**Note, this bot is based on the [mbpr](https://github.com/Migan-Studio/mbpr) project.**"
       }
     },

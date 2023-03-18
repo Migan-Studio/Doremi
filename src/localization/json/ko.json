@@ -5,7 +5,7 @@
     "embeds": {
       "title": "{botName}의 도움말",
       "description": {
-        "commands": "# 정보\n- 도움말\n\n# 관리\n- 추방\n- 차단\n- 채팅청소\n- 차단해제\n- 슬로우모드",
+        "commands": "# 정보\n- 도움말\n- 정보\n\n# 관리\n- 추방\n- 차단\n- 채팅청소\n- 차단해제\n- 슬로우모드\n\n# 기타\n- 지원 보내기",
         "copyright": "**참고. 이 봇은 [mbpr](https://github.com/Migan-Studio/mbpr)프로젝트를 기반하여 만들어 졌습니다.**"
       }
     },
