@@ -71,7 +71,7 @@ export default class SlowModeCommands extends Command {
 
   public execute(interaction: ChatInputCommandInteraction) {
     const locale = localizations(interaction.locale)
-    const time = interaction.options.getNumber('time', true)
+    const time = Math.floor(interaction.options.getNumber('time', true))
     const smh = interaction.options.getString('smh', true)
 
     if (
