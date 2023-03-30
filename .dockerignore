@@ -1,6 +1,5 @@
 dist/
 *.env
-.git*
 .prettier*
 .eslint*
 .yarn/*
