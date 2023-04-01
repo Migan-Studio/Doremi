@@ -1,3 +1,4 @@
+git fetch && git pull
 sudo docker compose stop
 sudo docker compose rm -s -f
 sudo docker compose build
