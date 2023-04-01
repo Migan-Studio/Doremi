@@ -10,7 +10,7 @@ import {
 export function ifNonePermissions(
   locale: Locale,
   permissions: string,
-  bot: boolean = false
+  bot = false
 ): string {
   if (locale === Locale.Korean) {
     if (bot) return `❌ 이 봇에 \`${permissions}\` 권한이 필요해요 :(`

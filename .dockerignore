@@ -3,6 +3,9 @@ dist/
 .prettier*
 .eslint*
 .yarn/*
-!.yarn/releases
+!.yarn/cache
+!.yarn/patches
 !.yarn/plugins
-.pnp*
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

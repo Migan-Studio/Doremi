@@ -13,12 +13,6 @@ import { version } from '../package.json'
 import { execSync } from 'node:child_process'
 import 'dotenv/config'
 
-function getVersion() {
-  const commit = execSync('git rev-parse --short HEAD').toString()
-  if (prerelease(version)) return `${version}.${commit}`
-  else return `${version}-${commit}`
-}
-
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export class DoremiClient extends Mbpr {
@@ -28,7 +22,11 @@ export class DoremiClient extends Mbpr {
       directory: join(__dirname, 'Interactions', 'SelectMenus'),
     }
   )
-  public readonly version = getVersion()
+  get version() {
+    const commit = execSync('git rev-parse --short HEAD').toString()
+    if (prerelease(version)) return `${version}.${commit}`
+    else return `${version}-${commit}`
+  }
   public constructor() {
     super(
       {

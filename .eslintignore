@@ -2,4 +2,4 @@
 .pnp.*
 dist/
 .vscode/
-src/localization/
+src/localization/**/*.json
