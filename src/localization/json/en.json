@@ -28,7 +28,8 @@
     },
     "embeds": {
       "description": "Member {member} has been kicked."
-    }
+    },
+    "error": "I can't kick user."
   },
   "ban": {
     "name": "ban",
@@ -45,7 +46,8 @@
     },
     "embeds": {
       "description": "Member {member} has been banned."
-    }
+    },
+    "error": "I can't ban user."
   },
   "clean": {
     "name": "clean",

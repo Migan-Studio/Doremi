@@ -28,7 +28,8 @@
     },
     "embeds": {
       "description": "멤버 {member}을/를 추방했어요."
-    }
+    },
+    "error": "해당 유저를 추방 할 수 없어요."
   },
   "ban": {
     "name": "차단",
@@ -45,7 +46,8 @@
     },
     "embeds": {
       "description": "멤버 {member}을/를 차단했어요."
-    }
+    },
+    "error": "해당 멤버를 차단 할 수 없어요."
   },
   "clean": {
     "name": "채팅청소",

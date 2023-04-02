@@ -90,6 +90,12 @@ export default class KickCommands extends Command {
           ephemeral: true,
         })
 
+      if (!member.kickable)
+        return interaction.reply({
+          content: locale.kick.error,
+          ephemeral: true,
+        })
+
       try {
         member.kick(reason || 'None')
         interaction.reply({
