@@ -92,7 +92,7 @@ export default class BanCommands extends Command {
           ephemeral: true,
         })
 
-      if (member.bannable)
+      if (!member.bannable)
         return interaction.reply({
           content: locale.ban.error,
           ephemeral: true,
