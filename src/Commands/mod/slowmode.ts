@@ -112,6 +112,11 @@ export default class SlowModeCommands extends Command {
         content: ifDM(interaction.locale),
       })
 
+    if (time < 0)
+      return interaction.reply({
+        content: locale.slowmode.error.minus,
+      })
+
     if (smh === 'second') {
       interaction.channel!.setRateLimitPerUser(time)
       interaction.reply({
@@ -148,7 +153,7 @@ export default class SlowModeCommands extends Command {
     } else if (smh === 'hour') {
       if (time > 6)
         return interaction.reply({
-          content: locale.slowmode.error.minute,
+          content: locale.slowmode.error.hour,
           ephemeral: true,
         })
       interaction.channel!.setRateLimitPerUser(time * 3600)

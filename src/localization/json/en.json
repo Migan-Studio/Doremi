@@ -169,7 +169,9 @@
       "error": "Failed to set slow mode for this channel. You need to have one of the three options."
     },
     "error": {
-      "minute": "The value of `time` must be less than 360."
+      "minute": "The value of `time` must be less than 360.",
+      "hour": "The value of `time` must be less than 6.",
+      "minus": "The value of `time` must be greater than zero."
     }
   }
 }
