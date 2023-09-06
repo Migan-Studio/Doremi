@@ -1,5 +1,5 @@
 import { Listener } from 'mbpr-rodule'
-import { Events, Message } from 'discord.js'
+import { Events, type Message } from 'discord.js'
 import Dokdo from 'dokdo'
 
 export default class MessageCreate extends Listener {

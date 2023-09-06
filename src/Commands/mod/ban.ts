@@ -5,6 +5,8 @@ import {
   GuildMember,
   ApplicationCommandOptionType,
   PermissionsBitField,
+  ComponentType,
+  ButtonStyle,
 } from 'discord.js'
 import {
   english,
@@ -48,7 +50,6 @@ export default class BanCommands extends Command {
   }
   execute(interaction: ChatInputCommandInteraction) {
     const member = interaction.options.getMember('member')
-    const reason = interaction.options.getString('reason')
     const locale = localizations(interaction.locale)
 
     if (interaction.channel!.type === ChannelType.DM)
@@ -58,6 +59,10 @@ export default class BanCommands extends Command {
       })
 
     if (member instanceof GuildMember) {
+      interaction.client.banNkick = {
+        member: member,
+        reason: interaction.options.getString('reason'),
+      }
       if (
         !interaction
           .guild!.members!.cache!.get(interaction.user.id)!
@@ -68,16 +73,16 @@ export default class BanCommands extends Command {
             interaction.locale,
             getPermissions(
               interaction.locale,
-              PermissionsBitField.Flags.BanMembers
+              PermissionsBitField.Flags.BanMembers,
             )!,
-            false
+            false,
           ),
           ephemeral: true,
         })
 
       if (
         !interaction.guild!.members!.me!.permissions.has(
-          PermissionsBitField.Flags.BanMembers
+          PermissionsBitField.Flags.BanMembers,
         )
       )
         return interaction.reply({
@@ -85,39 +90,57 @@ export default class BanCommands extends Command {
             interaction.locale,
             getPermissions(
               interaction.locale,
-              PermissionsBitField.Flags.BanMembers
+              PermissionsBitField.Flags.BanMembers,
             )!,
-            true
+            true,
           ),
           ephemeral: true,
         })
 
       if (!member.bannable)
         return interaction.reply({
-          content: locale.ban.error,
-          ephemeral: true,
-        })
-
-      try {
-        member.ban({
-          reason: reason || 'None',
-        })
-        interaction.reply({
           embeds: [
             {
-              title: locale.ban.name,
-              description: locale.ban.embeds.description.replace(
-                '{member}',
-                member.user.tag
-              ),
+              title: locale.ban.embeds.error,
+              color: 0xff0000,
               timestamp: new Date().toISOString(),
             },
           ],
           ephemeral: true,
         })
-      } catch (error) {
-        console.log(error)
-      }
+
+      interaction.reply({
+        embeds: [
+          {
+            title: locale.ban.name,
+            description: locale.ban.embeds.qustion.replace(
+              '{member}',
+              `\`${member.user.username}\``,
+            ),
+            timestamp: new Date().toISOString(),
+          },
+        ],
+        components: [
+          {
+            type: ComponentType.ActionRow,
+            components: [
+              {
+                type: ComponentType.Button,
+                label: locale.ban.components.yes,
+                customId: 'Doremi-ban$yes',
+                style: ButtonStyle.Success,
+              },
+              {
+                type: ComponentType.Button,
+                label: locale.ban.components.cancel,
+                customId: 'Doremi-ban$cancel',
+                style: ButtonStyle.Danger,
+              },
+            ],
+          },
+        ],
+        ephemeral: true,
+      })
     }
   }
 }

@@ -6,7 +6,7 @@ export default defineConfig({
     'src/index.ts',
     'src/Commands/**/*.ts',
     'src/Events/*.ts',
-    'src/Interactions/SelectMenus/*.ts',
+    'src/Interactions/Components/**/*.ts',
   ],
   skipNodeModulesBundle: true,
   format: ['esm'],

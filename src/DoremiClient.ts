@@ -4,7 +4,7 @@ import {
   type MessagePayload,
   type Snowflake,
 } from 'discord.js'
-import { ComponentHandler } from '@discommand/message-components'
+import { ComponentPlugin } from '@discommand/message-components'
 import { Mbpr } from 'mbpr-rodule'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -16,12 +16,6 @@ import 'dotenv/config'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export class DoremiClient extends Mbpr {
-  public readonly selectMenuHandler: ComponentHandler = new ComponentHandler(
-    this,
-    {
-      directory: join(__dirname, 'Interactions', 'SelectMenus'),
-    }
-  )
   get version() {
     const commit = execSync('git rev-parse --short HEAD').toString()
     if (prerelease(version)) return `${version}.${commit}`
@@ -44,17 +38,21 @@ export class DoremiClient extends Mbpr {
           command: join(__dirname, 'Commands'),
           listener: join(__dirname, 'Events'),
         },
-      }
+        plugins: [
+          new ComponentPlugin({
+            directory: join(__dirname, 'Interactions', 'Components'),
+          }),
+        ],
+      },
     )
   }
 
   public async start() {
     super.start()
-    await this.selectMenuHandler.loadAll()
   }
 
   public sendDeveloper(
-    options: string | MessagePayload | MessageCreateOptions
+    options: string | MessagePayload | MessageCreateOptions,
   ) {
     this.users.send(process.env.OWNER_ID!, options)
   }
@@ -72,7 +70,10 @@ declare module 'discord.js' {
       id: Snowflake
       text: string
     }
-    readonly selectMenuHandler: ComponentHandler
     readonly version: string
+    banNkick: {
+      member: GuildMember
+      reason: string | null
+    }
   }
 }

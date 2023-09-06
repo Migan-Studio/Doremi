@@ -45,9 +45,15 @@
       }
     },
     "embeds": {
-      "description": "Member {member} has been banned."
+      "success": "Member {member} has been banned.",
+      "qustion": "Are you really going to block this member?\nMember name: {member}",
+      "cancel": "The ban has been canceled.",
+      "error": "❌ I can't ban user."
     },
-    "error": "I can't ban user."
+    "components": {
+      "yes": "Yes",
+      "cancel": "Cancel"
+    }
   },
   "clean": {
     "name": "clean",
