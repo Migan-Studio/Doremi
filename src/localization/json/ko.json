@@ -27,9 +27,15 @@
       }
     },
     "embeds": {
-      "description": "멤버 {member}을/를 추방했어요."
+      "success": "멤버 {member}을/를 추방했어요.",
+      "qustion": "정말로 이 멤버를 추방하실껀가요?\n멤버 이름: {member}",
+      "cancel": "추방이 취소되었어요.",
+      "error": "해당 유저를 추방 할 수 없어요."
     },
-    "error": "해당 유저를 추방 할 수 없어요."
+    "components": {
+      "yes": "확인",
+      "cancel": "취소"
+    }
   },
   "ban": {
     "name": "차단",

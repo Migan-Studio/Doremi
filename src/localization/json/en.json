@@ -27,9 +27,15 @@
       }
     },
     "embeds": {
-      "description": "Member {member} has been kicked."
+      "success": "Member {member} has been kicked.",
+      "qustion": "Are you really going to kick this member?\nMember name: {member}",
+      "cancel": "The kick has been canceled.",
+      "error": "I can't kick user."
     },
-    "error": "I can't kick user."
+    "components": {
+      "yes": "Yes",
+      "cancel": "Cancel"
+    }
   },
   "ban": {
     "name": "ban",
@@ -41,12 +47,12 @@
       },
       "reason": {
         "name": "reason",
-        "description": "a reason to ban5"
+        "description": "a reason to ban."
       }
     },
     "embeds": {
       "success": "Member {member} has been banned.",
-      "qustion": "Are you really going to block this member?\nMember name: {member}",
+      "qustion": "Are you really going to ban this member?\nMember name: {member}",
       "cancel": "The ban has been canceled.",
       "error": "❌ I can't ban user."
     },

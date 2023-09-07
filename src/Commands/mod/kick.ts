@@ -1,10 +1,12 @@
 import { Command } from 'mbpr-rodule'
 import {
-  ChatInputCommandInteraction,
+  type ChatInputCommandInteraction,
   GuildMember,
   ChannelType,
   PermissionsBitField,
   ApplicationCommandOptionType,
+  ComponentType,
+  ButtonStyle,
 } from 'discord.js'
 import {
   english,
@@ -48,10 +50,14 @@ export default class KickCommands extends Command {
   }
   execute(interaction: ChatInputCommandInteraction) {
     const member = interaction.options.getMember('member')
-    const reason = interaction.options.getString('reason')
     const locale = localizations(interaction.locale)
 
     if (member instanceof GuildMember) {
+      interaction.client.banNkick = {
+        member: member,
+        reason: interaction.options.getString('reason'),
+      }
+
       if (interaction.channel!.type === ChannelType.DM)
         return interaction.reply({
           content: ifDM(interaction.locale),
@@ -67,15 +73,15 @@ export default class KickCommands extends Command {
             interaction.locale,
             getPermissions(
               interaction.locale,
-              PermissionsBitField.Flags.KickMembers
+              PermissionsBitField.Flags.KickMembers,
             )!,
-            false
+            false,
           ),
           ephemeral: true,
         })
       if (
         !interaction.guild!.members.me!.permissions.has(
-          PermissionsBitField.Flags.KickMembers
+          PermissionsBitField.Flags.KickMembers,
         )
       )
         return interaction.reply({
@@ -83,36 +89,57 @@ export default class KickCommands extends Command {
             interaction.locale,
             getPermissions(
               interaction.locale,
-              PermissionsBitField.Flags.KickMembers
+              PermissionsBitField.Flags.KickMembers,
             )!,
-            true
+            true,
           ),
           ephemeral: true,
         })
 
       if (!member.kickable)
         return interaction.reply({
-          content: locale.kick.error,
-          ephemeral: true,
-        })
-
-      try {
-        member.kick(reason || 'None')
-        interaction.reply({
           embeds: [
             {
-              title: locale.kick.name,
-              description: locale.kick.embeds.description.replace(
-                '{member}',
-                member.user.tag
-              ),
+              title: locale.kick.embeds.error,
+              color: 0xff0000,
+              timestamp: new Date().toISOString(),
             },
           ],
           ephemeral: true,
         })
-      } catch (error) {
-        console.log(error)
-      }
+
+      interaction.reply({
+        embeds: [
+          {
+            title: locale.kick.name,
+            description: locale.kick.embeds.qustion.replace(
+              '{member}',
+              `\`${member.user.username}\``,
+            ),
+            timestamp: new Date().toISOString(),
+          },
+        ],
+        components: [
+          {
+            type: ComponentType.ActionRow,
+            components: [
+              {
+                type: ComponentType.Button,
+                label: locale.kick.components.yes,
+                customId: 'Doremi-kick$yes',
+                style: ButtonStyle.Success,
+              },
+              {
+                type: ComponentType.Button,
+                label: locale.kick.components.cancel,
+                customId: 'Doremi-kick$cancel',
+                style: ButtonStyle.Danger,
+              },
+            ],
+          },
+        ],
+        ephemeral: true,
+      })
     }
   }
 }

@@ -33,14 +33,13 @@ export default class HelpCommands extends Command {
       url: 'https://github.com/Migan-Studio/Doremi',
     }
 
-    // if (interaction.locale === Locale.Korean) {
     interaction.reply({
       embeds: [
         {
           ...embed,
           title: locale.help.embeds.title.replace(
             '{botName}',
-            interaction.client.user!.username
+            interaction.client.user!.username,
           ),
           description: `${locale.help.embeds.description.copyright}
 ${codeBlock('md', locale.help.embeds.description.commands)}`,
