@@ -1,21 +1,21 @@
-# mbpr
+# Doremi
 
-- the mbpr (migan-bot-public-repositry) project.
+- the mbpr based bot.
 
 ## Using
 
-- **this project is use licence at `MIT`**
-- **You need node.js 16.6.0 or higher and yarn**
+- **this project is use licence at `AGPL-3.0`.**
+- **You need node.js 16.9.0 or higher and yarn.**
 
 1. Clone the project.
-2. run this command
+2. run this command.
 
 ```sh
 yarn install
 ```
 
-3. copy a `.env` the `example.env`
-4. insert Your Bot Token of `TOKEN` value
+3. copy a `.env` the `example.env`.
+4. insert Your Bot Token of `TOKEN` value and delete KRBOTS_TOKEN.
 5. run
 
 ```sh

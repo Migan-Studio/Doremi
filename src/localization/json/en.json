@@ -185,5 +185,15 @@
       "hour": "The value of `time` must be less than 6.",
       "minus": "The value of `time` must be greater than zero."
     }
+  },
+  "timeout": {
+    "name": "timeout",
+    "description": "Doremi's timeout",
+    "options": {
+      "member": {
+        "name": "member",
+        "description": "Member to timeout"
+      }
+    }
   }
 }
