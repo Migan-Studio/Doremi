@@ -10,7 +10,7 @@ import {
 export function ifNonePermissions(
   locale: Locale,
   permissions: string,
-  bot = false
+  bot = false,
 ): string {
   if (locale === Locale.Korean) {
     if (bot) return `❌ 이 봇에 \`${permissions}\` 권한이 필요해요 :(`
@@ -160,6 +160,28 @@ export function getInfo(locale: Locale) {
         .replace('{status}', options.status!)
         .replace('{isBot}', options.isBot)
         .replace('{nickname}', options.nickname),
+  }
+}
+
+export function getSmhdw(
+  locale: Locale,
+  smhdw: 'seconds' | 'minute' | 'hour' | 'day' | 'week',
+) {
+  if ((locale = Locale.Korean)) {
+    switch (smhdw) {
+      case 'seconds':
+        return '초'
+      case 'minute':
+        return '분'
+      case 'hour':
+        return '시간'
+      case 'day':
+        return '일'
+      case 'week':
+        return '주'
+    }
+  } else {
+    return smhdw
   }
 }
 

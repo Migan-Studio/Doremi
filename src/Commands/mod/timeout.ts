@@ -1,9 +1,11 @@
-import { english, korean } from '@localizations'
+import { english, getSmhdw, korean, localizations } from '@localizations'
 import {
   ApplicationCommandOptionType,
+  GuildMember,
   type ChatInputCommandInteraction,
 } from 'discord.js'
 import { Command } from 'mbpr-rodule'
+import { dayRegex, dicimal, hourRegex, minRegex, weekRegex } from '@utils'
 
 export default class TimeoutCommands extends Command {
   public constructor() {
@@ -23,14 +25,62 @@ export default class TimeoutCommands extends Command {
           },
           required: true,
         },
+        {
+          type: ApplicationCommandOptionType.String,
+          name: english.timeout.options.time.name,
+          nameLocalizations: { ko: korean.timeout.options.time.name },
+          description: english.timeout.options.time.description,
+          descriptionLocalizations: {
+            ko: korean.timeout.options.time.description,
+          },
+          required: true,
+        },
+        {
+          type: ApplicationCommandOptionType.String,
+          name: english.timeout.options.reason.name,
+          nameLocalizations: { ko: korean.timeout.options.reason.name },
+          description: english.timeout.options.reason.description,
+          descriptionLocalizations: {
+            ko: korean.timeout.options.reason.description,
+          },
+        },
       ],
     })
   }
 
   public execute(interaction: ChatInputCommandInteraction) {
-    interaction.reply({
-      content: 'coming soon...',
-      ephemeral: true,
-    })
+    const member = interaction.options.getMember('member')
+    const time = interaction.options.getString('time', true)
+    const resaon = interaction.options.getString('reason')
+    const locale = localizations(interaction.locale)
+
+    if (member instanceof GuildMember) {
+      if (minRegex.test(time)) {
+        const a = time.match(dicimal)![0] as unknown as number
+        if (a > 40320)
+          return interaction.reply({
+            content: locale.timeout.embeds.max_value
+              .replace('{time}', `${a}`)
+              .replace('{mhdw}', getSmhdw(interaction.locale, 'minute')),
+            ephemeral: true,
+          })
+
+        member.disableCommunicationUntil(Date.now() + a * 60 * 1000, resaon!)
+      } else if (hourRegex.test(time)) {
+      } else if (dayRegex.test(time)) {
+      } else if (weekRegex.test(time)) {
+      } else
+        return interaction.reply({
+          embeds: [
+            {
+              title: locale.timeout.name,
+              description: locale.timeout.embeds.time_error,
+              color: 0xff0000,
+              timestamp: new Date().toISOString(),
+            },
+          ],
+          ephemeral: true,
+        })
+    }
   }
 }

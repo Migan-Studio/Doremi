@@ -193,7 +193,19 @@
       "member": {
         "name": "member",
         "description": "Member to timeout"
+      },
+      "time": {
+        "name": "time",
+        "description": "Timeout of time"
+      },
+      "reason": {
+        "name": "reason",
+        "description": "Resaon for timeout."
       }
+    },
+    "embeds": {
+      "max_value": "The `time` value should be less than {time} {mhdw}(s).",
+      "time_error": "The time value should be in the format below.\n```\n1 min\n3 weeks\n1d\n```"
     }
   }
 }
