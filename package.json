@@ -2,7 +2,7 @@
   "name": "doremi",
   "description": "Doremi for mbpr",
   "private": true,
-  "version": "3.1.0",
+  "version": "3.1.1-81",
   "main": "dist/index.js",
   "license": "AGPL-3.0",
   "type": "module",

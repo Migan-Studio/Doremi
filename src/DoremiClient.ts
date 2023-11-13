@@ -8,18 +8,14 @@ import { ComponentPlugin } from '@discommand/message-components'
 import { Mbpr } from 'mbpr-rodule'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { prerelease } from 'semver'
 import { version } from '../package.json'
-import { execSync } from 'node:child_process'
 import 'dotenv/config'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export class DoremiClient extends Mbpr {
   get version() {
-    const commit = execSync('git rev-parse --short HEAD').toString()
-    if (prerelease(version)) return `${version}.${commit}`
-    else return `${version}-${commit}`
+    return version
   }
   public constructor() {
     super(
