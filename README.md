@@ -1,5 +1,7 @@
 # Doremi
 
+- [This project is maintenance mode. you want to new version, click this.](https://github.com/Migan-Studio/Doremi-next/tree/develop)
+
 - the mbpr based bot.
 
 ## Using
