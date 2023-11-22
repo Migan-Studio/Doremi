@@ -91,7 +91,15 @@ export default class TimeoutCommands extends Command {
             ephemeral: true,
           })
 
-        member.disableCommunicationUntil(Date.now() + a * 3600 * 1000, resaon!)
+        member
+          .disableCommunicationUntil(Date.now() + a * 3600 * 1000, resaon!)
+          .catch(err => {
+            console.error(err)
+            interaction.reply({
+              content: locale.timeout.embeds.error,
+              ephemeral: true,
+            })
+          })
 
         interaction.reply({
           embeds: [embed],
