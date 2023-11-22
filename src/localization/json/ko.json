@@ -91,7 +91,7 @@
     "embeds": {
       "title": "{name}의 정보",
       "description": {
-        "bot": "# OS 정보\n- {platform} {arch}\n\n# 봇 개발자\n- {owner}\n\n# Node.js 버전\n- {NodeJSVersion}\n\n# PID\n- {pid}\n\n# 서버수\n- {guildCount}\n\n# 유저수\n- {userCount}\n\n# 지연시간\n- {wsPing}ms\n\n# 버젼\n\n- {version}",
+        "bot": "# OS 정보\n- {platform} {arch}\n\n# 봇 개발자\n- {owner}\n\n# Node.js 버전\n- {NodeJSVersion}\n\n# PID\n- {pid}\n\n# 서버수\n- {guildCount}\n\n# 유저수\n- {userCount}\n\n# 지연시간\n- {wsPing}ms\n\n# 버젼\n- {version}",
         "guild": "# 이름\n{name}\n\n# 소유자\n{ownerName} ({ownerID})\n\n# 부스트 갯수\n{boostCount}\n\n# security\n{security}\n\n# 멤버  (봇 포함)\n{memberCount}\n\n# 봇 개수\n{botCount}\n\n# 멤버 수 (봇 제외)\n{memberOnlyCount}\n\n# 이모지 수\n{emojiCount}\n\n# 스티커 수\n{stickyCount}",
         "user": "# 이름\n- {name}\n\n# 태그\n- {tag}\n\n# 상태\n- {status}\n\n# bot\n- {isBot}\n\n# 별명\n- {nickname}",
         "none_nickname": "없음"
