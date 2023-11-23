@@ -75,7 +75,15 @@ export default class TimeoutCommands extends Command {
             ephemeral: true,
           })
 
-        member.disableCommunicationUntil(Date.now() + a * 60 * 1000, resaon!)
+        member
+          .disableCommunicationUntil(Date.now() + a * 60 * 1000, resaon!)
+          .catch(err => {
+            console.error(err)
+            interaction.reply({
+              content: locale.timeout.embeds.error,
+              ephemeral: true,
+            })
+          })
 
         interaction.reply({
           embeds: [embed],
@@ -115,7 +123,15 @@ export default class TimeoutCommands extends Command {
             ephemeral: true,
           })
 
-        member.disableCommunicationUntil(Date.now() + a * 86400 * 1000, resaon!)
+        member
+          .disableCommunicationUntil(Date.now() + a * 86400 * 1000, resaon!)
+          .catch(err => {
+            console.error(err)
+            interaction.reply({
+              content: locale.timeout.embeds.error,
+              ephemeral: true,
+            })
+          })
 
         interaction.reply({
           embeds: [embed],
@@ -131,10 +147,15 @@ export default class TimeoutCommands extends Command {
             ephemeral: true,
           })
 
-        member.disableCommunicationUntil(
-          Date.now() + a * 604_800 * 1000,
-          resaon!,
-        )
+        member
+          .disableCommunicationUntil(Date.now() + a * 604_800 * 1000, resaon!)
+          .catch(err => {
+            console.error(err)
+            interaction.reply({
+              content: locale.timeout.embeds.error,
+              ephemeral: true,
+            })
+          })
 
         interaction.reply({
           embeds: [embed],
