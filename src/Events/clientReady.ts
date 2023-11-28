@@ -20,8 +20,8 @@ export default class ClientReady extends Listener {
     if (!process.env.KRBOTS_TOKEN) {
       return client.logger.log(
         `KoreanBots Token is ${chalk.red(
-          'undefined'
-        )}. Not define of koreanbots variable.`
+          'undefined',
+        )}. Not define of koreanbots variable.`,
       )
     } else {
       const koreanBots = new Koreanbots({
@@ -36,6 +36,9 @@ export default class ClientReady extends Listener {
             servers: client.guilds.cache.size,
           })
           .then(response => client.logger.log(response.message))
+          .catch(err => {
+            console.error(err)
+          })
       }
 
       update()
