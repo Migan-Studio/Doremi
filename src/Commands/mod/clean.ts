@@ -1,3 +1,4 @@
+import { Command } from 'discommand'
 import {
   english,
   ifDM,
@@ -12,7 +13,6 @@ import {
   ChatInputCommandInteraction,
   PermissionsBitField,
 } from 'discord.js'
-import { Command } from 'mbpr-rodule'
 
 export default class extends Command {
   public constructor() {
@@ -38,7 +38,7 @@ export default class extends Command {
   async execute(interaction: ChatInputCommandInteraction) {
     const cleanLimit = interaction.options.getNumber(
       english.clean.options.name,
-      true
+      true,
     )
     const locale = localizations(interaction.locale)
 
@@ -52,7 +52,7 @@ export default class extends Command {
         .guild!.members!.cache.get(interaction.user.id)!
         .permissions.has(
           PermissionsBitField.Flags.ManageMessages ||
-            PermissionsBitField.Flags.Administrator
+            PermissionsBitField.Flags.Administrator,
         )
     )
       return interaction.reply({
@@ -60,16 +60,16 @@ export default class extends Command {
           interaction.locale,
           getPermissions(
             interaction.locale,
-            PermissionsBitField.Flags.ManageMessages
+            PermissionsBitField.Flags.ManageMessages,
           )!,
-          false
+          false,
         ),
         ephemeral: true,
       })
     if (
       !interaction.guild!.members.me!.permissions.has(
         PermissionsBitField.Flags.ManageMessages ||
-          PermissionsBitField.Flags.Administrator
+          PermissionsBitField.Flags.Administrator,
       )
     )
       return interaction.reply({
@@ -77,9 +77,9 @@ export default class extends Command {
           interaction.locale,
           getPermissions(
             interaction.locale,
-            PermissionsBitField.Flags.ManageMessages
+            PermissionsBitField.Flags.ManageMessages,
           )!,
-          true
+          true,
         ),
         ephemeral: true,
       })
@@ -97,7 +97,7 @@ export default class extends Command {
               title: locale.clean.name,
               description: locale.clean.embeds.description.replace(
                 '{count}',
-                `${cleanLimit}`
+                `${cleanLimit}`,
               ),
             },
           ],

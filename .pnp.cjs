@@ -28,7 +28,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@discommand/message-components", "npm:2.0.0"],\
+            ["@discommand/message-components", "npm:2.1.0"],\
+            ["@migan-studio/logger", "npm:1.0.1"],\
             ["@migan/koreanbots", "npm:1.1.1"],\
             ["@migan/prettier-config", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:1.0.0"],\
             ["@types/node", "npm:20.5.9"],\
@@ -36,14 +37,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:6.6.0"],\
             ["@typescript-eslint/parser", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:6.6.0"],\
             ["chalk", "npm:5.3.0"],\
-            ["discommand", "npm:13.0.0"],\
+            ["discommand", "npm:13.2.3"],\
             ["discord.js", "npm:14.13.0"],\
             ["dokdo", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:0.6.2"],\
             ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.48.0"],\
             ["eslint-config-prettier", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:9.0.0"],\
             ["eslint-plugin-prettier", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:5.0.0"],\
-            ["mbpr-rodule", "npm:9.1.3"],\
             ["prettier", "npm:3.0.3"],\
             ["semver", "npm:7.5.4"],\
             ["ts-node", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:10.9.1"],\
@@ -73,10 +73,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@discommand/message-components", [\
-        ["npm:2.0.0", {\
-          "packageLocation": "./.yarn/cache/@discommand-message-components-npm-2.0.0-560e3710aa-5adaa5180b.zip/node_modules/@discommand/message-components/",\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/cache/@discommand-message-components-npm-2.1.0-a48344ebf0-9aa464d2d6.zip/node_modules/@discommand/message-components/",\
           "packageDependencies": [\
-            ["@discommand/message-components", "npm:2.0.0"]\
+            ["@discommand/message-components", "npm:2.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1307,13 +1307,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:5.2.0", {\
-          "packageLocation": "./.yarn/cache/chalk-npm-5.2.0-bedd808592-03d8060277.zip/node_modules/chalk/",\
-          "packageDependencies": [\
-            ["chalk", "npm:5.2.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:5.3.0", {\
           "packageLocation": "./.yarn/cache/chalk-npm-5.3.0-d181999efb-623922e077.zip/node_modules/chalk/",\
           "packageDependencies": [\
@@ -1536,10 +1529,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["discommand", [\
-        ["npm:13.0.0", {\
-          "packageLocation": "./.yarn/cache/discommand-npm-13.0.0-386941603f-e90130e9ab.zip/node_modules/discommand/",\
+        ["npm:13.2.3", {\
+          "packageLocation": "./.yarn/cache/discommand-npm-13.2.3-56a7b3b050-7ce1949931.zip/node_modules/discommand/",\
           "packageDependencies": [\
-            ["discommand", "npm:13.0.0"]\
+            ["discommand", "npm:13.2.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1614,7 +1607,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["doremi", "workspace:."],\
-            ["@discommand/message-components", "npm:2.0.0"],\
+            ["@discommand/message-components", "npm:2.1.0"],\
+            ["@migan-studio/logger", "npm:1.0.1"],\
             ["@migan/koreanbots", "npm:1.1.1"],\
             ["@migan/prettier-config", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:1.0.0"],\
             ["@types/node", "npm:20.5.9"],\
@@ -1622,14 +1616,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:6.6.0"],\
             ["@typescript-eslint/parser", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:6.6.0"],\
             ["chalk", "npm:5.3.0"],\
-            ["discommand", "npm:13.0.0"],\
+            ["discommand", "npm:13.2.3"],\
             ["discord.js", "npm:14.13.0"],\
             ["dokdo", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:0.6.2"],\
             ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.48.0"],\
             ["eslint-config-prettier", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:9.0.0"],\
             ["eslint-plugin-prettier", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:5.0.0"],\
-            ["mbpr-rodule", "npm:9.1.3"],\
             ["prettier", "npm:3.0.3"],\
             ["semver", "npm:7.5.4"],\
             ["ts-node", "virtual:726fcfe1e9bc0aada54d92a97a812e09b5b7d1db7ba112d784d36b1ac0797bae09857fce771431d8ba4a5ca03bf99bf37a56b79fac74bfa91dd247a547c74d95#npm:10.9.1"],\
@@ -2687,18 +2680,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["promise-retry", "npm:2.0.1"],\
             ["socks-proxy-agent", "npm:7.0.0"],\
             ["ssri", "npm:9.0.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["mbpr-rodule", [\
-        ["npm:9.1.3", {\
-          "packageLocation": "./.yarn/cache/mbpr-rodule-npm-9.1.3-8900751da9-5fc96ef126.zip/node_modules/mbpr-rodule/",\
-          "packageDependencies": [\
-            ["mbpr-rodule", "npm:9.1.3"],\
-            ["@migan-studio/logger", "npm:1.0.1"],\
-            ["chalk", "npm:5.2.0"],\
-            ["discommand", "npm:13.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\

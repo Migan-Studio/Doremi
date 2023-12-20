@@ -5,18 +5,22 @@ import {
   type Snowflake,
 } from 'discord.js'
 import { ComponentPlugin } from '@discommand/message-components'
-import { Mbpr } from 'mbpr-rodule'
+import { DiscommandClient } from 'discommand'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { version } from '../package.json'
+import { Logger } from '@migan-studio/logger'
 import 'dotenv/config'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-export class DoremiClient extends Mbpr {
+export class DoremiClient extends DiscommandClient {
   get version() {
     return version
   }
+  public readonly logger = new Logger({
+    name: 'Doremi',
+  })
   public constructor() {
     super(
       {
@@ -28,8 +32,6 @@ export class DoremiClient extends Mbpr {
         ],
       },
       {
-        token: process.env.TOKEN!,
-        defaultHelpCommand: false,
         directory: {
           command: join(__dirname, 'Commands'),
           listener: join(__dirname, 'Events'),
@@ -43,20 +45,21 @@ export class DoremiClient extends Mbpr {
     )
   }
 
-  public async start() {
-    super.start()
-  }
-
   public sendDeveloper(
     options: string | MessagePayload | MessageCreateOptions,
   ) {
     this.users.send(process.env.OWNER_ID!, options)
+  }
+
+  public login(): Promise<string> {
+    return super.login(process.env.TOKEN)
   }
 }
 
 declare module 'discord.js' {
   interface Client {
     sendDeveloper(options: string | MessagePayload | MessageCreateOptions): void
+    readonly logger: Logger
     supportText: string
     notice: {
       title: string

@@ -1,4 +1,4 @@
-import { Listener } from 'mbpr-rodule'
+import { Listener } from 'discommand'
 import { type Client, Events, ActivityType } from 'discord.js'
 import { Koreanbots } from '@migan/koreanbots'
 import chalk from 'chalk'
@@ -8,6 +8,7 @@ export default class ClientReady extends Listener {
     super(Events.ClientReady)
   }
   public execute(client: Client<true>) {
+    client.logger.log(`Bot name: ${chalk.cyan(client!.user.username)}`)
     function changeStatus() {
       client.user.setActivity({
         name: '/help | /도움말',

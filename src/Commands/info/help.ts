@@ -1,4 +1,4 @@
-import { Command } from 'mbpr-rodule'
+import { Command } from 'discommand'
 import {
   type APIEmbed,
   type ChatInputCommandInteraction,
@@ -41,8 +41,7 @@ export default class HelpCommands extends Command {
             '{botName}',
             interaction.client.user!.username,
           ),
-          description: `${locale.help.embeds.description.copyright}
-${codeBlock('md', locale.help.embeds.description.commands)}`,
+          description: codeBlock('md', locale.help.embeds.description.commands),
         },
       ],
       components: [

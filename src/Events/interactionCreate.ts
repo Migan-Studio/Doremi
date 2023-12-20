@@ -1,4 +1,4 @@
-import { Listener } from 'mbpr-rodule'
+import { Listener } from 'discommand'
 import { Events, type Interaction, InteractionType } from 'discord.js'
 import { Modals } from '@interactions'
 

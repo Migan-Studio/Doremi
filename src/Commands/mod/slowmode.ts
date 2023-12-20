@@ -1,4 +1,4 @@
-import { Command } from 'mbpr-rodule'
+import { Command } from 'discommand'
 import {
   english,
   korean,
@@ -84,15 +84,15 @@ export default class SlowModeCommands extends Command {
           interaction.locale,
           getPermissions(
             interaction.locale,
-            PermissionFlagsBits.ManageChannels
-          )!
+            PermissionFlagsBits.ManageChannels,
+          )!,
         ),
         ephemeral: true,
       })
 
     if (
       !interaction.guild!.members.me!.permissions.has(
-        PermissionFlagsBits.ManageChannels
+        PermissionFlagsBits.ManageChannels,
       )
     )
       return interaction.reply({
@@ -100,9 +100,9 @@ export default class SlowModeCommands extends Command {
           interaction.locale,
           getPermissions(
             interaction.locale,
-            PermissionFlagsBits.ManageChannels
+            PermissionFlagsBits.ManageChannels,
           )!,
-          true
+          true,
         ),
         ephemeral: true,
       })
@@ -125,7 +125,7 @@ export default class SlowModeCommands extends Command {
             title: locale.slowmode.name,
             description: locale.slowmode.embeds.second.replace(
               '{time}',
-              `${time}`
+              `${time}`,
             ),
           },
         ],
@@ -144,7 +144,7 @@ export default class SlowModeCommands extends Command {
             title: locale.slowmode.name,
             description: locale.slowmode.embeds.minute.replace(
               '{time}',
-              `${time}`
+              `${time}`,
             ),
           },
         ],
@@ -163,7 +163,7 @@ export default class SlowModeCommands extends Command {
             title: locale.slowmode.name,
             description: locale.slowmode.embeds.hour.replace(
               '{time}',
-              `${time}`
+              `${time}`,
             ),
           },
         ],

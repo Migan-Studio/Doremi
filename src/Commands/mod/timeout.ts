@@ -1,3 +1,4 @@
+import { Command } from 'discommand'
 import { english, getSmhdw, korean, localizations } from '@localizations'
 import {
   ApplicationCommandOptionType,
@@ -5,7 +6,6 @@ import {
   type ChatInputCommandInteraction,
   type APIEmbed,
 } from 'discord.js'
-import { Command } from 'mbpr-rodule'
 import { dayRegex, dicimal, hourRegex, minRegex, weekRegex } from '@utils'
 
 export default class TimeoutCommands extends Command {

@@ -1,4 +1,4 @@
-import { Listener } from 'mbpr-rodule'
+import { Listener } from 'discommand'
 import { Events, type Message } from 'discord.js'
 import Dokdo from 'dokdo'
 

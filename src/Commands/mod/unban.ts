@@ -1,10 +1,10 @@
+import { Command } from 'discommand'
 import {
   ApplicationCommandOptionType,
   ChannelType,
   type ChatInputCommandInteraction,
   PermissionsBitField,
 } from 'discord.js'
-import { Command } from 'mbpr-rodule'
 import {
   english,
   ifDM,
@@ -50,15 +50,15 @@ export default class UnbanCommands extends Command {
           interaction.locale,
           getPermissions(
             interaction.locale,
-            PermissionsBitField.Flags.BanMembers
+            PermissionsBitField.Flags.BanMembers,
           )!,
-          false
+          false,
         ),
         ephemeral: true,
       })
     if (
       !interaction.guild!.members.me!.permissions.has(
-        PermissionsBitField.Flags.BanMembers
+        PermissionsBitField.Flags.BanMembers,
       )
     )
       return interaction.reply({
@@ -66,9 +66,9 @@ export default class UnbanCommands extends Command {
           interaction.locale,
           getPermissions(
             interaction.locale,
-            PermissionsBitField.Flags.BanMembers
+            PermissionsBitField.Flags.BanMembers,
           )!,
-          true
+          true,
         ),
         ephemeral: true,
       })

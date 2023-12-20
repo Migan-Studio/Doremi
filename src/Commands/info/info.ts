@@ -1,4 +1,4 @@
-import { Command } from 'mbpr-rodule'
+import { Command } from 'discommand'
 import {
   type ChatInputCommandInteraction,
   ChannelType,
@@ -35,7 +35,7 @@ export default class InfoCommands extends Command {
           },
           title: locale.info.embeds.title.replace(
             '{name}',
-            interaction.client.user.username
+            interaction.client.user.username,
           ),
           description: codeBlock(
             'md',
@@ -54,7 +54,7 @@ export default class InfoCommands extends Command {
               },
               wsPing: interaction.client.ws.ping,
               version: interaction.client.version,
-            })
+            }),
           ),
         },
       ],

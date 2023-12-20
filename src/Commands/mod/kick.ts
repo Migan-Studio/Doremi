@@ -1,4 +1,4 @@
-import { Command } from 'mbpr-rodule'
+import { Command } from 'discommand'
 import {
   type ChatInputCommandInteraction,
   GuildMember,
