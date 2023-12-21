@@ -1,5 +1,6 @@
 import {
   GatewayIntentBits,
+  type GuildMember,
   type MessageCreateOptions,
   type MessagePayload,
   type Snowflake,
@@ -56,6 +57,11 @@ export class DoremiClient extends DiscommandClient {
   }
 }
 
+export interface KickOrBanOptions {
+  member: GuildMember
+  reason: string | null
+}
+
 declare module 'discord.js' {
   interface Client {
     sendDeveloper(options: string | MessagePayload | MessageCreateOptions): void
@@ -70,9 +76,5 @@ declare module 'discord.js' {
       text: string
     }
     readonly version: string
-    banNkick: {
-      member: GuildMember
-      reason: string | null
-    }
   }
 }

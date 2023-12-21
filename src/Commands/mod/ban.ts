@@ -16,6 +16,7 @@ import {
   localizations,
   getPermissions,
 } from '@localizations'
+import { banMember } from '@interactions'
 
 export default class BanCommands extends Command {
   public constructor() {
@@ -48,8 +49,9 @@ export default class BanCommands extends Command {
       ],
     })
   }
-  execute(interaction: ChatInputCommandInteraction) {
+  public async execute(interaction: ChatInputCommandInteraction) {
     const member = interaction.options.getMember('member')
+    const reason = interaction.options.getString('reason')
     const locale = localizations(interaction.locale)
 
     if (interaction.channel!.type === ChannelType.DM)
@@ -59,10 +61,6 @@ export default class BanCommands extends Command {
       })
 
     if (member instanceof GuildMember) {
-      interaction.client.banNkick = {
-        member: member,
-        reason: interaction.options.getString('reason'),
-      }
       if (
         !interaction
           .guild!.members!.cache!.get(interaction.user.id)!
@@ -109,7 +107,7 @@ export default class BanCommands extends Command {
           ephemeral: true,
         })
 
-      interaction.reply({
+      const response = await interaction.reply({
         embeds: [
           {
             title: locale.ban.name,
@@ -140,6 +138,17 @@ export default class BanCommands extends Command {
           },
         ],
         ephemeral: true,
+      })
+
+      const confirmation =
+        await response.awaitMessageComponent<ComponentType.Button>({
+          filter: i => interaction.user.id === i.user.id,
+          time: 600_000,
+        })
+
+      await banMember(confirmation, {
+        member,
+        reason,
       })
     }
   }

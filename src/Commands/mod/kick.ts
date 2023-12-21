@@ -16,6 +16,7 @@ import {
   getPermissions,
   localizations,
 } from '@localizations'
+import { kickMember } from '@interactions'
 
 export default class KickCommands extends Command {
   constructor() {
@@ -48,16 +49,12 @@ export default class KickCommands extends Command {
       ],
     })
   }
-  execute(interaction: ChatInputCommandInteraction) {
+  public async execute(interaction: ChatInputCommandInteraction) {
     const member = interaction.options.getMember('member')
+    const reason = interaction.options.getString('reason')
     const locale = localizations(interaction.locale)
 
     if (member instanceof GuildMember) {
-      interaction.client.banNkick = {
-        member: member,
-        reason: interaction.options.getString('reason'),
-      }
-
       if (interaction.channel!.type === ChannelType.DM)
         return interaction.reply({
           content: ifDM(interaction.locale),
@@ -108,7 +105,7 @@ export default class KickCommands extends Command {
           ephemeral: true,
         })
 
-      interaction.reply({
+      const response = await interaction.reply({
         embeds: [
           {
             title: locale.kick.name,
@@ -139,6 +136,17 @@ export default class KickCommands extends Command {
           },
         ],
         ephemeral: true,
+      })
+
+      const confirmation =
+        await response.awaitMessageComponent<ComponentType.Button>({
+          filter: i => interaction.user.id === i.user.id,
+          time: 600_000,
+        })
+
+      await kickMember(confirmation, {
+        member,
+        reason,
       })
     }
   }
