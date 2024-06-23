@@ -15,12 +15,14 @@
     "discord.js": "^14.13.0",
     "dokdo": "^0.6.2",
     "dotenv": "^16.3.1",
-    "semver": "^7.5.4"
+    "semver": "^7.5.4",
+    "ws": "^8.17.1"
   },
   "devDependencies": {
     "@migan/prettier-config": "^1.0.0",
     "@types/node": "^20.5.9",
     "@types/semver": "^7.5.1",
+    "@types/ws": "^8",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
     "eslint": "^8.48.0",
